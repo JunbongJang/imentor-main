@@ -5,8 +5,18 @@
     "module": "es2015",
     "types": []
   },
+  "include": [
+    "../node_modules/api-ai-javascript/*.ts",
+    "../node_modules/api-ai-javascript/**/*.ts",
+    "main.ts",
+    "polyfills.ts"
+  ],
   "exclude": [
     "src/test.ts",
-    "**/*.spec.ts"
+    "**/*.spec.ts",
+    "../node_modules/api-ai-javascript/ts/Request/TTSRequest.ts"
+  ],
+  "files": [
+    "../src/app/app.module.ts"
   ]
 }

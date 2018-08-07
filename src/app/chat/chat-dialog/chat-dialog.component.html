@@ -1,0 +1,14 @@
+<h1>Welleastern Chat Bot</h1>
+
+
+<ng-container *ngFor="let message of messages | async">
+  <div class="message" [ngClass]="{ 'from': message.sentBy === 'bot',
+'                                   to': message.sentBy === 'user'}">
+    {{message.content}}
+  </div>
+</ng-container>
+
+<div class="form-group">
+  <label for="message">My Message </label>
+  <input [(ngModel)]="formValue" (keyup.enter)="sendMessage()" id="message" class="form-control" type="text">
+</div>
