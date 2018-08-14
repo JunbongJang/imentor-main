@@ -2,13 +2,89 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>ImentorMain</title>
+  <title>i-MENTOR</title>
   <base href="/">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
 </head>
 <body>
-  <app-root></app-root>
+  <app-root>
+
+    <!-- inline spinner styles to be able to display spinner right away -->
+    <!-- https://medium.com/@tomastrajan/how-to-style-angular-application-loading-with-angular-cli-like-a-boss-cdd4f5358554-->
+    <style type="text/css">
+      body, html {
+        height: 100%;
+      }
+      .app-loading {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+      }
+      .app-loading .spinner {
+        height: 220px;
+        width: 220px;
+        animation: rotate 2s linear infinite;
+        transform-origin: center center;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: auto;
+      }
+      .app-loading .spinner .path {
+        stroke-dasharray: 1, 200;
+        stroke-dashoffset: 0;
+        animation: dash 1.5s ease-in-out infinite;
+        stroke-linecap: round;
+      }
+      /*initial loading */
+      .app-loading .logo {
+        width: 175px;
+        height: 100px;
+
+        /* this way asset gets processed by webpack*/
+        background: url('assets/img/imentor_logo.svg') center center no-repeat;
+      }
+      @keyframes rotate {
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+      @keyframes dash {
+        0% {
+          stroke-dasharray: 1, 200;
+          stroke-dashoffset: 0;
+        }
+        50% {
+          stroke-dasharray: 89, 200;
+          stroke-dashoffset: -35px;
+        }
+        100% {
+          stroke-dasharray: 89, 200;
+          stroke-dashoffset: -124px;
+        }
+      }
+    </style>
+    <!-- loading layout replaced by app after startupp -->
+    <div class="app-loading">
+      <div class="logo"></div>
+      <svg class="spinner" viewBox="25 25 50 50">
+        <defs>
+          <linearGradient id="gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#fca8ac" />
+            <stop offset="100%" stop-color="#5eaefd" />
+          </linearGradient>
+        </defs>
+        <circle class="path" cx="50" cy="50" r="20" fill="none" stroke="url(#gradient)" stroke-width="2" stroke-miterlimit="10"/>
+      </svg>
+    </div>
+
+  </app-root>
 </body>
 </html>

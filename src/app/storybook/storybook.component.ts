@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {Title} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-storybook',
@@ -7,9 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class StorybookComponent implements OnInit {
 
-  constructor() { }
+  constructor(private titleService: Title) { }
 
   ngOnInit() {
+    document.body.style.backgroundColor = 'rgb(88, 73, 53)';
+    this.titleService.setTitle( 'i-MENTOR 스토리북' );
   }
 
 }

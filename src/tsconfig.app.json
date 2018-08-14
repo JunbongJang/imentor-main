@@ -8,6 +8,7 @@
   "include": [
     "../node_modules/api-ai-javascript/*.ts",
     "../node_modules/api-ai-javascript/**/*.ts",
+    "../src/**/*",
     "main.ts",
     "polyfills.ts"
   ],

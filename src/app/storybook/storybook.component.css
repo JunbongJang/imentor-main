@@ -1,0 +1,94 @@
+/*https://codepen.io/dcastanos/pen/FeJiu*/
+audio:hover, audio:focus, audio:active
+{
+  -webkit-box-shadow: 15px 15px 20px rgba(0,0, 0, 0.4);
+  -moz-box-shadow: 15px 15px 20px rgba(0,0, 0, 0.4);
+  box-shadow: 15px 15px 20px rgba(0,0, 0, 0.4);
+  -webkit-transform: scale(1.05);
+  -moz-transform: scale(1.05);
+  transform: scale(1.05);
+}
+
+
+audio
+{
+  background: rgb(241,243,244);
+  -webkit-transition:all 0.5s linear;
+  -moz-transition:all 0.5s linear;
+  -o-transition:all 0.5s linear;
+  transition:all 0.5s linear;
+  -moz-box-shadow: 2px 2px 4px 0px #006773;
+  -webkit-box-shadow:  2px 2px 4px 0px #006773;
+  box-shadow: 2px 2px 4px 0px #006773;
+  -moz-border-radius:7px 7px 7px 7px ;
+  -webkit-border-radius:7px 7px 7px 7px ;
+  border-radius:7px 7px 7px 7px ;
+}
+
+
+.nav-link {
+  background:linear-gradient(rgb(191,191,191), gray);
+  color:white;
+  padding-top:3px;
+  padding-bottom:3px;
+  font-size:.9rem;
+  font-weight:bold;
+}
+
+.nav-link:hover {
+  background:rgb(170, 233, 73);
+  color:white;
+}
+
+.nav-link.active {
+  color:white !important;
+  background:linear-gradient(rgb(170, 233, 73), rgb(130, 192, 31)) !important;
+}
+
+.image-container-custom {
+  border-style:solid;
+  border-width:1px;
+  border-color:white;
+  border-radius:15px;
+  background:linear-gradient(135deg, rgb(231, 217, 240), rgb(78, 42, 103));
+  width:270px;
+  z-index: 10;
+  position:relative;
+}
+
+.image-container-custom > img {
+  border-radius:10px;
+  width:260px;
+}
+
+.container-border {
+  background-color:white;
+  border-radius: 10px;
+}
+
+/*Medium devices (tablets, 768px and up)*/
+@media (min-width: 768px) {
+  .container-border {
+    background-color:white;
+    border-width: 10px;
+    border-style: solid;
+    border-color: rgb(0, 177, 205);
+    border-radius: 20px;
+  }
+}
+
+
+.inner-container-border {
+  border-radius: 10px;
+  background:linear-gradient(135deg, rgb(246, 246, 246), rgb(221, 221, 221));
+  height: 470px;
+}
+
+/*Large devices (desktops, 992px and up)*/
+@media (min-width: 992px) {
+  .inner-container-border {
+    border-width: 8px; border-style: solid;
+    border-color: rgb(221, 221, 221);
+  }
+}
+

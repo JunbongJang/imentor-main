@@ -1,0 +1,45 @@
+<div class="row mt-4 align-items-center mb-md-4 mb-2">
+  <div class="col-md-4 pl-md-5 pl-4" style="font-family: Orbitron-Black;">
+    <h2 style="color: rgb(9,94,129);">
+      STORYBOOK
+    </h2>
+    <h6>Listen and Choose the Right Word.</h6>
+  </div>
+
+  <div class="col-md-8 mt-2 mt-md-0">
+    <div class="d-none d-md-flex justify-content-center align-items-center">
+      <div (click) = "viewStateChoose('story-one')">
+        <img [hidden]="this.viewStateService.view_state === this.viewStateService.STORYBOOK_ONE" class="header_image_height" src="assets/img/story_one.png" >
+        <img [hidden]="this.viewStateService.view_state !== this.viewStateService.STORYBOOK_ONE" class="header_image_height" src="assets/img/story_one_active.png" >
+      </div>
+      <div (click) = "viewStateChoose('story-two')">
+        <img [hidden]="this.viewStateService.view_state === this.viewStateService.STORYBOOK_TWO" class="header_image_height" src="assets/img/story_two.png" >
+        <img [hidden]="this.viewStateService.view_state !== this.viewStateService.STORYBOOK_TWO" class="header_image_height" src="assets/img/story_two_active.png" >
+      </div>
+      <div (click) = "viewStateChoose('story-three')">
+        <img [hidden]="this.viewStateService.view_state === this.viewStateService.STORYBOOK_THREE" class="header_image_height" src="assets/img/story_three.png" >
+        <img [hidden]="this.viewStateService.view_state !== this.viewStateService.STORYBOOK_THREE" class="header_image_height" src="assets/img/story_three_active.png" >
+      </div>
+      <div (click) = "viewStateChoose('story-four')">
+        <img [hidden]="this.viewStateService.view_state === this.viewStateService.STORYBOOK_FOUR" class="header_image_height" src="assets/img/story_four.png" >
+        <img [hidden]="this.viewStateService.view_state !== this.viewStateService.STORYBOOK_FOUR" class="header_image_height" src="assets/img/story_four_active.png" >
+      </div>
+    </div>
+
+    <div class="dropdown show float-right d-md-none d-block mr-2">
+      <button class="btn btn-secondary dropdown-toggle rounded border border-danger text-danger font-weight-bold"
+              type="button" style="background-color: rgb(250,247,185);"
+              id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        {{ decideMainViewString() }}
+      </button>
+
+      <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
+        <a class="dropdown-item text-dark" (click) = "viewStateChoose(this.viewStateService.STORYBOOK_ONE)" style="background-color: rgb(250,247,185);">story1</a>
+        <a class="dropdown-item text-dark" (click) = "viewStateChoose(this.viewStateService.STORYBOOK_TWO)" style="background-color: rgb(250,247,185);">story2</a>
+        <a class="dropdown-item text-dark" (click) = "viewStateChoose(this.viewStateService.STORYBOOK_THREE)" style="background-color: rgb(250,247,185);">story3</a>
+        <a class="dropdown-item text-dark" (click) = "viewStateChoose(this.viewStateService.STORYBOOK_FOUR)" style="background-color: rgb(250,247,185);">story4</a>
+      </div>
+    </div>
+  </div>
+
+</div>

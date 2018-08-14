@@ -1,0 +1,27 @@
+<div class="modal fade" id="finalStoryModalCenter" tabindex="-1" role="dialog" aria-labelledby="finalStoryModalCenterTitle" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content"
+         style="background-color: #d87531;
+         background-image: url('assets/img/modal_image2.png');
+        background-repeat: no-repeat;
+          background-position: top;
+          background-size: 100% 90%;">
+      <div class="modal-header border-bottom-0">
+        <h4 i18n class="modal-title font-weight-bold" style="color:lightgray;">
+            Congratulation!
+        </h4>
+      </div>
+      <div i18n class="modal-body text-center h4 border-bottom-0" style="line-height:1.6;" i18n>
+        <div>
+          본문 {{stateCongratulationString(this.modal_view_state)}} 학습을<br>
+          완료하였습니다.
+        </div>
+      </div>
+      <div class="modal-footer border-top-0 d-flex justify-content-between">
+        <button i18n type="button" data-dismiss="modal" aria-label="Confirm" class="custom_green_button mr-2" (click)="this.retryButtonClick()">재학습</button>
+        <button i18n type="button" data-dismiss="modal" aria-label="Confirm" class="custom_blue_button mr-2" (click)="this.finishButtonClick()">마치기</button>
+        <button *ngIf="this.modal_view_state !== this.viewStateService.STORYBOOK_FOUR" i18n type="button" data-dismiss="modal" aria-label="Confirm" class="custom_pink_button" (click)="this.nextButtonClick()">다음학습</button>
+      </div>
+    </div>
+  </div>
+</div>

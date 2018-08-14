@@ -1,5 +1,21 @@
-<p>
-  main-menu works!
-</p>
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <button class="btn btn-primary" (click)="this.viewStateChoose('story-one', 'storybook/')">
+        Storybook1
+      </button>
+      <button class="btn btn-primary" (click)="this.viewStateChoose('story-two', 'storybook/')">
+        Storybook2
+      </button>
+      <button class="btn btn-primary" (click)="this.viewStateChoose('story-three', 'storybook/')">
+        Storybook3
+      </button>
+      <button class="btn btn-primary" (click)="this.viewStateChoose('story-four', 'storybook/')">
+        Storybook4
+      </button>
+    </div>
+  </div>
 
-<app-chat-dialog></app-chat-dialog>
+  <app-chat-dialog></app-chat-dialog>
+</div>
+

@@ -1,0 +1,16 @@
+
+.header_image_height {
+  height: 2.8rem;
+}
+
+@media (min-width: 992px) {
+  .header_image_height {
+    height: 3.3rem;
+  }
+}
+
+@media (min-width: 1200px) {
+  .header_image_height {
+    height: 3.8rem;
+  }
+}
