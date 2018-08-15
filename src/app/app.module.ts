@@ -2,12 +2,12 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import {AppRoutingModule} from './app-routing.module';
 import {ChatModule} from './chat/chat.module';
-import {HTTP_INTERCEPTORS} from '@angular/common/http';
-import {ServerInterceptor} from './shared/server.interceptor';
 
 import { AppComponent } from './app.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { MainMenuComponent } from './main-menu/main-menu.component';
+import {CoreModule} from './core/core.module';
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -18,9 +18,10 @@ import { MainMenuComponent } from './main-menu/main-menu.component';
   imports: [
     BrowserModule,
     ChatModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
+    CoreModule
   ],
-  providers: [{provide: HTTP_INTERCEPTORS, useClass: ServerInterceptor, multi: true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

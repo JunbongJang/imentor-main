@@ -4,9 +4,7 @@ import {catchError, retry, tap} from 'rxjs/operators';
 import {throwError} from 'rxjs';
 import {UserService} from './user.service';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class ServerService {
 
   constructor(private httpClient: HttpClient, private userService: UserService) { }
@@ -28,8 +26,24 @@ export class ServerService {
       'Something bad happened; please try again later.');
   }
 
-  getQuestionFromServer(a_step: string | null, a_ho: string | null) {
-    return this.httpClient.get<string>('https://www.welleastern.co.kr/IMENTOR/get-question.php?step=' + a_step + '&ho=' + a_ho)
+  getUserFromServer() {
+    return this.httpClient.get<string>('https://www.welleastern.co.kr/IMENTOR/get-member.php')
+      .pipe(
+        retry(2), // retry a failed request up to 3 times
+        catchError(this.handleError) // then handle the error
+      );
+  }
+
+  getCalendarFromServer(a_month: string, a_ho: string, a_year: string) {
+    return this.httpClient.get<string>(`https://www.welleastern.co.kr/IMENTOR/get-calendar.php?month=${a_month}&ho=${a_ho}&year=${a_year}`)
+      .pipe(
+        retry(2), // retry a failed request up to 3 times
+        catchError(this.handleError) // then handle the error
+      );
+  }
+
+  getQuestionFromServer(a_step: string | null, a_ho: string | null, a_section: string | null) {
+    return this.httpClient.get<string>('https://www.welleastern.co.kr/IMENTOR/get-question.php?step=' + a_step + '&ho=' + a_ho + '$section=' + a_section)
       .pipe(
         retry(2), // retry a failed request up to 3 times
         catchError(this.handleError) // then handle the error
@@ -61,14 +75,22 @@ export class ServerService {
       'x_count': x_count,
       'point': point,
       'is_pass': is_pass,
-      'uid': this.userService.uid,
-      'user_id': this.userService.user_id,
+      'uid': this.userService.user.uid,
+      'user_id': this.userService.user.user_id,
       'ho': this.userService.ho,
       'step': this.userService.step,
       'section': this.userService.section
     };
 
     return this.httpClient.post<string>('https://www.welleastern.co.kr/IMENTOR/save_json.php', body, {headers: {'Content-Type': 'application/json'}})
+      .pipe(
+        retry(2), // retry a failed request up to 3 times
+        catchError(this.handleError) // then handle the error
+      );
+  }
+
+  logoutUser() {
+    return this.httpClient.get<string>('https://www.welleastern.co.kr/IMENTOR/log-out.php')
       .pipe(
         retry(2), // retry a failed request up to 3 times
         catchError(this.handleError) // then handle the error

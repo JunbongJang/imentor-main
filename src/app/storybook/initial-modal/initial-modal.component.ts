@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {InitialModalService} from './initial-modal.service';
-import {ViewStateService} from '../../shared/view-state.service';
+import {ViewStateService} from '../../core/view-state.service';
 
 @Component({
   selector: 'app-initial-modal',

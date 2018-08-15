@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FinalModalService} from './final-modal.service';
 import {QuestionGradeService} from '../question/question-grade.service';
-import {ViewStateService} from '../../shared/view-state.service';
+import {ViewStateService} from '../../core/view-state.service';
 
 declare var $: any;
 

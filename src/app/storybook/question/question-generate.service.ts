@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {QuestionStorageService} from './question-storage.service';
-import {ServerService} from '../../shared/server.service';
-import {UserService} from '../../shared/user.service';
+import {ServerService} from '../../core/server.service';
+import {UserService} from '../../core/user.service';
 @Injectable()
 export class QuestionGenerateService {
 
@@ -13,7 +13,7 @@ export class QuestionGenerateService {
     // Initialize Questions for user if current page is not result page.
   getQuestionFromServer() {
     if (this.userService.step !== 'grammer6') {
-      this.serverService.getQuestionFromServer(this.userService.step, this.userService.ho).subscribe(
+      this.serverService.getQuestionFromServer(this.userService.step, this.userService.ho, this.userService.section ).subscribe(
         (question_xml_input) => {
           console.log('getQuestionFromServer');
           // console.log(question_xml_input);

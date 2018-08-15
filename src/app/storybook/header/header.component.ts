@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {UserService} from '../../shared/user.service';
-import {ViewStateService} from '../../shared/view-state.service';
+import {UserService} from '../../core/user.service';
+import {ViewStateService} from '../../core/view-state.service';
 
 @Component({
   selector: 'story-header',
@@ -21,6 +21,11 @@ export class HeaderComponent implements OnInit {
   }
 
   viewStateChoose(a_view: string) {
+    if (a_view === this.viewStateService.IMENTOR_MAIN) {
+      this.viewStateService.view_state = a_view;
+      this.router.navigate(['main']);
+    }
+
     if (this.viewStateService.view_state !== a_view && this.userService.master_status === 'true') {
       this.viewStateService.view_state = a_view;
       this.router.navigate([a_view], {relativeTo: this.route});

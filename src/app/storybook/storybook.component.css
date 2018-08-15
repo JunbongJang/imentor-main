@@ -1,6 +1,5 @@
 /*https://codepen.io/dcastanos/pen/FeJiu*/
-audio:hover, audio:focus, audio:active
-{
+audio:hover, audio:focus, audio:active {
   -webkit-box-shadow: 15px 15px 20px rgba(0,0, 0, 0.4);
   -moz-box-shadow: 15px 15px 20px rgba(0,0, 0, 0.4);
   box-shadow: 15px 15px 20px rgba(0,0, 0, 0.4);
@@ -10,8 +9,8 @@ audio:hover, audio:focus, audio:active
 }
 
 
-audio
-{
+audio {
+  cursor: pointer;
   background: rgb(241,243,244);
   -webkit-transition:all 0.5s linear;
   -moz-transition:all 0.5s linear;

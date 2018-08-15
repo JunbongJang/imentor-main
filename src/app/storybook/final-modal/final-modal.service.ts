@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {Subject} from 'rxjs';
-import {ViewStateService} from '../../shared/view-state.service';
+import {ViewStateService} from '../../core/view-state.service';
 
 @Injectable()
 export class FinalModalService {

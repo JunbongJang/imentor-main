@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {ViewStateService} from '../../shared/view-state.service';
+import {ViewStateService} from '../../core/view-state.service';
 
 @Component({
   selector: 'story-two',

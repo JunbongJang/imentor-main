@@ -6,7 +6,7 @@ import {StoryTwoComponent} from './story-two/story-two.component';
 import {StoryThreeComponent} from './story-three/story-three.component';
 import {StoryFourComponent} from './story-four/story-four.component';
 import {InitialModalService} from './initial-modal/initial-modal.service';
-import {GeneralUtilityService} from '../shared/general-utility.service';
+import {GeneralUtilityService} from '../core/general-utility.service';
 import {QuestionSoundService} from './question/question-sound.service';
 import {QuestionStorageService} from './question/question-storage.service';
 import {QuestionGradeService} from './question/question-grade.service';

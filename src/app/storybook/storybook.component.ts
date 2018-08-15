@@ -12,7 +12,7 @@ export class StorybookComponent implements OnInit {
 
   ngOnInit() {
     document.body.style.backgroundColor = 'rgb(88, 73, 53)';
-    this.titleService.setTitle( 'i-MENTOR 스토리북' );
+    this.titleService.setTitle( 'i-MENTOR Storybook' );
   }
 
 }

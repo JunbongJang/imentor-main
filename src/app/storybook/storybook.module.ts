@@ -13,11 +13,12 @@ import { HeaderComponent } from './header/header.component';
 import {InitialModalComponent} from './initial-modal/initial-modal.component';
 import {FinalModalComponent} from './final-modal/final-modal.component';
 
+import {InitialModalService} from './initial-modal/initial-modal.service';
+import {FinalModalService} from './final-modal/final-modal.service';
+
 
 import * as bowser from 'bowser';
 import * as bootstrap from 'bootstrap';
-import {InitialModalService} from './initial-modal/initial-modal.service';
-import {FinalModalService} from './final-modal/final-modal.service';
 declare var jQuery: any;
 
 @NgModule({
