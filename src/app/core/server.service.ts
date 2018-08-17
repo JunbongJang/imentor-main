@@ -43,7 +43,7 @@ export class ServerService {
   }
 
   getQuestionFromServer(a_step: string | null, a_ho: string | null, a_section: string | null) {
-    return this.httpClient.get<string>('https://www.welleastern.co.kr/IMENTOR/get-question.php?step=' + a_step + '&ho=' + a_ho + '$section=' + a_section)
+    return this.httpClient.get<string>('https://www.welleastern.co.kr/IMENTOR/get-question-utf8.php?step=' + a_step + '&ho=' + a_ho + '&section=' + a_section)
       .pipe(
         retry(2), // retry a failed request up to 3 times
         catchError(this.handleError) // then handle the error

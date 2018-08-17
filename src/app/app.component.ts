@@ -83,13 +83,6 @@ export class AppComponent implements OnInit {
       });
     }
 
-    // this.serverService.getCalendarFromServer('7', '1', '2018').subscribe(
-    //   (calendar_xml_string) => {
-    //     console.log('getCalendarFromServer: ');
-    //     console.log(calendar_xml_string);
-    //   }
-    // );
-
   }
 
   getState(outlet: any) {

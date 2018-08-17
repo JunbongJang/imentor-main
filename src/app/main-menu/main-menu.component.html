@@ -1,37 +1,258 @@
-<div class="container mt-5">
-  <div class="row">
-    <div class="col">
-      <button class="btn btn-primary" (click)="this.openPopup('storybook', '1')">
-        Storybook1
-      </button>
-      <button class="btn btn-primary" (click)="this.openPopup('storybook', '2')">
-        Storybook2
-      </button>
-      <button class="btn btn-primary" (click)="this.openPopup('storybook', '3')">
-        Storybook3
-      </button>
-      <button class="btn btn-primary" (click)="this.openPopup('storybook', '4')">
-        Storybook4
-      </button>
+<div class="wrap">
+  <div class="container_wrap">
+    <div class="h_wrap">
+      <div class="area_logo">
+        <h1 class="logo">아이멘토 로고</h1>
+        <p class="logo_t">Mentor Series의 자기주도 학습</p>
+      </div>
     </div>
-  </div>
-  <div class="row mt-3">
-    <div class="col">
-      <button class="btn btn-primary" (click)="this.viewStateChoose('story-one', 'storybook/')">
-        Storybook1
-      </button>
-      <button class="btn btn-primary" (click)="this.viewStateChoose('story-two', 'storybook/')">
-        Storybook2
-      </button>
-      <button class="btn btn-primary" (click)="this.viewStateChoose('story-three', 'storybook/')">
-        Storybook3
-      </button>
-      <button class="btn btn-primary" (click)="this.viewStateChoose('story-four', 'storybook/')">
-        Storybook4
-      </button>
+    <div class="area_login">
+      <p class="user_name">hi! test님</p>
+      <span>
+                    <a class="btn_login" href="#">LOGOUT</a>
+                </span>
     </div>
-  </div>
+    <div class="area_contents">
+      <div class="side_m">
+        <div class="area_select_bx">
+          <a class="pencil" href="#">교재선택</a>
+          <p>학습을 시작하셔야<br>권장학습일이 표시됩니다.</p>
+          <div class="select_bx">
+            <h2 class="sbx_title">교재선택</h2>
+            <div class="area_select_list">
+              <ul class="select_list select_list01">
+                <li>
+                  <input id="book01" type="radio" name="s_book">
+                  <label class="r_book" for="book01">1호</label>
+                </li>
+                <li>
+                  <input id="book02" type="radio" name="s_book">
+                  <label class="r_book" for="book02">2호</label>
+                </li>
+                <li>
+                  <input id="book03" type="radio" name="s_book">
+                  <label class="r_book" for="book03">3호</label>
+                </li>
+                <li>
+                  <input id="book04" type="radio" name="s_book">
+                  <label class="r_book" for="book04">4호</label>
+                </li>
+                <li>
+                  <input id="book05" type="radio" name="s_book">
+                  <label class="o_book" for="book05">5호</label>
+                </li>
+                <li>
+                  <input id="book06" type="radio" name="s_book">
+                  <label class="o_book" for="book06">6호</label>
+                </li>
+                <li>
+                  <input id="book07" type="radio" name="s_book">
+                  <label class="o_book" for="book07">7호</label>
+                </li>
+                <li>
+                  <input id="book08" type="radio" name="s_book">
+                  <label class="o_book" for="book08">8호</label>
+                </li>
+              </ul>
+              <ul class="select_list select_list02">
+                <li>
+                  <input id="book09" type="radio" name="s_book">
+                  <label class="o_book" for="book09">9호</label>
+                </li>
+                <li>
+                  <input id="book10" type="radio" name="s_book">
+                  <label class="o_book" for="book10">10호</label>
+                </li>
+                <li>
+                  <input id="book11" type="radio" name="s_book">
+                  <label class="o_book" for="book11">11호</label>
+                </li>
+                <li>
+                  <input id="book12" type="radio" name="s_book">
+                  <label class="g_book" for="book12">12호</label>
+                </li>
+                <li>
+                  <input id="book13" type="radio" name="s_book">
+                  <label class="g_book" for="book13">13호</label>
+                </li>
+                <li>
+                  <input id="book14" type="radio" name="s_book">
+                  <label class="g_book" for="book14">14호</label>
+                </li>
+                <li>
+                  <input id="book15" type="radio" name="s_book">
+                  <label class="g_book" for="book15">15호</label>
+                </li>
+                <li>
+                  <input id="book16" type="radio" name="s_book">
+                  <label class="g_book" for="book16">16호</label>
+                </li>
+              </ul>
+              <ul class="select_list select_list03">
+                <li>
+                  <input id="book17" type="radio" name="s_book">
+                  <label class="g_book" for="book17">17호</label>
+                </li>
+                <li>
+                  <input id="book18" type="radio" name="s_book">
+                  <label class="g_book" for="book18">18호</label>
+                </li>
+                <li>
+                  <input id="book19" type="radio" name="s_book">
+                  <label class="g_book" for="book19">19호</label>
+                </li>
+                <li>
+                  <input id="book20" type="radio" name="s_book">
+                  <label class="b_book" for="book20">20호</label>
+                </li>
+                <li>
+                  <input id="book21" type="radio" name="s_book">
+                  <label class="b_book" for="book21">21호</label>
+                </li>
+                <li>
+                  <input id="book22" type="radio" name="s_book">
+                  <label class="b_book" for="book22">22호</label>
+                </li>
+                <li>
+                  <input id="book23" type="radio" name="s_book">
+                  <label class="b_book" for="book23">23호</label>
+                </li>
+                <li>
+                  <input id="book24" type="radio" name="s_book">
+                  <label class="b_book" for="book24">24호</label>
+                </li>
+              </ul>
+            </div>
+            <a class="btn_close" href="#">close</a>
+            <a class="btn_select" href="#">선택</a>
+          </div>
+        </div>
+        <div class="cld">
+          &nbsp;
+        </div>
+        <div class="character_bx">
+          <p class="cc_text">본 학습은 30일 학습기간을 제공합니다.</p>
+        </div>
+      </div>
+      <div class="main_con">
+        <div class="area_mc">
+          <div class="area_mc_title">
+            <h2 class="mc_title">1호 / Don’t Be Greedy!</h2>
+          </div>
+          <div class="round_bx">
+            <ul class="round_list">
+              <li class="round_list01">
+                <a class="on" href="#">voca1</a>
+                <span class="area_btn_start">
+                                        <a class="btn_statr" href="#">Start</a>
+                                    </span>
+              </li>
+              <li class="round_list02">
+                <a href="#">voca2</a>
+                <span class="score">70</span>
+                <span class="area_btn_result">
+                                        <a class="btn_result" href="#">Result</a>
+                                    </span>
+              </li>
+              <li class="round_list03">
+                <a href="#">voca3</a>
+                <p class="grading">채점중입니다.</p>
+              </li>
+              <li class="round_list04">
+                <a href="#">voca4</a>
+              </li>
+              <li class="round_list05">
+                <a href="#">gram1</a>
+                <span class="score score02">70</span>
+                <span class="area_btn_result">
+                                        <a class="btn_result btn_result02" href="#">Result</a>
+                                    </span>
+              </li>
+              <li class="round_list06">
+                <a href="#">story book1</a>
+              </li>
+              <li class="round_list07">
+                <a href="#">test</a>
+                <span class="score score03">70</span>
+                <span class="area_btn_result">
+                                        <a class="btn_result btn_result03" href="#">Result</a>
+                                    </span>
+              </li>
+              <li class="round_list08">
+                <a href="#">gram4</a>
+              </li>
+              <li class="round_list09">
+                <a href="#">gram3</a>
+              </li>
+              <li class="round_list10">
+                <a href="#">gram2</a>
+              </li>
+              <li class="round_list11">
+                <a href="#">story book2</a>
+              </li>
+              <li class="round_list12">
+                <a href="#">story book3</a>
+              </li>
+              <li class="round_list13">
+                <a href="#">story book4</a>
+              </li>
+              <li class="round_list14">
+                <a href="#">speak-ing1</a>
+              </li>
+              <li class="round_list15">
+                <a href="#">speak-ing1</a>
+              </li>
+              <li class="round_list16">
+                <a href="#">speaking final test</a>
+              </li>
+              <li class="round_list17">
+                <a href="#">speaking final test</a>
+              </li>
+              <li class="round_list18">
+                <a href="#">speak-ing3</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div> <!-- END : container_wrap -->
+</div> <!-- END : wrap -->
 
-  <app-chat-dialog></app-chat-dialog>
-</div>
+<!--<div class="container mt-5">-->
+  <!--<div class="row">-->
+    <!--<div class="col">-->
+      <!--<button class="btn btn-primary" (click)="this.openPopup('storybook', '1')">-->
+        <!--Storybook1-->
+      <!--</button>-->
+      <!--<button class="btn btn-primary" (click)="this.openPopup('storybook', '2')">-->
+        <!--Storybook2-->
+      <!--</button>-->
+      <!--<button class="btn btn-primary" (click)="this.openPopup('storybook', '3')">-->
+        <!--Storybook3-->
+      <!--</button>-->
+      <!--<button class="btn btn-primary" (click)="this.openPopup('storybook', '4')">-->
+        <!--Storybook4-->
+      <!--</button>-->
+    <!--</div>-->
+  <!--</div>-->
+  <!--<div class="row mt-3">-->
+    <!--<div class="col">-->
+      <!--<button class="btn btn-primary" (click)="this.viewStateChoose('story-one', 'storybook', '1')">-->
+        <!--Storybook1-->
+      <!--</button>-->
+      <!--<button class="btn btn-primary" (click)="this.viewStateChoose('story-two', 'storybook', '2')">-->
+        <!--Storybook2-->
+      <!--</button>-->
+      <!--<button class="btn btn-primary" (click)="this.viewStateChoose('story-three', 'storybook', '3')">-->
+        <!--Storybook3-->
+      <!--</button>-->
+      <!--<button class="btn btn-primary" (click)="this.viewStateChoose('story-four', 'storybook', '4')">-->
+        <!--Storybook4-->
+      <!--</button>-->
+    <!--</div>-->
+  <!--</div>-->
+
+  <!--<app-chat-dialog></app-chat-dialog>-->
+<!--</div>-->
 

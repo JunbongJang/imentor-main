@@ -91,3 +91,39 @@ audio {
   }
 }
 
+
+
+.main_background_color {
+  background-color: rgb(0, 177, 205);
+}
+
+.story-view-height {
+  /*not defined */
+}
+
+html {
+  font-size: 80%;
+}
+
+@media (min-width: 768px) {
+  .main_background_color {
+    background-color:rgb(88, 73, 53);
+  }
+  html {
+    font-size: 90%;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .story-view-height {
+    overflow-y: auto;
+    height:470px;
+  }
+}
+
+@media (min-width: 992px) {
+  html {
+    font-size: 100%;
+  }
+}
+
