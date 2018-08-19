@@ -8,6 +8,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { MainMenuComponent } from './main-menu/main-menu.component';
 import {CoreModule} from './core/core.module';
 import {HttpClientModule} from '@angular/common/http';
+import {FormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import {HttpClientModule} from '@angular/common/http';
     ChatModule,
     AppRoutingModule,
     HttpClientModule,
+    FormsModule,
     CoreModule
   ],
   bootstrap: [AppComponent]

@@ -2,12 +2,11 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {catchError, retry, tap} from 'rxjs/operators';
 import {throwError} from 'rxjs';
-import {UserService} from './user.service';
 
 @Injectable()
 export class ServerService {
 
-  constructor(private httpClient: HttpClient, private userService: UserService) { }
+  constructor(private httpClient: HttpClient) { }
 
   // function obtained from https://angular.io/guide/http
   private handleError(error: HttpErrorResponse) {
@@ -69,17 +68,17 @@ export class ServerService {
   // $uid."','".$user_id."','".$ho."','".$group_name."','".$step."','".$section."','".$x_count."','".$point."','".$dt."'
   // quest	문제일련번호[!!]나의답변[!!]정답여부[@@]문제일련번호…..
   // 정오표 저장
-  postUserScoreToServer(quest: string, x_count: string, point: string, is_pass: string) {
+  postUserScoreToServer(quest: string, x_count: string, point: string, is_pass: string, uid: string, user_id: string, ho: string, step: string, section: string) {
     const body = {
       'quest': quest,
       'x_count': x_count,
       'point': point,
       'is_pass': is_pass,
-      'uid': this.userService.user.uid,
-      'user_id': this.userService.user.user_id,
-      'ho': this.userService.ho,
-      'step': this.userService.step,
-      'section': this.userService.section
+      'uid': uid,
+      'user_id': user_id,
+      'ho': ho,
+      'step': step,
+      'section': section
     };
 
     return this.httpClient.post<string>('https://www.welleastern.co.kr/IMENTOR/save_json.php', body, {headers: {'Content-Type': 'application/json'}})

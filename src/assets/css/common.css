@@ -336,7 +336,7 @@ width:100%;
     }
     
     .select_list>li{
-     margin-bottom:12px;   
+     margin-bottom:6px;
     }
     
     .select_list>li:last-child{
@@ -719,7 +719,7 @@ width:100%;
     
     
     
-    .btn_statr:link, .btn_statr:visited{
+    .btn_start:link, .btn_start:visited{
         position: absolute;
         bottom:8px;
         left:23px;
@@ -736,12 +736,12 @@ width:100%;
         border-radius: 20px;
     }
     
-   .area_btn_start .btn_statr02:link, .area_btn_start .btn_statr02:visited{
+   .area_btn_start .btn_start02:link, .area_btn_start .btn_start02:visited{
         bottom:28px;
     }
     
     
-     .area_btn_start .btn_statr03:link, .area_btn_start .btn_statr03:visited{
+     .area_btn_start .btn_start03:link, .area_btn_start .btn_start03:visited{
         left:43px;
     }
     
@@ -862,7 +862,7 @@ width:100%;
     }
     
     .select_list>li{
-     margin-bottom:11px;   
+     margin-bottom:6px;
     }
     
     .select_list>li:last-child{
@@ -1237,7 +1237,7 @@ width:100%;
     
     
     
-    .btn_statr:link, .btn_statr:visited{
+    .btn_start:link, .btn_start:visited{
         position: absolute;
         bottom:8px;
         left:23px;
@@ -1254,12 +1254,12 @@ width:100%;
         border-radius: 20px;
     }
     
-   .area_btn_start .btn_statr02:link, .area_btn_start .btn_statr02:visited{
+   .area_btn_start .btn_start02:link, .area_btn_start .btn_start02:visited{
         bottom:28px;
     }
     
     
-     .area_btn_start .btn_statr03:link, .area_btn_start .btn_statr03:visited{
+     .area_btn_start .btn_start03:link, .area_btn_start .btn_start03:visited{
         left:43px;
     }
     
@@ -1432,7 +1432,7 @@ content:'';
     }
     
     .select_list>li{
-     margin-bottom:11px;   
+     margin-bottom:6px;
     }
     
     .select_list>li:last-child{
@@ -1832,7 +1832,7 @@ content:'';
     
     
     
-    .btn_statr:link, .btn_statr:visited{
+    .btn_start:link, .btn_start:visited{
         position: absolute;
         bottom:4px;
         left:18px;
@@ -1849,12 +1849,12 @@ content:'';
         border-radius: 20px;
     }
     
-   .area_btn_start .btn_statr02:link, .area_btn_start .btn_statr02:visited{
+   .area_btn_start .btn_start02:link, .area_btn_start .btn_start02:visited{
         bottom:21px;
     }
     
     
-     .area_btn_start .btn_statr03:link, .area_btn_start .btn_statr03:visited{
+     .area_btn_start .btn_start03:link, .area_btn_start .btn_start03:visited{
         left:33px;
     }
     
@@ -2025,7 +2025,7 @@ content:'';
     }
     
     .select_list>li{
-     margin-bottom:11px;   
+     margin-bottom:5px;
     }
     
     .select_list>li:last-child{
@@ -2398,7 +2398,7 @@ content:'';
          text-indent:0;
     }
     
-     .btn_statr:link, .btn_statr:visited{
+     .btn_start:link, .btn_start:visited{
         position: absolute;
         bottom:4px;
         left:12px;
@@ -2442,12 +2442,12 @@ content:'';
     
     
     
-   .area_btn_start .btn_statr02:link, .area_btn_start .btn_statr02:visited{
+   .area_btn_start .btn_start02:link, .area_btn_start .btn_start02:visited{
         bottom:16px;
     }
     
     
-     .area_btn_start .btn_statr03:link, .area_btn_start .btn_statr03:visited{
+     .area_btn_start .btn_start03:link, .area_btn_start .btn_start03:visited{
         left:23px;
     }
     
