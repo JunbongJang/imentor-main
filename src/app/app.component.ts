@@ -18,13 +18,6 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     const url = new URL(window.location.href);
     console.log(window.location.href);
-
-    // initialize user if it's not localhost
-    if (url.host.indexOf('localhost') !== 0) {
-      this.userService.setUserFromServer();
-      this.userService.setJindoFromServer();
-    }
-
   }
 
   getState(outlet: any) {

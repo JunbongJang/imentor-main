@@ -157,45 +157,4 @@ export class UserService {
         console.log(error);
       });
   }
-
-  setJindoFromServer() {
-    this.serverService.getJindoFromServer(this.step, this.ho).subscribe(
-      (jindo_xml_string) => {
-        console.log('getJindoFromServer: ');
-        const parser = new DOMParser();
-        const jindo_xml = parser.parseFromString(jindo_xml_string, 'text/xml');
-        console.log(jindo_xml);
-
-        this.jindo.book_title = jindo_xml.getElementsByTagName('book_title')[0].childNodes[0].nodeValue;
-        this.jindo.level = jindo_xml.getElementsByTagName('level')[0].childNodes[0].nodeValue;
-        this.jindo.step = jindo_xml.getElementsByTagName('step')[0].childNodes[0].nodeValue;
-        if ( jindo_xml.getElementsByTagName('section')[0].childNodes[0] !== undefined) {
-          this.jindo.section = jindo_xml.getElementsByTagName('section')[0].childNodes[0].nodeValue;
-        }
-        this.jindo.current_storybook1 = jindo_xml.getElementsByTagName('section_storybook1')[0].getAttribute('thisJindo');
-        this.jindo.current_storybook2 = jindo_xml.getElementsByTagName('section_storybook2')[0].getAttribute('thisJindo');
-        this.jindo.current_storybook3 = jindo_xml.getElementsByTagName('section_storybook3')[0].getAttribute('thisJindo');
-        this.jindo.current_storybook4 = jindo_xml.getElementsByTagName('section_storybook4')[0].getAttribute('thisJindo');
-        this.jindo.current_speaking1 = jindo_xml.getElementsByTagName('section_speaking1')[0].getAttribute('thisJindo');
-        this.jindo.current_speaking2 = jindo_xml.getElementsByTagName('section_speaking2')[0].getAttribute('thisJindo');
-        this.jindo.current_speaking3 = jindo_xml.getElementsByTagName('section_speaking3')[0].getAttribute('thisJindo');
-        this.jindo.current_finaltest = jindo_xml.getElementsByTagName('section_finaltest')[0].getAttribute('thisJindo');
-
-        this.jindo.point_vocabulary4 = jindo_xml.getElementsByTagName('point')[0].getAttribute('vocabulary4');
-        this.jindo.point_grammar5 = jindo_xml.getElementsByTagName('point')[0].getAttribute('grammer5');
-        this.jindo.point_speaking1 = jindo_xml.getElementsByTagName('point')[0].getAttribute('speaking1');
-        this.jindo.point_speaking2 = jindo_xml.getElementsByTagName('point')[0].getAttribute('speaking2');
-        this.jindo.point_speaking3 = jindo_xml.getElementsByTagName('point')[0].getAttribute('speaking3');
-        this.jindo.point_finaltest_speaking = jindo_xml.getElementsByTagName('point')[0].getAttribute('finaltest_speaking');
-        this.jindo.point_finaltest_writing = jindo_xml.getElementsByTagName('point')[0].getAttribute('finaltest_writing');
-        this.jindo.is_complete = jindo_xml.getElementsByTagName('point')[0].getAttribute('is_complete');
-
-        console.log('----------------------------------------------');
-        console.log(this.jindo);
-      },
-      (error) => {
-        console.log('error');
-        console.log(error);
-      });
-  }
 }

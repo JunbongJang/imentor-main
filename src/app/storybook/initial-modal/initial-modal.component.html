@@ -9,7 +9,7 @@
           background-position: top;
           background-size: 100% 100%;">
       <div class="modal-header border-bottom-0">
-        <h4 i18n class="modal-title text-danger font-weight-bold">
+        <h4 class="modal-title text-danger font-weight-bold">
           <div *ngIf="this.modal_view_state === this.viewStateService.STORYBOOK_ONE">
             STORYBOOK 1
           </div>
@@ -27,7 +27,7 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div i18n class="modal-body text-center h4 border-bottom-0 p-2" style="line-height:1.5; font-size: 1.4rem;">
+      <div class="modal-body text-center h4 border-bottom-0 p-2" style="line-height:1.5; font-size: 1.4rem;">
         <div *ngIf="this.modal_view_state === this.viewStateService.STORYBOOK_ONE" i18n>
           본문학습 입니다.<br>
           본문을 들으면서 알맞은 단어를<br>
@@ -62,7 +62,7 @@
 
       </div>
       <div class="modal-footer border-top-0">
-        <button i18n type="button" data-dismiss="modal" aria-label="Confirm" class="custom_pink_button" (click)="this.modalButtonClick()">START</button>
+        <button type="button" data-dismiss="modal" aria-label="Confirm" class="custom_pink_button" (click)="this.modalButtonClick()">START</button>
       </div>
     </div>
   </div>

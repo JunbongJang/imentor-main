@@ -1,9 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
+import {Component, OnInit, Renderer2} from '@angular/core';
+import {Router} from '@angular/router';
 import {ViewStateService} from '../core/view-state.service';
 import {Title} from '@angular/platform-browser';
 import {UserService} from '../core/user.service';
-import {current} from '../../../node_modules/codelyzer/util/syntaxKind';
 import {ServerService} from '../core/server.service';
 declare var $: any;
 
@@ -14,33 +13,54 @@ declare var $: any;
 })
 export class MainMenuComponent implements OnInit {
 
+  public character_url = '';
+
   NUM_BOOK_TOTAL = 24;
   NUM_BOOK_LIST = [];
   book_select_num = 1;
-  step_num = 1; //1 equals vocabulary1, 18 equals writing test
+
+  step_num = 1; // 1 equals vocabulary1, 18 equals writing test
 
   constructor(public router: Router,
               private viewStateService: ViewStateService,
               public userService: UserService,
               private titleService: Title,
-              private serverService: ServerService) { }
+              private serverService: ServerService,
+              private renderer: Renderer2) { }
 
   ngOnInit() {
+    const url = new URL(window.location.href);
+    // initialize user if it's not localhost
+    if (url.host.indexOf('localhost') !== 0) {
+      this.userService.setUserFromServer();
+      this.setJindoFromServer(this.userService.step, this.userService.ho);
+    }
+
     document.body.style.backgroundColor = 'rgb(241,210,83)';
     this.titleService.setTitle( 'i-MENTOR Home' );
+    this.setCharacterImage();
 
-    $(".select_bx").hide();
-    for (let i = 1; i <= 24; i++) {
+    $('.select_bx').hide();
+    for (let i = 1; i <= this.NUM_BOOK_TOTAL; i++) {
       this.NUM_BOOK_LIST.push(i);
     }
   }
 
   viewStateChoose(a_view: string, clicked_step_category: string, clicked_step: string) {
+    console.log('viewStateChoose');
+    console.log(a_view);
+    console.log(clicked_step);
+    console.log(clicked_step_category);
     this.updateUserState(clicked_step_category, clicked_step);
     if (this.viewStateService.view_state !== a_view) {
       this.viewStateService.view_state = a_view;
       this.router.navigate([clicked_step_category + '/' + a_view]);
     }
+  }
+
+  openPopup( clicked_step_category: string, clicked_step: string) {
+    const open_url = this.updateUserState(clicked_step_category, clicked_step);
+    window.open(open_url, '_blank');
   }
 
   updateUserState (clicked_step_category: string, clicked_step: string) {
@@ -102,26 +122,23 @@ export class MainMenuComponent implements OnInit {
     return open_url;
   }
 
-  openPopup( clicked_step_category: string, clicked_step: string) {
-    const open_url = this.updateUserState(clicked_step_category, clicked_step);
-    window.open(open_url, '_blank');
-  }
 
   closeChooseBook() {
-    $(".select_bx").hide();
+    $('.select_bx').hide();
   }
 
   openChooseBook() {
-    $(".select_bx").show();
+    $('.select_bx').show();
   }
 
   chooseBook() {
     this.userService.ho = String(this.book_select_num);
+    this.setJindoFromServer(this.userService.step, this.userService.ho);
+    this.setCharacterImage();
     this.closeChooseBook();
-    this.userService.setJindoFromServer();
   }
 
-  decideOpenStep(step: string) {
+  setOpenStep(step: string) {
     if (step === 'vocabulary1') {
       this.step_num = 1;
     } else if (step === 'vocabulary2') {
@@ -160,5 +177,53 @@ export class MainMenuComponent implements OnInit {
       this.step_num = 18;
     }
   }
+
+  setCharacterImage() {
+    this.character_url = '/IMENTOR/img/illust/' + this.userService.ho + '.png';
+    console.log('setCharacterImage!');
+  }
+
+  setJindoFromServer(a_step: string, a_ho: string) {
+    this.serverService.getJindoFromServer(a_step, a_ho).subscribe(
+      (jindo_xml_string) => {
+        console.log('getJindoFromServer: ');
+        const parser = new DOMParser();
+        const jindo_xml = parser.parseFromString(jindo_xml_string, 'text/xml');
+        console.log(jindo_xml);
+
+        this.userService.jindo.book_title = jindo_xml.getElementsByTagName('book_title')[0].childNodes[0].nodeValue;
+        this.userService.jindo.level = jindo_xml.getElementsByTagName('level')[0].childNodes[0].nodeValue;
+        this.userService.jindo.step = jindo_xml.getElementsByTagName('step')[0].childNodes[0].nodeValue;
+        if ( jindo_xml.getElementsByTagName('section')[0].childNodes[0] !== undefined) {
+          this.userService.jindo.section = jindo_xml.getElementsByTagName('section')[0].childNodes[0].nodeValue;
+        }
+        this.userService.jindo.current_storybook1 = jindo_xml.getElementsByTagName('section_storybook1')[0].getAttribute('thisJindo');
+        this.userService.jindo.current_storybook2 = jindo_xml.getElementsByTagName('section_storybook2')[0].getAttribute('thisJindo');
+        this.userService.jindo.current_storybook3 = jindo_xml.getElementsByTagName('section_storybook3')[0].getAttribute('thisJindo');
+        this.userService.jindo.current_storybook4 = jindo_xml.getElementsByTagName('section_storybook4')[0].getAttribute('thisJindo');
+        this.userService.jindo.current_speaking1 = jindo_xml.getElementsByTagName('section_speaking1')[0].getAttribute('thisJindo');
+        this.userService.jindo.current_speaking2 = jindo_xml.getElementsByTagName('section_speaking2')[0].getAttribute('thisJindo');
+        this.userService.jindo.current_speaking3 = jindo_xml.getElementsByTagName('section_speaking3')[0].getAttribute('thisJindo');
+        this.userService.jindo.current_finaltest = jindo_xml.getElementsByTagName('section_finaltest')[0].getAttribute('thisJindo');
+
+        this.userService.jindo.point_vocabulary4 = jindo_xml.getElementsByTagName('point')[0].getAttribute('vocabulary4');
+        this.userService.jindo.point_grammar5 = jindo_xml.getElementsByTagName('point')[0].getAttribute('grammer5');
+        this.userService.jindo.point_speaking1 = jindo_xml.getElementsByTagName('point')[0].getAttribute('speaking1');
+        this.userService.jindo.point_speaking2 = jindo_xml.getElementsByTagName('point')[0].getAttribute('speaking2');
+        this.userService.jindo.point_speaking3 = jindo_xml.getElementsByTagName('point')[0].getAttribute('speaking3');
+        this.userService.jindo.point_finaltest_speaking = jindo_xml.getElementsByTagName('point')[0].getAttribute('finaltest_speaking');
+        this.userService.jindo.point_finaltest_writing = jindo_xml.getElementsByTagName('point')[0].getAttribute('finaltest_writing');
+        this.userService.jindo.is_complete = jindo_xml.getElementsByTagName('point')[0].getAttribute('is_complete');
+
+        this.setOpenStep(this.userService.jindo.step);
+        console.log('----------------------------------------------');
+        console.log(this.userService.jindo);
+      },
+      (error) => {
+        console.log('error');
+        console.log(error);
+      });
+  }
+
 
 }

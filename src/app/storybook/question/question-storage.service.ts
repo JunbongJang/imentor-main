@@ -5,6 +5,30 @@ import {Subject} from 'rxjs';
 export class QuestionStorageService {
 
   dataInitialized = new Subject<boolean>();
+
+  // storybook question has data in order, which means I don't have to shuffle it by implementing Map data structure.
+  private _question_structure = {
+    storybook1: [{
+      eng: '',
+      o_word: '',
+      x_word: ''
+    }],
+    storybook2_3: [{
+      pgraph: [{
+          eng: '',
+          kor: '',
+          cn: ''
+        }
+      ]
+    }],
+    storybook4: [{
+      eng: '',
+      kor: '',
+      cn: ''
+    }],
+  };
+
+
   private _nextQuestionCalled = new Subject<number>();
 
   private _question_map: Map<string, {seq: string, english: string, english_raw: string, english_parsed: string[], korean: string}>;
@@ -116,5 +140,13 @@ export class QuestionStorageService {
 
   set total_question_number(value: number) {
     this._total_question_number = value;
+  }
+
+  get question_structure(): { storybook1: { eng: string; o_word: string; x_word: string }[]; storybook2_3: { pgraph: { eng: string; kor: string; cn: string }[] }[]; storybook4: { eng: string; kor: string; cn: string }[] } {
+    return this._question_structure;
+  }
+
+  set question_structure(value: { storybook1: { eng: string; o_word: string; x_word: string }[]; storybook2_3: { pgraph: { eng: string; kor: string; cn: string }[] }[]; storybook4: { eng: string; kor: string; cn: string }[] }) {
+    this._question_structure = value;
   }
 }

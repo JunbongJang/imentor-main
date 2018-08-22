@@ -19,6 +19,11 @@ import {FinalModalService} from './final-modal/final-modal.service';
 
 import * as bowser from 'bowser';
 import * as bootstrap from 'bootstrap';
+import {QuestionGenerateService} from './question/question-generate.service';
+import {QuestionStorageService} from './question/question-storage.service';
+import {QuestionGradeService} from './question/question-grade.service';
+import {QuestionSoundService} from './question/question-sound.service';
+import {GeneralUtilityService} from '../core/general-utility.service';
 declare var jQuery: any;
 
 @NgModule({
@@ -39,7 +44,12 @@ declare var jQuery: any;
   ],
   providers: [
     InitialModalService,
-    FinalModalService
+    FinalModalService,
+    QuestionGenerateService,
+    QuestionStorageService,
+    QuestionGradeService,
+    QuestionSoundService,
+    GeneralUtilityService
   ]
 })
 export class StorybookModule { }

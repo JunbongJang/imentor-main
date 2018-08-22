@@ -243,8 +243,8 @@ body{
     }
     
     .character_bx{
-     
-        background:url(../images/character.png) no-repeat center bottom;
+      background-repeat: no-repeat;
+      background-position: center bottom;
     }
     
 

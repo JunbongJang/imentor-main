@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+  <file source-language="en" datatype="plaintext" original="ng2.template">
+    <body>
+      <trans-unit id="45ae05e935846a5501c57a596f0c0481536cf0de" datatype="html">
+        <source>Mentor Series의 자기주도 학습</source>
+        <target>Mentor Series </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/main-menu/main-menu.component.html</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="c14a3d566ff6a612e3a585d90c7115aaabbe3f5b" datatype="html">
+        <source>학습을 시작하셔야<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br/&gt;"/>권장학습일이 표시됩니다.</source>
+        <target>Start Online Study </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/main-menu/main-menu.component.html</context>
+          <context context-type="linenumber">19</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="d93bc9cf690f25dad58b96e490125bb5b45ab32f" datatype="html">
+        <source>교재선택</source>
+        <target>Mentor Series </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/main-menu/main-menu.component.html</context>
+          <context context-type="linenumber">21</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1bad85f1465fe78b87a8d1a3747ae4799e5d2218" datatype="html">
+        <source><x id="INTERPOLATION" equiv-text="{{a_book}}"/>호</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/main-menu/main-menu.component.html</context>
+          <context context-type="linenumber">33</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/main-menu/main-menu.component.html</context>
+          <context context-type="linenumber">46</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/main-menu/main-menu.component.html</context>
+          <context context-type="linenumber">59</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="c5a6fae48dc8707f3d2046a982b96517c9d762b5" datatype="html">
+        <source>
+          본문학습 입니다.<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br/&gt;"/>
+          본문을 들으면서 알맞은 단어를<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br/&gt;"/>
+          클릭하세요.<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br/&gt;"/>
+          본문 듣기는 Scene 별로<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br/&gt;"/>
+          학습 기록이 저장됩니다.
+        </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/storybook/initial-modal/initial-modal.component.html</context>
+          <context context-type="linenumber">31</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2e4ff56730aa10c36e03f8b8e6b86c3b092a56fc" datatype="html">
+        <source>
+          본문 쓰기 학습입니다.<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br/&gt;"/>
+          단락별 음원을 듣고, 한글 해석을<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br/&gt;"/>
+          보면서 영어 문장을 완성하세요.<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br/&gt;"/>
+          본문 쓰기는 Scene 별로<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br/&gt;"/>
+          학습 기록이 저장됩니다.
+        </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/storybook/initial-modal/initial-modal.component.html</context>
+          <context context-type="linenumber">38</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="89f99c98d17acae4d66cabc5b154808e37cf2eb1" datatype="html">
+        <source>
+          본문 받아쓰기 학습입니다.<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br/&gt;"/>
+          단락별 음원을 듣고, 빈 칸에<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br/&gt;"/>
+          알맞은 단어를 쓰세요.<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br/&gt;"/>
+          단어 입력 후 엔터 키를 누르세요.<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br/&gt;"/>
+          틀린 경우 힌트가 등장합니다.<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br/&gt;"/>
+          본문 쓰기는 Scene 별로<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br/&gt;"/>
+          학습 기록이 저장됩니다.
+        </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/storybook/initial-modal/initial-modal.component.html</context>
+          <context context-type="linenumber">45</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="71ba267751a53984622e041a9abef8b5098f025f" datatype="html">
+        <source>
+          본문 영작 학습입니다.<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br/&gt;"/>
+          문장을 영작한 후, 엔터 키를<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br/&gt;"/>
+          누르세요.<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br/&gt;"/>
+          틀린 경우 힌트가 등장합니다.<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br/&gt;"/>
+          본문 쓰기는 Scene 별로<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br/&gt;"/>
+          학습기록이 저장됩니다.
+        </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/storybook/initial-modal/initial-modal.component.html</context>
+          <context context-type="linenumber">54</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="51ad164f3cdc27f1f185c2e728bb4851b3af7e55" datatype="html">
+        <source>
+            Congratulation!
+        </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/storybook/final-modal/final-modal.component.html</context>
+          <context context-type="linenumber">10</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="dbe43745942155ce76cb26b46e34285e99f5345b" datatype="html">
+        <source>
+        <x id="START_TAG_DIV" ctype="x-div" equiv-text="&lt;div&gt;"/>
+          본문 <x id="INTERPOLATION" equiv-text="{{stateCongratulationString(this.modal_view_state)}}"/> 학습을<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br/&gt;"/>
+          완료하였습니다.
+        <x id="CLOSE_TAG_DIV" ctype="x-div" equiv-text="&lt;/div&gt;"/>
+      </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/storybook/final-modal/final-modal.component.html</context>
+          <context context-type="linenumber">14</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="846af83182bf3931ac569414877df9c879c76996" datatype="html">
+        <source>재학습</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/storybook/final-modal/final-modal.component.html</context>
+          <context context-type="linenumber">21</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="d4dc5831956f724fb985a27d395c23de4ba5f318" datatype="html">
+        <source>마치기</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/storybook/final-modal/final-modal.component.html</context>
+          <context context-type="linenumber">22</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="0220d72183ff3b69edef27ec1fecf41067fc73e5" datatype="html">
+        <source>다음학습</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/storybook/final-modal/final-modal.component.html</context>
+          <context context-type="linenumber">23</context>
+        </context-group>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

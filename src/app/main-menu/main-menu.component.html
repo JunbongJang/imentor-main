@@ -2,12 +2,12 @@
   <div class="container_wrap">
     <div class="h_wrap">
       <div class="area_logo">
-        <h1 class="logo">아이멘토 로고</h1>
-        <p class="logo_t">Mentor Series의 자기주도 학습</p>
+        <h1 class="logo" i18n>아이멘토 로고</h1>
+        <p class="logo_t" i18n>Mentor Series의 자기주도 학습</p>
       </div>
     </div>
     <div class="area_login">
-      <p class="user_name">hi! {{this.userService.user.name}}님</p>
+      <p class="user_name" i18n>hi! {{this.userService.user.name}}님</p>
       <span>
           <a class="btn_login" href="#">LOGOUT</a>
       </span>
@@ -15,10 +15,10 @@
     <div class="area_contents">
       <div class="side_m">
         <div class="area_select_bx">
-          <a class="pencil" href="#" (click)="this.openChooseBook()">교재선택</a>
-          <p>학습을 시작하셔야<br>권장학습일이 표시됩니다.</p>
+          <a class="pencil" href="#" (click)="this.openChooseBook()" i18n>교재선택</a>
+          <p i18n>학습을 시작하셔야<br>권장학습일이 표시됩니다.</p>
           <div class="select_bx">
-            <h2 class="sbx_title">교재선택</h2>
+            <h2 class="sbx_title" i18n>교재선택</h2>
 
             <form #book_select_form="ngForm">
               <div class="area_select_list">
@@ -30,7 +30,7 @@
                              [name]="'book_select_' + a_book"
                              [(ngModel)]="book_select_num"
                              [value]="a_book">
-                      <label class="r_book" [for]="'book_select_' + a_book">{{a_book}}호</label>
+                      <label class="r_book" [for]="'book_select_' + a_book" i18n>{{a_book}}호</label>
                     </li>
                   </ng-container>
 
@@ -43,7 +43,7 @@
                              [name]="'book_select_' + a_book"
                              [(ngModel)]="book_select_num"
                              [value]="a_book">
-                      <label class="g_book" [for]="'book_select_' + a_book">{{a_book}}호</label>
+                      <label class="g_book" [for]="'book_select_' + a_book" i18n>{{a_book}}호</label>
                     </li>
                   </ng-container>
 
@@ -56,7 +56,7 @@
                              [name]="'book_select_' + a_book"
                              [(ngModel)]="book_select_num"
                              [value]="a_book">
-                      <label class="b_book" [for]="'book_select_' + a_book">{{a_book}}호</label>
+                      <label class="b_book" [for]="'book_select_' + a_book" i18n>{{a_book}}호</label>
                     </li>
                   </ng-container>
 
@@ -70,15 +70,15 @@
         <div class="cld">
           &nbsp;
         </div>
-        <div class="character_bx">
-          <p class="cc_text">본 학습은 30일 학습기간을 제공합니다.</p>
+        <div class="character_bx" [ngStyle]="{ 'background-image': 'url(' + this.character_url + ')'}">
+          <p class="cc_text" i18n>본 학습은 30일 학습기간을 제공합니다.</p>
         </div>
       </div>
 
       <div class="main_con">
         <div class="area_mc">
           <div class="area_mc_title">
-            <h2 class="mc_title">{{this.userService.ho}}호 / {{this.userService.jindo.book_title}}</h2>
+            <h2 class="mc_title" i18n>{{this.userService.ho}}호 / {{this.userService.jindo.book_title}}</h2>
           </div>
           <div class="round_bx">
             <ul class="round_list">
@@ -137,7 +137,7 @@
 
                 <ng-template #studied_step4>
                   <a href="#">voca4</a>
-                  <span class="score">70</span>
+                  <span class="score">{{this.userService.jindo.point_vocabulary4}}</span>
                   <span class="area_btn_result">
                     <a class="btn_result" href="#">Result</a>
                   </span>
@@ -158,7 +158,7 @@
                 </ng-template>
               </li>
 
-              <li class="round_list06" (click)="this.openPopup('storybook', '1')">
+              <li class="round_list06" (click)="this.viewStateChoose('story-one', 'storybook', '1')">
                 <ng-template [ngIf]="this.step_num <= 10" [ngIfElse]="studied_step10">
                   <a class="on" href="#">storybook1</a>
                   <span class="area_btn_start">
@@ -181,7 +181,7 @@
 
                 <ng-template #studied_step9>
                   <a href="#">test</a>
-                  <span class="score score03">70</span>
+                  <span class="score score03">{{this.userService.jindo.point_grammar5}}</span>
                   <span class="area_btn_result">
                     <a class="btn_result btn_result03" href="#">Result</a>
                   </span>
@@ -228,7 +228,7 @@
                 </ng-template>
               </li>
 
-              <li class="round_list11" (click)="this.openPopup('storybook', '2')">
+              <li class="round_list11" (click)="this.viewStateChoose('story-two', 'storybook', '2')">
                 <ng-template [ngIf]="this.step_num <= 11" [ngIfElse]="studied_step11">
                   <a class="on" href="#">storybook2</a>
                   <span class="area_btn_start">
@@ -241,7 +241,7 @@
                 </ng-template>
               </li>
 
-              <li class="round_list12" (click)="this.openPopup('storybook', '3')">
+              <li class="round_list12" (click)="this.viewStateChoose('story-three', 'storybook', '3')">
                 <ng-template [ngIf]="this.step_num <= 12" [ngIfElse]="studied_step12">
                   <a class="on" href="#">storybook3</a>
                   <span class="area_btn_start">
@@ -254,7 +254,7 @@
                 </ng-template>
               </li>
 
-              <li class="round_list13" (click)="this.openPopup('storybook', '4')">
+              <li class="round_list13" (click)="this.viewStateChoose('story-four', 'storybook', '4')">
                 <ng-template [ngIf]="this.step_num <= 13" [ngIfElse]="studied_step13">
                   <a class="on" href="#">storybook4</a>
                   <span class="area_btn_start">
@@ -277,10 +277,7 @@
 
                 <ng-template #studied_step14>
                   <a href="#">speak-ing1</a>
-                  <span class="score">70</span>
-                  <span class="area_btn_result">
-                    <a class="btn_result" href="#">Result</a>
-                  </span>
+                  <span class="score">{{this.userService.jindo.point_speaking1}}</span>
                 </ng-template>
               </li>
 
@@ -294,10 +291,7 @@
 
                 <ng-template #studied_step15>
                   <a href="#">speak-ing2</a>
-                  <span class="score score02">70</span>
-                  <span class="area_btn_result">
-                    <a class="btn_result btn_result02" href="#">Result</a>
-                  </span>
+                  <span class="score score02">{{this.userService.jindo.point_speaking2}}</span>
                 </ng-template>
               </li>
 
@@ -311,7 +305,7 @@
 
                 <ng-template #studied_step18>
                   <a href="#">Writing Test</a>
-                  <span class="score score03">70</span>
+                  <span class="score score03">{{this.userService.jindo.point_finaltest_writing}}</span>
                   <span class="area_btn_result">
                     <a class="btn_result btn_result03" href="#">Result</a>
                   </span>
@@ -328,7 +322,7 @@
 
                 <ng-template #studied_step17>
                   <a href="#">Speaking Test</a>
-                  <span class="score score03">70</span>
+                  <span class="score score03">{{this.userService.jindo.point_finaltest_speaking}}</span>
                   <span class="area_btn_result">
                     <a class="btn_result btn_result03" href="#">Result</a>
                   </span>
@@ -345,10 +339,7 @@
 
                 <ng-template #studied_step16>
                   <a href="#">speak-ing3</a>
-                  <span class="score score03">70</span>
-                  <span class="area_btn_result">
-                    <a class="btn_result btn_result03" href="#">Result</a>
-                </span>
+                  <span class="score score03">{{this.userService.jindo.point_speaking3}}</span>
                 </ng-template>
               </li>
 
@@ -360,40 +351,40 @@
   </div> <!-- END : container_wrap -->
 </div> <!-- END : wrap -->
 
-<!--<div class="container mt-5">-->
-  <!--<div class="row">-->
-    <!--<div class="col">-->
-      <!--<button class="btn btn-primary" (click)="this.openPopup('storybook', '1')">-->
-        <!--Storybook1-->
-      <!--</button>-->
-      <!--<button class="btn btn-primary" (click)="this.openPopup('storybook', '2')">-->
-        <!--Storybook2-->
-      <!--</button>-->
-      <!--<button class="btn btn-primary" (click)="this.openPopup('storybook', '3')">-->
-        <!--Storybook3-->
-      <!--</button>-->
-      <!--<button class="btn btn-primary" (click)="this.openPopup('storybook', '4')">-->
-        <!--Storybook4-->
-      <!--</button>-->
-    <!--</div>-->
-  <!--</div>-->
-  <!--<div class="row mt-3">-->
-    <!--<div class="col">-->
-      <!--<button class="btn btn-primary" (click)="this.viewStateChoose('story-one', 'storybook', '1')">-->
-        <!--Storybook1-->
-      <!--</button>-->
-      <!--<button class="btn btn-primary" (click)="this.viewStateChoose('story-two', 'storybook', '2')">-->
-        <!--Storybook2-->
-      <!--</button>-->
-      <!--<button class="btn btn-primary" (click)="this.viewStateChoose('story-three', 'storybook', '3')">-->
-        <!--Storybook3-->
-      <!--</button>-->
-      <!--<button class="btn btn-primary" (click)="this.viewStateChoose('story-four', 'storybook', '4')">-->
-        <!--Storybook4-->
-      <!--</button>-->
-    <!--</div>-->
-  <!--</div>-->
+<div class="container mt-5">
+  <div class="row">
+    <div class="col">
+      <button class="btn btn-primary" (click)="this.openPopup('storybook', '1')">
+        Storybook1
+      </button>
+      <button class="btn btn-primary" (click)="this.openPopup('storybook', '2')">
+        Storybook2
+      </button>
+      <button class="btn btn-primary" (click)="this.openPopup('storybook', '3')">
+        Storybook3
+      </button>
+      <button class="btn btn-primary" (click)="this.openPopup('storybook', '4')">
+        Storybook4
+      </button>
+    </div>
+  </div>
+  <div class="row mt-3">
+    <div class="col">
+      <button class="btn btn-primary" (click)="this.viewStateChoose('story-one', 'storybook', '1')">
+        Storybook1
+      </button>
+      <button class="btn btn-primary" (click)="this.viewStateChoose('story-two', 'storybook', '2')">
+        Storybook2
+      </button>
+      <button class="btn btn-primary" (click)="this.viewStateChoose('story-three', 'storybook', '3')">
+        Storybook3
+      </button>
+      <button class="btn btn-primary" (click)="this.viewStateChoose('story-four', 'storybook', '4')">
+        Storybook4
+      </button>
+    </div>
+  </div>
 
-  <!--<app-chat-dialog></app-chat-dialog>-->
-<!--</div>-->
+  <app-chat-dialog></app-chat-dialog>
+</div>
 
