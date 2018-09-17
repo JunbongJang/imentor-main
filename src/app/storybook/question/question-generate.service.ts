@@ -14,8 +14,7 @@ export class QuestionGenerateService {
   /**
    * Initialize Question From server based on different step names.
    */
-  getQuestionFromServer() {
-      const step_snapshot = this.userService.step;
+  getQuestionFromServer(step_snapshot: string) {
       this.serverService.getQuestionFromServer(this.userService.step, this.userService.ho, this.userService.section ).subscribe(
         (question_xml_string) => {
 
@@ -23,29 +22,33 @@ export class QuestionGenerateService {
           const parser = new DOMParser();
           const parsed_xml = parser.parseFromString(question_xml_string, 'text/xml');
           console.log(parsed_xml);
+          const question_xml = parsed_xml.getElementsByTagName('question')[0];
+          this.xmlParse(question_xml, step_snapshot);
 
-          if (step_snapshot === 'storybook1') {
+          this.questionStorageService.questionInitialized.next(true);
 
-            console.log('storybook1');
-            const question_xml = parsed_xml.getElementsByTagName('question')[0];
-            this.xmlPrint(question_xml, 'o_word', 'x_word');
+          console.log('------------xmlParse---------------');
+          console.log(this.questionStorageService.question_structure);
 
-          } else if (step_snapshot === 'storybook2' || step_snapshot === 'storybook3') {
-
-            console.log('2 or 3: ' + step_snapshot);
-            const pgraph1 = parsed_xml.getElementsByTagName('pgraph')[0];
-            const pgraph2 = parsed_xml.getElementsByTagName('pgraph')[1];
-            this.xmlPrint(pgraph1, 'kor', 'cn');
-            this.xmlPrint(pgraph2, 'kor', 'cn');
-
-          } else if (step_snapshot === 'storybook4') {
-
-            console.log('storybook4');
-            const question_xml = parsed_xml.getElementsByTagName('question')[0];
-            this.xmlPrint(question_xml, 'kor', 'cn');
-
-          }
-
+          // if (step_snapshot === 'storybook1') {
+          //
+          //   console.log('storybook1');
+          //   this.xmlPrint(question_xml, 'o_word', 'x_word');
+          //
+          // } else if (step_snapshot === 'storybook2' || step_snapshot === 'storybook3') {
+          //
+          //   console.log('2 or 3: ' + step_snapshot);
+          //   const pgraph1 = parsed_xml.getElementsByTagName('pgraph')[0];
+          //   const pgraph2 = parsed_xml.getElementsByTagName('pgraph')[1];
+          //   this.xmlPrint(pgraph1, 'kor', 'cn');
+          //   this.xmlPrint(pgraph2, 'kor', 'cn');
+          //
+          // } else if (step_snapshot === 'storybook4') {
+          //
+          //   console.log('storybook4');
+          //   this.xmlPrint(question_xml, 'kor', 'cn');
+          //
+          // }
         },
         (error) => {
           console.log('error');
@@ -59,11 +62,14 @@ export class QuestionGenerateService {
    * @param current_step
    */
   private xmlParse(xml_object: any, current_step) {
-    if (current_step === 'storybook1') {
-      const a_object = {eng: '', o_word: '', x_word: ''};
+    this.questionStorageService.question_structure.max_section = xml_object.getElementsByTagName('scene')[0].childNodes[0].nodeValue;
 
+    if (current_step === 'storybook1') {
+
+      this.questionStorageService.question_structure.storybook1 = [];
       for (let i = 0; xml_object.getElementsByTagName('eng')[i] !== undefined; i++) {
         // dynamic JSON filling in
+        const a_object = {eng: '', o_word: '', x_word: ''};
         a_object.eng = xml_object.getElementsByTagName('eng')[i].childNodes[0].nodeValue;
         if (xml_object.getElementsByTagName('o_word')[i].childNodes[0] !== undefined) {
           a_object.o_word = xml_object.getElementsByTagName('o_word')[i].childNodes[0].nodeValue;
@@ -73,27 +79,47 @@ export class QuestionGenerateService {
         }
         this.questionStorageService.question_structure.storybook1.push(a_object);
       }
+
     } else {
-      const a_object = {eng: '', kor: '', cn: ''};
 
       if (current_step === 'storybook2' || current_step === 'storybook3') {
 
+        this.questionStorageService.question_structure.storybook2_3 = {pgraph1: [], pgraph2: []};
         const pgraph1 = xml_object.getElementsByTagName('pgraph')[0];
         const pgraph2 = xml_object.getElementsByTagName('pgraph')[1];
 
-        a_object.eng = pgraph1.getElementsByTagName('eng')[0].childNodes[0].nodeValue;
-        a_object.kor = pgraph1.getElementsByTagName('kor')[0].childNodes[0].nodeValue;
-        a_object.cn = pgraph1.getElementsByTagName('cn')[0].childNodes[0].nodeValue;
-        this.questionStorageService.question_structure.storybook4.push(a_object);
+        for (let i = 0; pgraph1.getElementsByTagName('eng')[i] !== undefined; i++) {
+          // dynamic JSON filling in
+          const a_object = {eng: '', kor: '', cn: ''};
+          a_object.eng = pgraph1.getElementsByTagName('eng')[i].childNodes[0].nodeValue;
+          if (pgraph1.getElementsByTagName('kor')[i].childNodes[0] !== undefined) {
+            a_object.kor = pgraph1.getElementsByTagName('kor')[i].childNodes[0].nodeValue;
+          }
+          if (pgraph1.getElementsByTagName('cn')[i].childNodes[0] !== undefined) {
+            a_object.cn = pgraph1.getElementsByTagName('cn')[i].childNodes[0].nodeValue;
+          }
+          this.questionStorageService.question_structure.storybook2_3.pgraph1.push(a_object);
+        }
 
-        a_object.eng = pgraph2.getElementsByTagName('eng')[0].childNodes[0].nodeValue;
-        a_object.kor = pgraph2.getElementsByTagName('kor')[0].childNodes[0].nodeValue;
-        a_object.cn = pgraph2.getElementsByTagName('cn')[0].childNodes[0].nodeValue;
-        this.questionStorageService.question_structure.storybook4.push(a_object);
+        for (let i = 0; pgraph2.getElementsByTagName('eng')[i] !== undefined; i++) {
+          // dynamic JSON filling in
+          const a_object = {eng: '', kor: '', cn: ''};
+          a_object.eng = pgraph2.getElementsByTagName('eng')[i].childNodes[0].nodeValue;
+          if (pgraph2.getElementsByTagName('kor')[i].childNodes[0] !== undefined) {
+            a_object.kor = pgraph2.getElementsByTagName('kor')[i].childNodes[0].nodeValue;
+          }
+          if (pgraph2.getElementsByTagName('cn')[i].childNodes[0] !== undefined) {
+            a_object.cn = pgraph2.getElementsByTagName('cn')[i].childNodes[0].nodeValue;
+          }
+          this.questionStorageService.question_structure.storybook2_3.pgraph2.push(a_object);
+        }
 
       } else {
+
+        this.questionStorageService.question_structure.storybook4 = [];
         for (let i = 0; xml_object.getElementsByTagName('eng')[i] !== undefined; i++) {
           // dynamic JSON filling in
+          const a_object = {eng: '', kor: '', cn: ''};
           a_object.eng = xml_object.getElementsByTagName('eng')[i].childNodes[0].nodeValue;
           if (xml_object.getElementsByTagName('kor')[i].childNodes[0] !== undefined) {
             a_object.kor = xml_object.getElementsByTagName('kor')[i].childNodes[0].nodeValue;
@@ -103,9 +129,9 @@ export class QuestionGenerateService {
           }
           this.questionStorageService.question_structure.storybook4.push(a_object);
         }
-      }
+      } // end of else
 
-    }
+    } // end of else
   }
 
   /**

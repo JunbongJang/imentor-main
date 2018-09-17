@@ -80,7 +80,6 @@ audio {
 .inner-container-border {
   border-radius: 10px;
   background:linear-gradient(135deg, rgb(246, 246, 246), rgb(221, 221, 221));
-  height: 470px;
 }
 
 /*Large devices (desktops, 992px and up)*/

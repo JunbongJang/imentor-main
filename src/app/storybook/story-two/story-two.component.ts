@@ -20,7 +20,7 @@ export class StoryTwoComponent implements OnInit {
   ngOnInit() {
     this.viewStateService.view_state = this.viewStateService.STORYBOOK_TWO;
     this.userService.step = 'storybook2';
-    this.questionGenerateService.getQuestionFromServer();
+    this.questionGenerateService.getQuestionFromServer(this.userService.step);
   }
 
 }

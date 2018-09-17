@@ -6,19 +6,12 @@
         <div class="col justify-content-end d-flex">
           <ul class="nav nav-tabs ml-md-5 ml-0 border-bottom-0">
 
-            <li class="nav-item">
-              <a class="nav-link cursor_pointer border border-top rounded">
-                Scene 1
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link cursor_pointer border border-top rounded">
-                Scene 2
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link cursor_pointer border border-top rounded">
-                Scene 3
+            <li class="nav-item" *ngFor="let a_section of this.NUM_SECTION_LIST">
+              <a class="nav-link cursor_pointer border border-top rounded text-white"
+                 style="font-size:.74rem;"
+                 [ngClass]="setActiveSectionTab(a_section)"
+                  (click)="this.clickSectionTab(a_section)">
+                Scene {{a_section}}
               </a>
             </li>
 
@@ -29,24 +22,29 @@
       <div class="row ml-lg-3 ml-0 mr-0 mb-lg-3">
         <div class="col-lg-4 text-center">
 
-          <h3 class="font-weight-bold" style="color: rgb(106,57,156);">Don't Be Greedy!</h3>
+          <h3 class="font-weight-bold font-italic" style="color: rgb(106,57,156);">{{this.userService.jindo.book_title}}</h3>
 
           <div class="tada animated image-container-custom mx-auto mt-2">
-            <img src="assets/img/left_image.png" class="p-1">
+            <img [src]="this.setStorybookImage()" class="p-1">
           </div>
 
-          <audio src="assets/mp3/1_1.mp3" type="audio/mpeg"
+          <audio [src]="this.setStorybookAudio('')" type="audio/mpeg"
+                 id="storybook_audio"
                  controls controlsList="nodownload"
                  class="mt-3 w-100"
-                 style="max-width:400px;"></audio>
+                 style="max-width:400px;"
+                *ngIf="this.userService.step !== 'storybook4'"></audio>
 
         </div>
         <div class="col-lg-8 mt-3 mt-md-0">
-          <div class="row pt-3 inner-container-border">
-            <div class="col-12">
-
+          <div class="row pt-3 inner-container-border" style="height: 470px;">
+            <div class="col-12 scrollbar-deep-blue" style="height: 390px; overflow-y: scroll;">
               <router-outlet></router-outlet>
+            </div>
 
+            <div class="col-12 justify-content-center d-flex" style="height: 40px;">
+              <button class="btn btn-info mr-3" *ngIf="this.checkNotMaxScene()" (click)="this.gotoNextScene()" id="storybook_next_button" disabled>Next Scene</button>
+              <button class="btn btn-primary" id="storybook_finish_button" (click)="this.finishStorybook()" disabled>Finish</button>
             </div>
           </div>
         </div>

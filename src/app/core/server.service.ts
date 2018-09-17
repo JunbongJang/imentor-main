@@ -26,7 +26,7 @@ export class ServerService {
   }
 
   getUserFromServer() {
-    return this.httpClient.get<string>('https://www.welleastern.co.kr/IMENTOR/get-member.php')
+    return this.httpClient.get<string>('/IMENTOR/get-member.php')
       .pipe(
         retry(2), // retry a failed request up to 3 times
         catchError(this.handleError) // then handle the error
@@ -34,7 +34,7 @@ export class ServerService {
   }
 
   getCalendarFromServer(a_month: string, a_ho: string, a_year: string) {
-    return this.httpClient.get<string>(`https://www.welleastern.co.kr/IMENTOR/get-calendar.php?month=${a_month}&ho=${a_ho}&year=${a_year}`)
+    return this.httpClient.get<string>(`/IMENTOR/get-calendar.php?month=${a_month}&ho=${a_ho}&year=${a_year}`)
       .pipe(
         retry(2), // retry a failed request up to 3 times
         catchError(this.handleError) // then handle the error
@@ -42,7 +42,7 @@ export class ServerService {
   }
 
   getQuestionFromServer(a_step: string | null, a_ho: string | null, a_section: string | null) {
-    return this.httpClient.get<string>('https://www.welleastern.co.kr/IMENTOR/get-question-utf8.php?step=' + a_step + '&ho=' + a_ho + '&section=' + a_section)
+    return this.httpClient.get<string>('/IMENTOR/get-question-utf8.php?step=' + a_step + '&ho=' + a_ho + '&section=' + a_section)
       .pipe(
         retry(2), // retry a failed request up to 3 times
         catchError(this.handleError) // then handle the error
@@ -50,7 +50,7 @@ export class ServerService {
   }
 
   getJindoFromServer(a_step: string | null, a_ho: string | null) {
-    return this.httpClient.get<string>('https://www.welleastern.co.kr/IMENTOR/get-jindo.php?step=' + a_step + '&ho=' + a_ho)
+    return this.httpClient.get<string>('/IMENTOR/get-jindo.php?step=' + a_step + '&ho=' + a_ho)
       .pipe(
         retry(2), // retry a failed request up to 3 times
         catchError(this.handleError) // then handle the error
@@ -58,7 +58,7 @@ export class ServerService {
   }
 
   getResultFromServer(a_step: string | null, a_ho: string | null, a_uid: string | null) {
-    return this.httpClient.get<string>('https://www.welleastern.co.kr/IMENTOR/my-result-seq.php?step=' + 'grammer5' + '&ho=' + a_ho + '&uid=' + a_uid)
+    return this.httpClient.get<string>('/IMENTOR/my-result-seq.php?step=' + 'grammer5' + '&ho=' + a_ho + '&uid=' + a_uid)
       .pipe(
         retry(2), // retry a failed request up to 3 times
         catchError(this.handleError) // then handle the error
@@ -81,7 +81,7 @@ export class ServerService {
       'section': section
     };
 
-    return this.httpClient.post<string>('https://www.welleastern.co.kr/IMENTOR/save_json.php', body, {headers: {'Content-Type': 'application/json'}})
+    return this.httpClient.post<string>('/IMENTOR/save_json.php', body, {headers: {'Content-Type': 'application/json'}})
       .pipe(
         retry(2), // retry a failed request up to 3 times
         catchError(this.handleError) // then handle the error
@@ -89,7 +89,7 @@ export class ServerService {
   }
 
   logoutUser() {
-    return this.httpClient.get<string>('https://www.welleastern.co.kr/IMENTOR/log-out.php')
+    return this.httpClient.get<string>('/IMENTOR/log-out.php')
       .pipe(
         retry(2), // retry a failed request up to 3 times
         catchError(this.handleError) // then handle the error

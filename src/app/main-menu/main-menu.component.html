@@ -9,13 +9,14 @@
     <div class="area_login">
       <p class="user_name" i18n>hi! {{this.userService.user.name}}님</p>
       <span>
-          <a class="btn_login" href="#">LOGOUT</a>
+          <a class="btn_login" href="javascript:void(0)" (click)="this.logoutUser()">LOGOUT</a>
       </span>
     </div>
     <div class="area_contents">
       <div class="side_m">
         <div class="area_select_bx">
-          <a class="pencil" href="#" (click)="this.openChooseBook()" i18n>교재선택</a>
+          <span class="wb_book" [ngStyle]="{ 'background-image': 'url(' + this.book_url + ')'}" [ngClass]="{wb_book_center: !this.checkMasterPerm()}">책</span>
+          <a class="pencil" href="javascript:void(0)" (click)="this.openChooseBook()" i18n *ngIf="this.checkMasterPerm()">교재선택</a>
           <p i18n>학습을 시작하셔야<br>권장학습일이 표시됩니다.</p>
           <div class="select_bx">
             <h2 class="sbx_title" i18n>교재선택</h2>
@@ -24,7 +25,7 @@
               <div class="area_select_list">
                 <ul class="select_list select_list01">
 
-                  <ng-container *ngFor="let a_book of this.NUM_BOOK_LIST;">
+                  <ng-container *ngFor="let a_book of this.NUM_BOOK_LIST; ">
                     <li *ngIf="a_book < 9">
                       <input [id]="'book_select_' + a_book" type="radio"
                              [name]="'book_select_' + a_book"
@@ -63,15 +64,15 @@
                 </ul>
               </div>
             </form>
-            <a class="btn_close" href="#" (click)="this.closeChooseBook();">close</a>
-            <a class="btn_select" href="#" (click)="this.chooseBook();">선택</a>
+            <a class="btn_close" href="javascript:void(0)" (click)="this.closeChooseBook();">close</a>
+            <a class="btn_select" href="javascript:void(0)" (click)="this.chooseBook();">choose</a>
           </div>
         </div>
         <div class="cld">
           &nbsp;
         </div>
+        <p class="cc_text" i18n>본 학습은 30일 학습기간을 제공합니다.</p>
         <div class="character_bx" [ngStyle]="{ 'background-image': 'url(' + this.character_url + ')'}">
-          <p class="cc_text" i18n>본 학습은 30일 학습기간을 제공합니다.</p>
         </div>
       </div>
 
@@ -83,263 +84,263 @@
           <div class="round_bx">
             <ul class="round_list">
 
-              <li class="round_list01" (click)="this.openPopup('vocabulary', '1')">
+              <li class="round_list01" (click)="this.openPopup('vocabulary', '1', 1)">
 
                 <ng-template [ngIf]="this.step_num <= 1" [ngIfElse]="studied_step1">
-                  <a class="on" href="#">voca1</a>
+                  <a class="on" href="javascript:void(0)">voca1</a>
                   <span class="area_btn_start">
-                    <a class="btn_start" href="#">Start</a>
+                    <a class="btn_start" href="javascript:void(0)">Start</a>
                   </span>
                 </ng-template>
 
                 <ng-template #studied_step1>
-                  <a href="#">voca1</a>
+                  <a href="javascript:void(0)">voca1</a>
                 </ng-template>
 
               </li>
 
-              <li class="round_list02" (click)="this.openPopup('vocabulary', '2')">
+              <li class="round_list02" (click)="this.openPopup('vocabulary', '2', 2)">
                 <ng-template [ngIf]="this.step_num <= 2" [ngIfElse]="studied_step2">
-                  <a class="on" href="#">voca2</a>
-                  <span class="area_btn_start">
-                    <a class="btn_start" href="#">Start</a>
+                  <a class="on" href="javascript:void(0)">voca2</a>
+                  <span class="area_btn_start" *ngIf="this.checkMasterPerm() || this.step_num == 2">
+                    <a class="btn_start" href="javascript:void(0)">Start</a>
                   </span>
                 </ng-template>
 
                 <ng-template #studied_step2>
-                  <a href="#">voca2</a>
+                  <a href="javascript:void(0)">voca2</a>
                 </ng-template>
               </li>
 
-              <li class="round_list03" (click)="this.openPopup('vocabulary', '3')">
+              <li class="round_list03" (click)="this.openPopup('vocabulary', '3', 3)">
 
                 <ng-template [ngIf]="this.step_num <= 3" [ngIfElse]="studied_step3">
-                  <a class="on" href="#">voca3</a>
-                  <span class="area_btn_start">
-                    <a class="btn_start" href="#">Start</a>
+                  <a class="on" href="javascript:void(0)">voca3</a>
+                  <span class="area_btn_start" *ngIf="this.checkMasterPerm() || this.step_num == 3">
+                    <a class="btn_start" href="javascript:void(0)">Start</a>
                   </span>
                 </ng-template>
 
                 <ng-template #studied_step3>
-                  <a href="#">voca3</a>
+                  <a href="javascript:void(0)">voca3</a>
                 </ng-template>
 
               </li>
 
-              <li class="round_list04" (click)="this.openPopup('vocabulary', '4')">
+              <li class="round_list04" (click)="this.openPopup('vocabulary', '4', 4)">
 
                 <ng-template [ngIf]="this.step_num <= 4" [ngIfElse]="studied_step4">
-                  <a class="on" href="#">voca4</a>
-                  <span class="area_btn_start">
-                    <a class="btn_start" href="#">Start</a>
+                  <a class="on" href="javascript:void(0)">voca4</a>
+                  <span class="area_btn_start" *ngIf="this.checkMasterPerm() || this.step_num == 4">
+                    <a class="btn_start" href="javascript:void(0)">Start</a>
                   </span>
                 </ng-template>
 
                 <ng-template #studied_step4>
-                  <a href="#">voca4</a>
+                  <a href="javascript:void(0)">voca4</a>
                   <span class="score">{{this.userService.jindo.point_vocabulary4}}</span>
                   <span class="area_btn_result">
-                    <a class="btn_result" href="#">Result</a>
+                    <a class="btn_result" href="javascript:void(0)">Result</a>
                   </span>
                   <!--<p class="grading">채점중입니다.</p>-->
                 </ng-template>
               </li>
 
-              <li class="round_list05" (click)="this.openPopup('grammar', '1')">
+              <li class="round_list05" (click)="this.openPopup('grammar', '1', 5)">
                 <ng-template [ngIf]="this.step_num <= 5" [ngIfElse]="studied_step5">
-                  <a class="on" href="#">grammar1</a>
-                  <span class="area_btn_start">
-                    <a class="btn_start btn_start02" href="#">Start</a>
+                  <a class="on" href="javascript:void(0)">grammar1</a>
+                  <span class="area_btn_start" *ngIf="this.checkMasterPerm() || this.step_num == 5">
+                    <a class="btn_start btn_start02" href="javascript:void(0)">Start</a>
                   </span>
                 </ng-template>
 
                 <ng-template #studied_step5>
-                  <a href="#">grammar1</a>
+                  <a href="javascript:void(0)">grammar1</a>
                 </ng-template>
               </li>
 
-              <li class="round_list06" (click)="this.viewStateChoose('story-one', 'storybook', '1')">
+              <li class="round_list06" (click)="this.viewStateChoose('story-one', 'storybook', '1', 10)">
                 <ng-template [ngIf]="this.step_num <= 10" [ngIfElse]="studied_step10">
-                  <a class="on" href="#">storybook1</a>
-                  <span class="area_btn_start">
-                    <a class="btn_start btn_start02" href="#">Start</a>
+                  <a class="on" href="javascript:void(0)">storybook1</a>
+                  <span class="area_btn_start" *ngIf="this.checkMasterPerm() || this.step_num == 10">
+                    <a class="btn_start btn_start02" href="javascript:void(0)">Start</a>
                   </span>
                 </ng-template>
 
                 <ng-template #studied_step10>
-                  <a href="#">storybook1</a>
+                  <a href="javascript:void(0)">storybook1</a>
                 </ng-template>
               </li>
 
-              <li class="round_list07" (click)="this.openPopup('grammar', '5')">
+              <li class="round_list07" (click)="this.openPopup('grammar', '5', 9)">
                 <ng-template [ngIf]="this.step_num <= 9" [ngIfElse]="studied_step9">
-                  <a class="on" href="#">test</a>
-                  <span class="area_btn_start">
-                    <a class="btn_start btn_start03" href="#">Start</a>
+                  <a class="on" href="javascript:void(0)">test</a>
+                  <span class="area_btn_start" *ngIf="this.checkMasterPerm() || this.step_num == 9">
+                    <a class="btn_start btn_start03" href="javascript:void(0)">Start</a>
                   </span>
                 </ng-template>
 
                 <ng-template #studied_step9>
-                  <a href="#">test</a>
+                  <a href="javascript:void(0)">test</a>
                   <span class="score score03">{{this.userService.jindo.point_grammar5}}</span>
                   <span class="area_btn_result">
-                    <a class="btn_result btn_result03" href="#">Result</a>
+                    <a class="btn_result btn_result03" href="javascript:void(0)">Result</a>
                   </span>
                   <!--<p class="grading">채점중입니다.</p>-->
                 </ng-template>
               </li>
 
-              <li class="round_list08" (click)="this.openPopup('grammar', '4')">
+              <li class="round_list08" (click)="this.openPopup('grammar', '4', 8)">
                 <ng-template [ngIf]="this.step_num <= 8" [ngIfElse]="studied_step8">
-                  <a class="on" href="#">grammar4</a>
-                  <span class="area_btn_start">
-                    <a class="btn_start btn_start03" href="#">Start</a>
+                  <a class="on" href="javascript:void(0)">grammar4</a>
+                  <span class="area_btn_start" *ngIf="this.checkMasterPerm() || this.step_num == 8">
+                    <a class="btn_start btn_start03" href="javascript:void(0)">Start</a>
                   </span>
                 </ng-template>
 
                 <ng-template #studied_step8>
-                  <a href="#">grammar4</a>
+                  <a href="javascript:void(0)">grammar4</a>
                 </ng-template>
               </li>
 
-              <li class="round_list09" (click)="this.openPopup('grammar', '3')">
+              <li class="round_list09" (click)="this.openPopup('grammar', '3', 7)">
                 <ng-template [ngIf]="this.step_num <= 7" [ngIfElse]="studied_step7">
-                  <a class="on" href="#">grammar3</a>
-                  <span class="area_btn_start">
-                    <a class="btn_start btn_start03" href="#">Start</a>
+                  <a class="on" href="javascript:void(0)">grammar3</a>
+                  <span class="area_btn_start" *ngIf="this.checkMasterPerm() || this.step_num == 7">
+                    <a class="btn_start btn_start03" href="javascript:void(0)">Start</a>
                   </span>
                 </ng-template>
 
                 <ng-template #studied_step7>
-                  <a href="#">grammar3</a>
+                  <a href="javascript:void(0)">grammar3</a>
                 </ng-template>
               </li>
 
-              <li class="round_list10" (click)="this.openPopup('grammar', '2')">
+              <li class="round_list10" (click)="this.openPopup('grammar', '2', 6)">
                 <ng-template [ngIf]="this.step_num <= 6" [ngIfElse]="studied_step6">
-                  <a class="on" href="#">grammar2</a>
-                  <span class="area_btn_start">
-                    <a class="btn_start btn_start03" href="#">Start</a>
+                  <a class="on" href="javascript:void(0)">grammar2</a>
+                  <span class="area_btn_start" *ngIf="this.checkMasterPerm() || this.step_num == 6">
+                    <a class="btn_start btn_start03" href="javascript:void(0)">Start</a>
                   </span>
                 </ng-template>
 
                 <ng-template #studied_step6>
-                  <a href="#">grammar2</a>
+                  <a href="javascript:void(0)">grammar2</a>
                 </ng-template>
               </li>
 
-              <li class="round_list11" (click)="this.viewStateChoose('story-two', 'storybook', '2')">
+              <li class="round_list11" (click)="this.viewStateChoose('story-two', 'storybook', '2', 11)">
                 <ng-template [ngIf]="this.step_num <= 11" [ngIfElse]="studied_step11">
-                  <a class="on" href="#">storybook2</a>
-                  <span class="area_btn_start">
-                    <a class="btn_start" href="#">Start</a>
+                  <a class="on" href="javascript:void(0)">storybook2</a>
+                  <span class="area_btn_start" *ngIf="this.checkMasterPerm() || this.step_num == 11">
+                    <a class="btn_start" href="javascript:void(0)">Start</a>
                   </span>
                 </ng-template>
 
                 <ng-template #studied_step11>
-                  <a href="#">storybook2</a>
+                  <a href="javascript:void(0)">storybook2</a>
                 </ng-template>
               </li>
 
-              <li class="round_list12" (click)="this.viewStateChoose('story-three', 'storybook', '3')">
+              <li class="round_list12" (click)="this.viewStateChoose('story-three', 'storybook', '3', 12)">
                 <ng-template [ngIf]="this.step_num <= 12" [ngIfElse]="studied_step12">
-                  <a class="on" href="#">storybook3</a>
-                  <span class="area_btn_start">
-                    <a class="btn_start" href="#">Start</a>
+                  <a class="on" href="javascript:void(0)">storybook3</a>
+                  <span class="area_btn_start" *ngIf="this.checkMasterPerm() || this.step_num == 12">
+                    <a class="btn_start" href="javascript:void(0)">Start</a>
                   </span>
                 </ng-template>
 
                 <ng-template #studied_step12>
-                  <a href="#">storybook3</a>
+                  <a href="javascript:void(0)">storybook3</a>
                 </ng-template>
               </li>
 
-              <li class="round_list13" (click)="this.viewStateChoose('story-four', 'storybook', '4')">
+              <li class="round_list13" (click)="this.viewStateChoose('story-four', 'storybook', '4', 13)">
                 <ng-template [ngIf]="this.step_num <= 13" [ngIfElse]="studied_step13">
-                  <a class="on" href="#">storybook4</a>
-                  <span class="area_btn_start">
-                    <a class="btn_start" href="#">Start</a>
+                  <a class="on" href="javascript:void(0)">storybook4</a>
+                  <span class="area_btn_start" *ngIf="this.checkMasterPerm() || this.step_num == 13">
+                    <a class="btn_start" href="javascript:void(0)">Start</a>
                   </span>
                 </ng-template>
 
                 <ng-template #studied_step13>
-                  <a href="#">storybook4</a>
+                  <a href="javascript:void(0)">storybook4</a>
                 </ng-template>
               </li>
 
-              <li class="round_list14" (click)="this.openPopup('speaking', '1')">
+              <li class="round_list14" (click)="this.openPopup('speaking', '1', 14)">
                 <ng-template [ngIf]="this.step_num <= 14" [ngIfElse]="studied_step14">
-                  <a class="on" href="#">speak-ing1</a>
-                  <span class="area_btn_start">
-                    <a class="btn_start" href="#">Start</a>
+                  <a class="on" href="javascript:void(0)">speak-ing1</a>
+                  <span class="area_btn_start" *ngIf="this.checkMasterPerm() || this.step_num == 14">
+                    <a class="btn_start" href="javascript:void(0)">Start</a>
                   </span>
                 </ng-template>
 
                 <ng-template #studied_step14>
-                  <a href="#">speak-ing1</a>
-                  <span class="score">{{this.userService.jindo.point_speaking1}}</span>
+                  <a href="javascript:void(0)">speak-ing1</a>
+                  <span class="score score03">{{this.userService.jindo.point_speaking1}}</span>
                 </ng-template>
               </li>
 
-              <li class="round_list15" (click)="this.openPopup('speaking', '2')">
+              <li class="round_list15" (click)="this.openPopup('speaking', '2', 15)">
                 <ng-template [ngIf]="this.step_num <= 15" [ngIfElse]="studied_step15">
-                  <a class="on" href="#">speak-ing2</a>
-                  <span class="area_btn_start">
-                    <a class="btn_start btn_start02" href="#">Start</a>
+                  <a class="on" href="javascript:void(0)">speak-ing2</a>
+                  <span class="area_btn_start" *ngIf="this.checkMasterPerm() || this.step_num == 15">
+                    <a class="btn_start btn_start02" href="javascript:void(0)">Start</a>
                   </span>
                 </ng-template>
 
                 <ng-template #studied_step15>
-                  <a href="#">speak-ing2</a>
-                  <span class="score score02">{{this.userService.jindo.point_speaking2}}</span>
+                  <a href="javascript:void(0)">speak-ing2</a>
+                  <span class="score score04">{{this.userService.jindo.point_speaking2}}</span>
                 </ng-template>
               </li>
 
-              <li class="round_list16" (click)="this.openPopup('finaltest', '2')">
+              <li class="round_list16" (click)="this.openPopup('finaltest', '', 18)" style="position:absolute; z-index:5;">
                 <ng-template [ngIf]="this.step_num <= 18" [ngIfElse]="studied_step18">
-                  <a class="on" href="#">Writing Test</a>
-                  <span class="area_btn_start">
-                    <a class="btn_start btn_start03" href="#">Start</a>
+                  <a class="on" href="javascript:void(0)">Writing Test</a>
+                  <span class="area_btn_start" *ngIf="this.checkMasterPerm() || this.step_num == 18">
+                    <a class="btn_start" href="javascript:void(0)">Start</a>
                   </span>
                 </ng-template>
 
                 <ng-template #studied_step18>
-                  <a href="#">Writing Test</a>
+                  <a href="javascript:void(0)">Writing Test</a>
                   <span class="score score03">{{this.userService.jindo.point_finaltest_writing}}</span>
                   <span class="area_btn_result">
-                    <a class="btn_result btn_result03" href="#">Result</a>
+                    <a class="btn_result btn_result03" href="javascript:void(0)">Result</a>
                   </span>
                 </ng-template>
               </li>
 
-              <li class="round_list17" (click)="this.openPopup('finaltest', '1')">
+              <li class="round_list17" (click)="this.openPopup('finaltest', '', 17)">
                 <ng-template [ngIf]="this.step_num <= 17" [ngIfElse]="studied_step17">
-                  <a class="on" href="#">Speaking Test</a>
-                  <span class="area_btn_start">
-                    <a class="btn_start btn_start03" href="#">Start</a>
+                  <a class="on" href="javascript:void(0)">Speaking Test</a>
+                  <span class="area_btn_start" *ngIf="this.checkMasterPerm() || this.step_num == 17">
+                    <a class="btn_start btn_start03" href="javascript:void(0)">Start</a>
                   </span>
                 </ng-template>
 
                 <ng-template #studied_step17>
-                  <a href="#">Speaking Test</a>
+                  <a href="javascript:void(0)">Speaking Test</a>
                   <span class="score score03">{{this.userService.jindo.point_finaltest_speaking}}</span>
                   <span class="area_btn_result">
-                    <a class="btn_result btn_result03" href="#">Result</a>
+                    <a class="btn_result btn_result03" href="javascript:void(0)">Result</a>
                   </span>
                 </ng-template>
               </li>
 
-              <li class="round_list18" (click)="this.openPopup('speaking', '3')">
+              <li class="round_list18" (click)="this.openPopup('speaking', '3', 16)">
                 <ng-template [ngIf]="this.step_num <= 16" [ngIfElse]="studied_step16">
-                  <a class="on" href="#">speak-ing3</a>
-                  <span class="area_btn_start">
-                    <a class="btn_start btn_start03" href="#">Start</a>
+                  <a class="on" href="javascript:void(0)">speak-ing3</a>
+                  <span class="area_btn_start" *ngIf="this.checkMasterPerm() || this.step_num == 16">
+                    <a class="btn_start btn_start03" href="javascript:void(0)">Start</a>
                   </span>
                 </ng-template>
 
                 <ng-template #studied_step16>
-                  <a href="#">speak-ing3</a>
-                  <span class="score score03">{{this.userService.jindo.point_speaking3}}</span>
+                  <a href="javascript:void(0)">speak-ing3</a>
+                  <span class="score score05">{{this.userService.jindo.point_speaking3}}</span>
                 </ng-template>
               </li>
 
@@ -351,40 +352,40 @@
   </div> <!-- END : container_wrap -->
 </div> <!-- END : wrap -->
 
-<div class="container mt-5">
-  <div class="row">
-    <div class="col">
-      <button class="btn btn-primary" (click)="this.openPopup('storybook', '1')">
-        Storybook1
-      </button>
-      <button class="btn btn-primary" (click)="this.openPopup('storybook', '2')">
-        Storybook2
-      </button>
-      <button class="btn btn-primary" (click)="this.openPopup('storybook', '3')">
-        Storybook3
-      </button>
-      <button class="btn btn-primary" (click)="this.openPopup('storybook', '4')">
-        Storybook4
-      </button>
-    </div>
-  </div>
-  <div class="row mt-3">
-    <div class="col">
-      <button class="btn btn-primary" (click)="this.viewStateChoose('story-one', 'storybook', '1')">
-        Storybook1
-      </button>
-      <button class="btn btn-primary" (click)="this.viewStateChoose('story-two', 'storybook', '2')">
-        Storybook2
-      </button>
-      <button class="btn btn-primary" (click)="this.viewStateChoose('story-three', 'storybook', '3')">
-        Storybook3
-      </button>
-      <button class="btn btn-primary" (click)="this.viewStateChoose('story-four', 'storybook', '4')">
-        Storybook4
-      </button>
-    </div>
-  </div>
+<!--<div class="container mt-5">-->
+  <!--<div class="row">-->
+    <!--<div class="col">-->
+      <!--<button class="btn btn-primary" (click)="this.openPopup('storybook', '1')">-->
+        <!--Storybook1-->
+      <!--</button>-->
+      <!--<button class="btn btn-primary" (click)="this.openPopup('storybook', '2')">-->
+        <!--Storybook2-->
+      <!--</button>-->
+      <!--<button class="btn btn-primary" (click)="this.openPopup('storybook', '3')">-->
+        <!--Storybook3-->
+      <!--</button>-->
+      <!--<button class="btn btn-primary" (click)="this.openPopup('storybook', '4')">-->
+        <!--Storybook4-->
+      <!--</button>-->
+    <!--</div>-->
+  <!--</div>-->
+  <!--<div class="row mt-3">-->
+    <!--<div class="col">-->
+      <!--<button class="btn btn-primary" (click)="this.viewStateChoose('story-one', 'storybook', '1')">-->
+        <!--Storybook1-->
+      <!--</button>-->
+      <!--<button class="btn btn-primary" (click)="this.viewStateChoose('story-two', 'storybook', '2')">-->
+        <!--Storybook2-->
+      <!--</button>-->
+      <!--<button class="btn btn-primary" (click)="this.viewStateChoose('story-three', 'storybook', '3')">-->
+        <!--Storybook3-->
+      <!--</button>-->
+      <!--<button class="btn btn-primary" (click)="this.viewStateChoose('story-four', 'storybook', '4')">-->
+        <!--Storybook4-->
+      <!--</button>-->
+    <!--</div>-->
+  <!--</div>-->
 
-  <app-chat-dialog></app-chat-dialog>
-</div>
+  <!--<app-chat-dialog></app-chat-dialog>-->
+<!--</div>-->
 
