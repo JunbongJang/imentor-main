@@ -31,7 +31,7 @@
           <audio [src]="this.setStorybookAudio('')" type="audio/mpeg"
                  id="storybook_audio"
                  controls controlsList="nodownload"
-                 class="mt-3 w-100"
+                 class="mt-3 mb-2 w-100"
                  style="max-width:400px;"
                 *ngIf="this.userService.step !== 'storybook4'"></audio>
 
@@ -43,7 +43,7 @@
             </div>
 
             <div class="col-12 justify-content-center d-flex" style="height: 40px;">
-              <button class="btn btn-info mr-3" *ngIf="this.checkNotMaxScene()" (click)="this.gotoNextScene()" id="storybook_next_button" disabled>Next Scene</button>
+              <button class="btn btn-info mr-3" (click)="this.retryScene()" id="storybook_next_button" disabled>Retry</button>
               <button class="btn btn-primary" id="storybook_finish_button" (click)="this.finishStorybook()" disabled>Finish</button>
             </div>
           </div>
@@ -54,3 +54,6 @@
     </div>
   </div>
 </div>
+
+<storybook-initial-modal></storybook-initial-modal>
+<storybook-final-modal></storybook-final-modal>

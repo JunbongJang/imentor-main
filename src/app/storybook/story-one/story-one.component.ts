@@ -33,7 +33,6 @@ export class StoryOneComponent implements OnInit, OnDestroy  {
   current_question_num = 0;
 
   questionInitializedSubscription: Subscription;
-  storybookSceneChangeSubscription: Subscription;
   modalStartSubscription: Subscription;
 
   constructor(private viewStateService: ViewStateService,
@@ -50,20 +49,12 @@ export class StoryOneComponent implements OnInit, OnDestroy  {
     this.viewStateService.view_state = this.viewStateService.STORYBOOK_ONE;
     this.userService.step = 'storybook1';
 
-    this.questionGenerateService.getQuestionFromServer(this.userService.step);
-
-    this.storybookSceneChangeSubscription = this.storybookService.storybookSceneChange.subscribe(() => {
-        this.questionGenerateService.getQuestionFromServer(this.userService.step);
-      },
-      (error) => {
-        console.log(error);
-      });
+    this.questionGenerateService.getQuestionFromServer();
 
     this.questionInitializedSubscription = this.questionStorageService.questionInitialized.subscribe(() => {
         console.log('question Initialized');
         this.initializeStorybookOne();
-        this.storybookService.storybookAudioInitialize.next('');
-        this.initialModalService.modalInitialized.next('voca-one');
+        this.initialModalService.modalInitialized.next('story-one');
       },
       (error) => {
         console.log(error);
@@ -71,6 +62,7 @@ export class StoryOneComponent implements OnInit, OnDestroy  {
 
     this.modalStartSubscription = this.initialModalService.modalStartClicked.subscribe(
       (modal_state) => {
+        this.storybookService.storybookAudioInitialize.next('');
       }, (error) => {
         console.log('error');
         console.log(error);
@@ -79,7 +71,6 @@ export class StoryOneComponent implements OnInit, OnDestroy  {
 
   ngOnDestroy() {
     this.questionInitializedSubscription.unsubscribe();
-    this.storybookSceneChangeSubscription.unsubscribe();
     this.modalStartSubscription.unsubscribe();
   }
 
@@ -177,7 +168,7 @@ export class StoryOneComponent implements OnInit, OnDestroy  {
         document.getElementById('pair_first_word_' + idx).classList.add('strikethrough');
       }
       this.current_question_num++;
-    } else {
+    } else if (this.current_question_num < clicked_question_num) {
       alert ('please do previous question first');
     }
 
@@ -186,12 +177,12 @@ export class StoryOneComponent implements OnInit, OnDestroy  {
 
   checkNextQuestion() {
     if (this.row_index_array.length <= this.current_question_num) {
-      if (this.correct_num >= this.row_index_array.length) {
+      if (this.correct_num >= this.row_index_array.length) { // all questions correct
         this.storybookService.storybookSceneComplete.next(true);
-      } else {
-        alert('you failed the current storybook scene.\nPlease try again.');
-        this.initializeStorybookOne();
-        this.storybookService.storybookAudioInitialize.next('');
+      } else {  // not all questions are correct
+        this.storybookService.storybookSceneComplete.next(false);
+        // this.initializeStorybookOne();
+        // this.storybookService.storybookAudioInitialize.next('');
       }
     }
   }

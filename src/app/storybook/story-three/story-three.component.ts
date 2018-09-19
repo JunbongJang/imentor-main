@@ -20,6 +20,6 @@ export class StoryThreeComponent implements OnInit {
   ngOnInit() {
     this.viewStateService.view_state = this.viewStateService.STORYBOOK_THREE;
     this.userService.step = 'storybook3';
-    this.questionGenerateService.getQuestionFromServer(this.userService.step);
+    this.questionGenerateService.getQuestionFromServer();
   }
 }

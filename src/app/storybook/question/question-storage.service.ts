@@ -37,9 +37,6 @@ export class QuestionStorageService {
   private _nextQuestionCalled = new Subject<number>();
 
   private _question_map: Map<string, {seq: string, english: string, english_raw: string, english_parsed: string[], korean: string}>;
-  private _current_english_sentence: string;
-  private _current_korean_sentence: string;
-  private _current_question_number: number;
   private _total_question_number: number;
 
   constructor() {
@@ -83,26 +80,10 @@ export class QuestionStorageService {
       {eng: 'He is sleeping under the tree.', kor: '그는 자는 중이다 나무 아래에서.', cn: ''}
   ];
 
-    // this._current_question_number = 0;
-    // this._current_english_sentence = this._question_map.get('0').english;
-    // this._current_korean_sentence = this._question_map.get('0').korean;
     // this._total_question_number = this._question_map.size;
   }
 
-  gotoNextQuestion(): number {
-    this._current_question_number++;
-    this._current_english_sentence = this._question_map.get(String(this._current_question_number)).english;
-    this._current_korean_sentence = this._question_map.get(String(this._current_question_number)).korean;
-    this._nextQuestionCalled.next(this._current_question_number);
-    return this._current_question_number;
-  }
 
-  resetQuestionNumber() {
-    this._current_question_number = 0;
-    this._current_english_sentence = this._question_map.get(String(this._current_question_number)).english;
-    this._current_korean_sentence = this._question_map.get(String(this._current_question_number)).korean;
-    console.log('question reset');
-  }
 
   /**
    * Search inside the given string for the character pattern [~~~~~]
@@ -136,18 +117,6 @@ export class QuestionStorageService {
 
   set question_map(value: Map<string, { seq: string; english: string; english_raw: string; english_parsed: string[]; korean: string }>) {
     this._question_map = value;
-  }
-
-  get current_english_sentence(): string {
-    return this._current_english_sentence;
-  }
-
-  get current_korean_sentence(): string {
-    return this._current_korean_sentence;
-  }
-
-  get current_question_number(): number {
-    return this._current_question_number;
   }
 
   get total_question_number(): number {

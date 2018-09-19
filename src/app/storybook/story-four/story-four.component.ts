@@ -20,7 +20,7 @@ export class StoryFourComponent implements OnInit {
   ngOnInit() {
     this.viewStateService.view_state = this.viewStateService.STORYBOOK_FOUR;
     this.userService.step = 'storybook4';
-    this.questionGenerateService.getQuestionFromServer(this.userService.step);
+    this.questionGenerateService.getQuestionFromServer();
   }
 
 }

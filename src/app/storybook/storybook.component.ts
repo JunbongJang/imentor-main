@@ -6,6 +6,7 @@ import {Subject, Subscription} from 'rxjs';
 import {StorybookService} from './storybook.service';
 import {ViewStateService} from '../core/view-state.service';
 import {Router} from '@angular/router';
+import {QuestionGenerateService} from './question/question-generate.service';
 
 @Component({
   selector: 'app-storybook',
@@ -19,15 +20,18 @@ export class StorybookComponent implements OnInit, OnDestroy {
 
   storybookAudioInitializedSubscription: Subscription;
   storybookSceneCompleteSubscription: Subscription;
+  user_passed = false;
 
   constructor(private titleService: Title,
               public questionStorageService: QuestionStorageService,
+              private questionGenerateService: QuestionGenerateService,
               public userService: UserService,
               private storybookService: StorybookService,
               private viewStateService: ViewStateService,
               private router: Router) { }
 
   ngOnInit() {
+    this.user_passed = false;
     document.body.style.backgroundColor = 'rgb(88, 73, 53)';
     this.titleService.setTitle( 'i-MENTOR Storybook' );
 
@@ -65,8 +69,15 @@ export class StorybookComponent implements OnInit, OnDestroy {
       console.log(error);
     });
 
-    this.storybookSceneCompleteSubscription = this.storybookService.storybookSceneComplete.subscribe( (complete_bool: boolean) => {
-      this.activateButtonsWhenSceneFinish(!complete_bool);
+    this.storybookSceneCompleteSubscription = this.storybookService.storybookSceneComplete.subscribe( (all_correct_bool: boolean) => {
+
+      (<HTMLButtonElement>document.getElementById('storybook_finish_button')).disabled = !all_correct_bool;
+      const storybook_element = document.getElementById('storybook_next_button');
+      (<HTMLButtonElement>storybook_element).disabled = false;
+      if (this.checkNotMaxScene() && all_correct_bool) {
+        storybook_element.innerHTML = 'Next Scene';
+        this.user_passed = true;
+      }
     }, (error) => {
       console.log(error);
     });
@@ -80,17 +91,6 @@ export class StorybookComponent implements OnInit, OnDestroy {
 
 
   setActiveSectionTab(given_index: number) {
-    // let current_section = '';
-    // if (this.userService.step === 'storybook1') {
-    //   current_section = this.userService.jindo.current_storybook1;
-    // } else if (this.userService.step === 'storybook2') {
-    //   current_section = this.userService.jindo.current_storybook2;
-    // } else if (this.userService.step === 'storybook3') {
-    //   current_section = this.userService.jindo.current_storybook3;
-    // } else if (this.userService.step === 'storybook4') {
-    //   current_section = this.userService.jindo.current_storybook4;
-    // }
-    // *** +1 to the given_index because current_section actually represents previously completed section
     if (this.userService.section === String(given_index)) {
       return 'active';
     } else if (this.userService.section === '' && given_index === 1) {
@@ -114,17 +114,12 @@ export class StorybookComponent implements OnInit, OnDestroy {
   clickSectionTab(a_section: number) {
     console.log('clickSectionTab: ' + a_section);
     this.userService.section = String(a_section);
-    this.storybookService.storybookSceneChange.next(true);
+    this.questionGenerateService.getQuestionFromServer();
   }
 
   checkNotMaxScene() {
     console.log('checkNotMaxScene: ' + this.NUM_SECTION_TOTAL + '  ' + this.userService.section);
     return parseInt(this.userService.section, 10) < this.NUM_SECTION_TOTAL;
-  }
-
-  activateButtonsWhenSceneFinish(disabled_bool: boolean) {
-    (<HTMLButtonElement>document.getElementById('storybook_next_button')).disabled = disabled_bool;
-    (<HTMLButtonElement>document.getElementById('storybook_finish_button')).disabled = disabled_bool;
   }
 
   finishStorybook() {
@@ -138,6 +133,23 @@ export class StorybookComponent implements OnInit, OnDestroy {
     } else {
       alert('You can\'t go to the next scene. Please Finish instead.');
     }
+    this.disableButtons();
+  }
+
+  retryScene() {
+    if (this.user_passed) {
+      this.gotoNextScene();
+      this.user_passed = false;
+    } else {
+      this.questionGenerateService.getQuestionFromServer();
+    }
+    this.disableButtons();
+  }
+
+  disableButtons() {
+    (<HTMLButtonElement>document.getElementById('storybook_finish_button')).disabled = true;
+    (<HTMLButtonElement>document.getElementById('storybook_next_button')).disabled = true;
+    (<HTMLButtonElement>document.getElementById('storybook_next_button')).innerHTML = 'Retry';
   }
 
 

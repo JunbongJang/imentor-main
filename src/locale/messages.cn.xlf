@@ -90,7 +90,7 @@
         下面学习正文。<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br/&gt;"/>
         请在听取正文的同时，<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br/&gt;"/>
         点击正确单词。<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br/&gt;"/>
-        听正文可按scens保存学习记录。
+        听正文可按scenes保存学习记录。
         </target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/storybook/initial-modal/initial-modal.component.html</context>

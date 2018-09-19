@@ -7,7 +7,6 @@ import {Subject} from 'rxjs';
 export class StorybookService {
 
   storybookAudioInitialize = new Subject<string>();
-  storybookSceneChange = new Subject<boolean>();
   storybookSceneComplete = new Subject<boolean>();
 
   constructor() { }

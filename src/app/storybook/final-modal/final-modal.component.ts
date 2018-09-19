@@ -6,7 +6,7 @@ import {ViewStateService} from '../../core/view-state.service';
 declare var $: any;
 
 @Component({
-  selector: 'app-final-modal',
+  selector: 'storybook-final-modal',
   templateUrl: './final-modal.component.html',
   styleUrls: ['./final-modal.component.css']
 })
@@ -25,23 +25,12 @@ export class FinalModalComponent implements OnInit {
         console.log('finalModalService: ' + final_score);
         this.modal_final_score = parseInt(final_score, 10);
         $('#finalGrammarModalCenter').modal('show');
-        // document.getElementById('finalGrammarModalButton').click();
+        this.modal_view_state = this.viewStateService.view_state;
       }, (error) => {
         console.log('error');
         console.log(error);
       });
 
-    // this.store.select('view_state').subscribe(
-    //   (a_view) => {
-    //     if (a_view !== undefined) {
-    //       this.modal_view_state = a_view[0].current_view;
-    //     }
-    //   },
-    //   (error) => {
-    //     console.log('error');
-    //     console.log(error);
-    //   }
-    // );
   }
 
   stateCongratulationString(input_state: string): string {

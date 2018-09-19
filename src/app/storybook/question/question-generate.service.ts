@@ -14,20 +14,18 @@ export class QuestionGenerateService {
   /**
    * Initialize Question From server based on different step names.
    */
-  getQuestionFromServer(step_snapshot: string) {
+  getQuestionFromServer() {
       this.serverService.getQuestionFromServer(this.userService.step, this.userService.ho, this.userService.section ).subscribe(
         (question_xml_string) => {
 
-          console.log('GetQuestionFromServer');
+          console.log('-------------------GetQuestionFromServer-------------------');
           const parser = new DOMParser();
           const parsed_xml = parser.parseFromString(question_xml_string, 'text/xml');
           console.log(parsed_xml);
           const question_xml = parsed_xml.getElementsByTagName('question')[0];
-          this.xmlParse(question_xml, step_snapshot);
-
+          this.xmlParse(question_xml, this.userService.step);
           this.questionStorageService.questionInitialized.next(true);
 
-          console.log('------------xmlParse---------------');
           console.log(this.questionStorageService.question_structure);
 
           // if (step_snapshot === 'storybook1') {
@@ -63,9 +61,7 @@ export class QuestionGenerateService {
    */
   private xmlParse(xml_object: any, current_step) {
     this.questionStorageService.question_structure.max_section = xml_object.getElementsByTagName('scene')[0].childNodes[0].nodeValue;
-
     if (current_step === 'storybook1') {
-
       this.questionStorageService.question_structure.storybook1 = [];
       for (let i = 0; xml_object.getElementsByTagName('eng')[i] !== undefined; i++) {
         // dynamic JSON filling in
@@ -80,10 +76,7 @@ export class QuestionGenerateService {
         this.questionStorageService.question_structure.storybook1.push(a_object);
       }
 
-    } else {
-
-      if (current_step === 'storybook2' || current_step === 'storybook3') {
-
+    } else if (current_step === 'storybook2' || current_step === 'storybook3') {
         this.questionStorageService.question_structure.storybook2_3 = {pgraph1: [], pgraph2: []};
         const pgraph1 = xml_object.getElementsByTagName('pgraph')[0];
         const pgraph2 = xml_object.getElementsByTagName('pgraph')[1];
@@ -115,7 +108,6 @@ export class QuestionGenerateService {
         }
 
       } else {
-
         this.questionStorageService.question_structure.storybook4 = [];
         for (let i = 0; xml_object.getElementsByTagName('eng')[i] !== undefined; i++) {
           // dynamic JSON filling in
@@ -130,8 +122,6 @@ export class QuestionGenerateService {
           this.questionStorageService.question_structure.storybook4.push(a_object);
         }
       } // end of else
-
-    } // end of else
   }
 
   /**
