@@ -7,6 +7,7 @@ import {StorybookService} from './storybook.service';
 import {ViewStateService} from '../core/view-state.service';
 import {Router} from '@angular/router';
 import {QuestionGenerateService} from './question/question-generate.service';
+import {GeneralUtilityService} from '../core/general-utility.service';
 
 @Component({
   selector: 'app-storybook',
@@ -52,24 +53,16 @@ export class StorybookComponent implements OnInit, OnDestroy {
         this.NUM_SECTION_LIST.push(i);
       }
 
-      (<HTMLAudioElement>document.getElementById('storybook_audio')).pause();
-      (<HTMLAudioElement>document.getElementById('storybook_audio')).currentTime = 0;
-      if (part_num === '') {
-        this.setStorybookAudio('');
-        (<HTMLAudioElement>document.getElementById('storybook_audio')).play();
-      } else if (part_num === '1') {
-        this.setStorybookAudio('1');
-        (<HTMLAudioElement>document.getElementById('storybook_audio')).play();
-      } else if (part_num === '2') {
-        this.setStorybookAudio('2');
-        (<HTMLAudioElement>document.getElementById('storybook_audio')).play();
-      }
+      this.initializeAudio();
+      (<HTMLAudioElement>document.getElementById('storybook_audio')).src = this.setStorybookAudio(part_num);
+      (<HTMLAudioElement>document.getElementById('storybook_audio')).play();
     },
     (error) => {
       console.log(error);
     });
 
     this.storybookSceneCompleteSubscription = this.storybookService.storybookSceneComplete.subscribe( (all_correct_bool: boolean) => {
+      this.initializeAudio();
 
       (<HTMLButtonElement>document.getElementById('storybook_finish_button')).disabled = !all_correct_bool;
       const storybook_element = document.getElementById('storybook_next_button');
@@ -104,8 +97,10 @@ export class StorybookComponent implements OnInit, OnDestroy {
   }
 
   setStorybookAudio(audio_part: string) {
-    if (audio_part !== undefined && audio_part !== '') {
+    if (audio_part === '1' || audio_part === '2') {
       return '/IMENTOR/mp3/storybook/' + this.userService.ho + '_' + this.userService.section + '_' + audio_part + '.mp3';
+    } else if (audio_part === '3') {
+      return '';
     } else {
       return '/IMENTOR/mp3/storybook/' + this.userService.ho + '_' + this.userService.section + '.mp3';
     }
@@ -113,6 +108,7 @@ export class StorybookComponent implements OnInit, OnDestroy {
 
   clickSectionTab(a_section: number) {
     console.log('clickSectionTab: ' + a_section);
+    this.initializeAudio();
     this.userService.section = String(a_section);
     this.questionGenerateService.getQuestionFromServer();
   }
@@ -150,6 +146,11 @@ export class StorybookComponent implements OnInit, OnDestroy {
     (<HTMLButtonElement>document.getElementById('storybook_finish_button')).disabled = true;
     (<HTMLButtonElement>document.getElementById('storybook_next_button')).disabled = true;
     (<HTMLButtonElement>document.getElementById('storybook_next_button')).innerHTML = 'Retry';
+  }
+
+  initializeAudio() {
+    (<HTMLAudioElement>document.getElementById('storybook_audio')).pause();
+    (<HTMLAudioElement>document.getElementById('storybook_audio')).currentTime = 0;
   }
 
 

@@ -50,7 +50,7 @@ export class MainMenuComponent implements OnInit, OnDestroy {
           console.log(error);
         });
     } else {
-      this.setOpenStep(this.userService.jindo.step);
+      this.setJindoFromServer(this.userService.step, this.userService.ho); // this is needed when going from storybook to main by finish
       this.setCharacterImage();
       this.setBookImage();
     }
@@ -65,6 +65,7 @@ export class MainMenuComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
+    console.log('destroy!!!');
     if (this.userInitlizedSubscription !== undefined) {
       this.userInitlizedSubscription.unsubscribe();
     }
@@ -108,31 +109,38 @@ export class MainMenuComponent implements OnInit, OnDestroy {
     this.userService.section = '';
 
     let open_url = '';
-    if (clicked_step_category === 'vocabulary') {
+    if (clicked_step_category === 'vocabulary') {  // ----------------------- vocabulary -------------------------------------
       open_url = `/IMENTOR/cn/vocabulary/?uid=${this.userService.user.uid}&user_id=${this.userService.user.user_id}&ho=${this.userService.ho}&step=vocabulary${clicked_step}&master=${this.userService.master_status}`;
 
-    } else if (clicked_step_category === 'grammar') {
+    } else if (clicked_step_category === 'grammar') { // ----------------------- grammar -------------------------------------
       open_url = `/IMENTOR/cn/grammar/?uid=${this.userService.user.uid}&user_id=${this.userService.user.user_id}&ho=${this.userService.ho}&step=grammer${clicked_step}&master=${this.userService.master_status}`;
 
-    } else if (clicked_step_category === 'storybook') {
+    } else if (clicked_step_category === 'storybook') { // ----------------------- storybook -------------------------------------
+      let temp_max_section = '';
       if (clicked_step === '1') {
         this.userService.section = this.userService.jindo.current_storybook1;
+        temp_max_section = this.userService.jindo.max_storybook1;
       } else if (clicked_step === '2') {
         this.userService.section = this.userService.jindo.current_storybook2;
+        temp_max_section = this.userService.jindo.max_storybook2;
       } else if (clicked_step === '3') {
         this.userService.section = this.userService.jindo.current_storybook3;
+        temp_max_section = this.userService.jindo.max_storybook3;
       } else if (clicked_step === '4') {
         this.userService.section = this.userService.jindo.current_storybook4;
+        temp_max_section = this.userService.jindo.max_storybook4;
       }
       if (isNaN(parseInt(this.userService.section, 10))) {
         this.userService.section = '1';
       } else {
-        this.userService.section = String(parseInt(this.userService.section, 10) + 1);
+        if (parseInt(this.userService.section, 10) < parseInt(temp_max_section, 10)) {
+          this.userService.section = String(parseInt(this.userService.section, 10) + 1);
+        }
       }
 
       open_url = `/IMENTOR/cn/sub.html?uid=${this.userService.user.uid}&user_id=${this.userService.user.user_id}&ho=${this.userService.ho}&step=storybook${clicked_step}&section=${this.userService.section}&master=${this.userService.master_status}`;
 
-    } else if (clicked_step_category === 'speaking') {
+    } else if (clicked_step_category === 'speaking') { // ----------------------- speaking -------------------------------------
       if (clicked_step === '1') {
         this.userService.section = this.userService.jindo.current_speaking1;
       } else if (clicked_step === '2') {

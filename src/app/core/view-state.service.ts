@@ -1,3 +1,5 @@
+import {Subject} from 'rxjs';
+
 export class ViewStateService {
 
   // -------------------GLOBAL CONSTANTS----------------------

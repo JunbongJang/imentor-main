@@ -28,9 +28,10 @@
             <img [src]="this.setStorybookImage()" class="p-1">
           </div>
 
-          <audio [src]="this.setStorybookAudio('')" type="audio/mpeg"
+          <audio type="audio/mpeg"
                  id="storybook_audio"
                  controls controlsList="nodownload"
+                 loop
                  class="mt-3 mb-2 w-100"
                  style="max-width:400px;"
                 *ngIf="this.userService.step !== 'storybook4'"></audio>

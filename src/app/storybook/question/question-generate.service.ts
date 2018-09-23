@@ -93,18 +93,21 @@ export class QuestionGenerateService {
           }
           this.questionStorageService.question_structure.storybook2_3.pgraph1.push(a_object);
         }
-
-        for (let i = 0; pgraph2.getElementsByTagName('eng')[i] !== undefined; i++) {
-          // dynamic JSON filling in
-          const a_object = {eng: '', kor: '', cn: ''};
-          a_object.eng = pgraph2.getElementsByTagName('eng')[i].childNodes[0].nodeValue;
-          if (pgraph2.getElementsByTagName('kor')[i].childNodes[0] !== undefined) {
-            a_object.kor = pgraph2.getElementsByTagName('kor')[i].childNodes[0].nodeValue;
+        if (pgraph2 !== undefined) { // pgraph2 doesn't exist for some sections
+          for (let i = 0; pgraph2.getElementsByTagName('eng')[i] !== undefined; i++) {
+            // dynamic JSON filling in
+            const a_object = {eng: '', kor: '', cn: ''};
+            a_object.eng = pgraph2.getElementsByTagName('eng')[i].childNodes[0].nodeValue;
+            if (pgraph2.getElementsByTagName('kor')[i].childNodes[0] !== undefined) {
+              a_object.kor = pgraph2.getElementsByTagName('kor')[i].childNodes[0].nodeValue;
+            }
+            if (pgraph2.getElementsByTagName('cn')[i].childNodes[0] !== undefined) {
+              a_object.cn = pgraph2.getElementsByTagName('cn')[i].childNodes[0].nodeValue;
+            }
+            this.questionStorageService.question_structure.storybook2_3.pgraph2.push(a_object);
           }
-          if (pgraph2.getElementsByTagName('cn')[i].childNodes[0] !== undefined) {
-            a_object.cn = pgraph2.getElementsByTagName('cn')[i].childNodes[0].nodeValue;
-          }
-          this.questionStorageService.question_structure.storybook2_3.pgraph2.push(a_object);
+        } else {
+          this.questionStorageService.question_structure.storybook2_3.pgraph2 = [];
         }
 
       } else {

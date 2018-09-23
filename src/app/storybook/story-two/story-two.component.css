@@ -1,3 +1,8 @@
+.border_thick {
+  border: solid lawngreen;
+  border-width: 0px 0px 3px 0px;
+}
+
 .table_font_size {
   font-size: 1.3rem;
   font-weight: bold;

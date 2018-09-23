@@ -8,6 +8,7 @@ import {QuestionSoundService} from '../question/question-sound.service';
 import {StorybookService} from '../storybook.service';
 import {Subscription} from 'rxjs';
 import {InitialModalService} from '../initial-modal/initial-modal.service';
+import {GeneralUtilityService} from '../../core/general-utility.service';
 
 @Component({
   selector: 'story-one',
@@ -42,7 +43,8 @@ export class StoryOneComponent implements OnInit, OnDestroy  {
               public questionStorageService: QuestionStorageService,
               private questionGenerateService: QuestionGenerateService,
               private questionSoundService: QuestionSoundService,
-              private initialModalService: InitialModalService) {
+              private initialModalService: InitialModalService,
+              private generalUtilityService: GeneralUtilityService) {
   }
 
   ngOnInit() {
@@ -178,7 +180,22 @@ export class StoryOneComponent implements OnInit, OnDestroy  {
   checkNextQuestion() {
     if (this.row_index_array.length <= this.current_question_num) {
       if (this.correct_num >= this.row_index_array.length) { // all questions correct
-        this.storybookService.storybookSceneComplete.next(true);
+        this.serverService.postUserScoreToServer('storybook',
+          '0',
+          '100',
+          '1',
+          this.userService.user.uid,
+          this.userService.user.user_id,
+          this.userService.ho,
+          this.userService.step,
+          this.userService.section).subscribe(
+          (post_reply) => {
+            console.log('postUserScoreToServer: ' + post_reply);
+            this.storybookService.storybookSceneComplete.next(true);
+          }, (error) => {
+            console.log('error');
+            console.log(error);
+          });
       } else {  // not all questions are correct
         this.storybookService.storybookSceneComplete.next(false);
         // this.initializeStorybookOne();

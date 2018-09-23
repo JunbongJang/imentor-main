@@ -7,7 +7,7 @@
          background-image: url('assets/img/modal_image.png');
         background-repeat: no-repeat;
           background-position: top;
-          background-size: 100% 90%;">
+          background-size: 100% 85%;">
       <div class="modal-header border-bottom-0">
         <h4 class="modal-title text-danger font-weight-bold">
           <div *ngIf="this.modal_view_state === this.viewStateService.STORYBOOK_ONE">
@@ -27,7 +27,7 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body text-center h4 border-bottom-0 p-2" style="line-height:1.5; font-size: 1.4rem;">
+      <div class="modal-body text-center h4 border-bottom-0 p-2 pt-4" style="line-height:1.5; font-size: 1.4rem;">
         <div *ngIf="this.modal_view_state === this.viewStateService.STORYBOOK_ONE" i18n>
           본문학습 입니다.<br>
           본문을 들으면서 알맞은 단어를<br>

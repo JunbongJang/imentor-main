@@ -63,8 +63,12 @@ export class GeneralUtilityService {
     return year_string + '-' + month_string + '-' + day_string;
   }
 
-  reloadParentPage() {
-    console.log('reload parent');
-    window.opener.location.reload();
+  checkEmptyArray(an_array: any) {
+    return (!Array.isArray(an_array) || !an_array.length);
   }
+
+
+  // reloadItself() {
+  //   window.location.reload();
+  // }
 }

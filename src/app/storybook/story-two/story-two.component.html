@@ -1,13 +1,13 @@
-<div class="row pt-3 pb-5 pr-md-3 pl-md-3"
+<div class="row pt-2 pb-2 pr-md-3 pl-md-3 pr-2 pl-2"
      *ngFor="let a_key of getKeys(); let idx = index"
-     [id]="'story_test_div_'+idx">
-  <div class="col-12">
+     [id]="'story_two_div_'+idx">
+  <div class="col-12 pl-0 pr-0">
 
     <div class="p-3" [ngClass]="this.current_question_num === idx? 'question_statement_box_selected': 'question_statement_box'">
 
 
       <div style="font-size: 1.5rem;" class="pl-3">
-        {{this.current_translation_sentence}}
+        {{this.displayTranslationSentences(idx)}}
       </div>
 
       <div class="mt-3 pl-2 bg-white pt-1 pb-2 ml-1"
@@ -19,7 +19,7 @@
 
         <ng-template #question_default>
               <span [ngClass]="idx > this.current_question_num? 'invisible' : 'visible'">
-              {{this.questionStorageService.question_structure.storybook2_3.pgraph1[a_key].eng}}
+              {{this.displayEnglishSentences(idx)}}
               </span>
         </ng-template>
 

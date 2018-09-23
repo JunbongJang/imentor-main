@@ -1,0 +1,22 @@
+.question_statement_box {
+  background-color: #f7f7f7;
+}
+
+.question_statement_box_selected {
+  background-color: rgb(204, 204, 102);
+  border: 2px solid rgb(185, 185, 71);
+  box-shadow: -5px 5px 7px grey;
+}
+
+.question_font_size {
+  font-size: 1.6rem;
+  color: #737373;
+  border: 1px groove gray;
+  border-radius:10px;
+}
+
+.question_font_size_selected {
+  font-size: 1.6rem;
+  border: 2px groove coral;
+  border-radius:10px;
+}
