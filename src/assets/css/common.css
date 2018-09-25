@@ -18,6 +18,9 @@ body{
 }
 
 
+.round_list>li:hover{
+  z-index: 200;
+}
 
  .round_list01>a.on{
     background:url(../images/vc1_af.png) no-repeat left top;
@@ -488,7 +491,7 @@ width:100%;
      width:100px;
         height:120px;
     }
-    
+
     .round_list>li>a:link, .round_list>li>a:visited{
      display:block;
         height:100%;

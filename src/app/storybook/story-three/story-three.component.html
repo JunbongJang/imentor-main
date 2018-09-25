@@ -1,38 +1,46 @@
 <div class="row pt-2 pb-2 pr-md-3 pl-md-3 pr-2 pl-2"
-     *ngFor="let a_paragraph of this.paragraph_list; let idx = index"
-     [id]="'story_three_pgraph_'+idx">
-  <div class="col-12 pl-3 pr-3 pt-2 pb-2 bg-white storybook_body_text"
-       [ngClass]="this.current_pgraph_num === idx? 'question_statement_box_selected': 'question_statement_box'">
-
-        <div *ngFor="let a_english_word of this.pgraph_english_words[idx]; let idx = index"
-             [id]="'story_three_word_div_'+idx">
-            {{a_english_word}}.
-        <!---->
-        <!--<ng-container-->
-          <!--*ngIf="this.current_question_num !== idx; then question_default; else question_highlight">-->
-        <!--</ng-container>-->
-
-        <!--<ng-template #question_default>-->
-              <!--<span [ngClass]="idx > this.current_question_num? 'invisible' : 'visible'">-->
-              <!--{{this.all_english_words[idx]}}-->
-              <!--</span>-->
-        <!--</ng-template>-->
-
-        <!--<ng-template #question_highlight>-->
-          <!--<form class="form-style-4 form-inline"-->
-                <!--[formGroup]="storyTestForm">-->
-            <!--<input type="email"-->
-                   <!--class=""-->
-                   <!--formControlName="english_sentence"-->
-                   <!--autocomplete="off"-->
-                   <!--maxlength="100"-->
-                   <!--[placeholder]="this.current_english_word"-->
-                   <!--[id]="'english_sentence_'+ idx">-->
-          <!--</form>-->
-        <!--</ng-template>-->
+     *ngFor="let a_paragraph of this.pgraph_list; let pgraph_index = index"
+     [id]="'story_three_pgraph_'+pgraph_index">
+  <div class="col-12 pl-3 pr-3 pt-2 pb-2 storybook_body_text"
+       [ngClass]="this.current_pgraph_num === pgraph_index? 'question_statement_box_selected': 'question_statement_box'">
 
 
-      </div>
+    <div *ngFor="let a_sentence of this.split_sentences[pgraph_index]; let idx = index;" class="storybook_body_text">
+      <span>
+        {{a_sentence.left_phrase}}
+      </span>
+      <ng-container *ngIf="a_sentence.answer !== ''">
+        <span [id]="'story_three_num_' + this.question_index_array.indexOf(this.indexConverter(idx, pgraph_index))" style="font-size: 1.7rem; color:black; font-weight: bold;">
+        </span>
+
+        <ng-container *ngIf="this.current_question_num !== this.question_index_array.indexOf(this.indexConverter(idx, pgraph_index)); then question_default; else question_highlight">
+        </ng-container>
+
+        <ng-template #question_default>
+          <span [ngClass]="this.question_index_array.indexOf(this.indexConverter(idx, pgraph_index)) > this.current_question_num? 'invisible' : 'visible'">
+            {{a_sentence.answer}}
+          </span>
+        </ng-template>
+
+        <ng-template #question_highlight>
+          <form class="form-inline form-style-4 d-inline"
+          [formGroup]="storyTestForm">
+            <input type="email"
+            class=""
+            formControlName="english_word"
+            autocomplete="off"
+            maxlength="100"
+            [id]="'english_word_'+ this.question_index_array.indexOf(this.indexConverter(idx, pgraph_index))">
+          </form>
+        </ng-template>
+
+        <span>
+          {{a_sentence.right_phrase}}
+        </span>
+
+      </ng-container>
+    </div>
+
 
   </div>
 </div>

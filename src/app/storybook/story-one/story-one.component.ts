@@ -29,7 +29,7 @@ export class StoryOneComponent implements OnInit, OnDestroy  {
     right_phrase: string
   }[] = [];
 
-  row_index_array: number[] = [];
+  row_index_array: number[] = []; // this contains the total questions
   correct_num = 0;
   current_question_num = 0;
 
@@ -108,8 +108,6 @@ export class StoryOneComponent implements OnInit, OnDestroy  {
         });
       }
     }
-    console.log('initializeSentences');
-    console.log(this.split_sentences);
   }
 
   initializePairWords() {
