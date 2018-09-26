@@ -64,7 +64,7 @@ export class StoryThreeComponent implements OnInit, OnDestroy, AfterViewChecked 
 
     this.modalStartSubscription = this.initialModalService.modalStartClicked.subscribe(
       (modal_state) => {
-        this.storybookService.storybookAudioInitialize.next('1');
+        this.storybookService.storybookSceneAudioInitialize.next('1');
         this.initializeStorybookThree(); // so that the focus remains.
       }, (error) => {
         console.log('error');
@@ -134,7 +134,7 @@ export class StoryThreeComponent implements OnInit, OnDestroy, AfterViewChecked 
       if (this.question_index_array[this.current_question_num] >= this.questionStorageService.question_structure.storybook2_3.pgraph1.length &&
         this.current_pgraph_num === 0) {
         this.current_pgraph_num = 1;
-        this.storybookService.storybookAudioInitialize.next('2');
+        this.storybookService.storybookSceneAudioInitialize.next('2');
       }
       this.nextQuestionCalled = true; // this will cause ngAfterViewChecked() to call initialProblemSetup() when generateQuestion is over.
     }

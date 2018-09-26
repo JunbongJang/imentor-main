@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {Title} from '@angular/platform-browser';
 import {QuestionStorageService} from './question/question-storage.service';
 import {UserService} from '../core/user.service';
@@ -21,7 +21,12 @@ export class StorybookComponent implements OnInit, OnDestroy {
 
   storybookAudioInitializedSubscription: Subscription;
   storybookSceneCompleteSubscription: Subscription;
+  storybookSetBombSubscription: Subscription;
   user_passed = false;
+
+  @ViewChild('bomb1') private bomb1: ElementRef;
+  @ViewChild('bomb2') private bomb2: ElementRef;
+  @ViewChild('bomb3') private bomb3: ElementRef;
 
   constructor(private titleService: Title,
               public questionStorageService: QuestionStorageService,
@@ -36,8 +41,8 @@ export class StorybookComponent implements OnInit, OnDestroy {
     document.body.style.backgroundColor = 'rgb(88, 73, 53)';
     this.titleService.setTitle( 'i-MENTOR Storybook' );
 
-    this.storybookAudioInitializedSubscription = this.storybookService.storybookAudioInitialize.subscribe((part_num) => {
-
+    this.storybookAudioInitializedSubscription = this.storybookService.storybookSceneAudioInitialize.subscribe((part_num: string) => {
+      this.NUM_SECTION_LIST = [];
       if (this.userService.step === 'storybook1') {
         this.NUM_SECTION_TOTAL = parseInt(this.userService.jindo.max_storybook1, 10);
       } else if (this.userService.step === 'storybook2') {
@@ -46,9 +51,12 @@ export class StorybookComponent implements OnInit, OnDestroy {
         this.NUM_SECTION_TOTAL = parseInt(this.userService.jindo.max_storybook3, 10);
       } else if (this.userService.step === 'storybook4') {
         this.NUM_SECTION_TOTAL = parseInt(this.userService.jindo.max_storybook4, 10);
+        for (let i = 1; i <= this.NUM_SECTION_TOTAL; i++) {
+          this.NUM_SECTION_LIST.push(i);
+        }
+        return; // don't initialize audio!!!
       }
 
-      this.NUM_SECTION_LIST = [];
       for (let i = 1; i <= this.NUM_SECTION_TOTAL; i++) {
         this.NUM_SECTION_LIST.push(i);
       }
@@ -63,7 +71,6 @@ export class StorybookComponent implements OnInit, OnDestroy {
 
     this.storybookSceneCompleteSubscription = this.storybookService.storybookSceneComplete.subscribe( (all_correct_bool: boolean) => {
       this.initializeAudio();
-
       (<HTMLButtonElement>document.getElementById('storybook_finish_button')).disabled = !all_correct_bool;
       const storybook_element = document.getElementById('storybook_next_button');
       (<HTMLButtonElement>storybook_element).disabled = false;
@@ -74,6 +81,13 @@ export class StorybookComponent implements OnInit, OnDestroy {
     }, (error) => {
       console.log(error);
     });
+
+    this.storybookSetBombSubscription = this.storybookService.storybookSetBomb.subscribe((bomb_number: number) => {
+      this.setBomb(bomb_number);
+    }, (error) => {
+      console.log(error);
+    });
+
   }
 
 
@@ -149,8 +163,30 @@ export class StorybookComponent implements OnInit, OnDestroy {
   }
 
   initializeAudio() {
-    (<HTMLAudioElement>document.getElementById('storybook_audio')).pause();
-    (<HTMLAudioElement>document.getElementById('storybook_audio')).currentTime = 0;
+    if (<HTMLAudioElement>document.getElementById('storybook_audio')) {
+      (<HTMLAudioElement>document.getElementById('storybook_audio')).pause();
+      (<HTMLAudioElement>document.getElementById('storybook_audio')).currentTime = 0;
+    }
+  }
+
+  setBomb(wrong_count: number) {
+    if (wrong_count === 1 ) {
+      this.bomb1.nativeElement.src = 'assets/img/black_bomb.svg';
+    } else if (wrong_count === 2 ) {
+      this.bomb2.nativeElement.src = 'assets/img/black_bomb.svg';
+    } else if (wrong_count === 3 ) {
+      this.bomb3.nativeElement.src = 'assets/img/black_bomb.svg';
+    } else if (wrong_count > 3) {
+      this.retryScene();
+    } else {
+      this.resetBomb(); // if wrong_count === 0
+    }
+  }
+
+  resetBomb() {
+    this.bomb1.nativeElement.src = 'assets/img/yellow_bomb.svg';
+    this.bomb2.nativeElement.src = 'assets/img/yellow_bomb.svg';
+    this.bomb3.nativeElement.src = 'assets/img/yellow_bomb.svg';
   }
 
 

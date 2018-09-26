@@ -1,3 +1,6 @@
+.dropdown-item {
+  cursor: pointer;
+}
 
 .header_image_height {
   height: 2.8rem;

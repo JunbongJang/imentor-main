@@ -6,8 +6,9 @@ import {Subject} from 'rxjs';
 })
 export class StorybookService {
 
-  storybookAudioInitialize = new Subject<string>();
+  storybookSceneAudioInitialize = new Subject<string>();
   storybookSceneComplete = new Subject<boolean>();
+  storybookSetBomb = new Subject<number>(); // only for storybook four!
 
   constructor() { }
 }

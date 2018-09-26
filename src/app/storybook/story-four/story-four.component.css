@@ -1,0 +1,123 @@
+.border_thick {
+  border: solid lawngreen;
+  border-width: 0px 0px 3px 0px;
+}
+
+.table_font_size {
+  font-size: 1.3rem;
+  font-weight: bold;
+}
+
+.table_border {
+  border: 1px solid darkblue;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  background-color: white;
+}
+
+table tr:not(:first-child) {
+  border-bottom: 3px solid blue;
+}
+
+.word_passed {
+  color: #d0ff19;
+}
+
+.word_not_passed {
+  color: white;
+}
+
+.question_font_size {
+  font-size: 1.6rem;
+  color: #737373;
+  border: 1px groove gray;
+  border-radius:10px;
+}
+
+.question_font_size_selected {
+  font-size: 1.6rem;
+  border: 2px groove coral;
+  border-radius:10px;
+}
+
+.question_statement_box {
+  background-color: #f7f7f7;
+}
+
+.question_statement_box_selected {
+  background-color: rgb(204, 204, 102);
+  border: 2px solid rgb(185, 185, 71);
+  box-shadow: -5px 5px 7px grey;
+}
+
+/*https://stackoverflow.com/questions/23108550/make-the-right-side-of-a-div-as-an-arrow*/
+.pointy_div{
+  height:40px;
+  background-color: gray;
+  color:#fff;
+  position:relative;
+  width:100px;
+  text-align:center;
+  line-height:40px;
+  font-size:1.1rem;
+}
+
+.pointy_div:after{
+  content:"";
+  position:absolute;
+  height:0;
+  width:0;
+  left:100%;
+  top:0;
+  border:20px solid transparent;
+  border-left: 20px solid gray;
+}
+
+/*https://stackoverflow.com/questions/23108550/make-the-right-side-of-a-div-as-an-arrow*/
+.pointy_div_selected{
+  height:40px;
+  background-color: rgb(102, 102, 204);
+  color:#fff;
+  position:relative;
+  width:100px;
+  text-align:center;
+  line-height:40px;
+  font-size:1.1rem;
+  box-shadow: -5px 5px 7px grey;
+}
+
+.pointy_div_selected:after{
+  content:"";
+  position:absolute;
+  height:0;
+  width:0;
+  left:100%;
+  top:0;
+  border:20px solid transparent;
+  border-left: 20px solid rgb(102, 102, 204);
+}
+
+@media (min-width: 1200px) {
+  .pointy_div{
+    height:40px;
+    color:#fff;
+    position:relative;
+    width:110px;
+    text-align:center;
+    line-height:40px;
+    font-size:1.2rem;
+  }
+
+  .pointy_div_selected{
+    height:40px;
+    color:#fff;
+    position:relative;
+    width:110px;
+    text-align:center;
+    line-height:40px;
+    font-size:1.2rem;
+    box-shadow: -5px 5px 7px grey;
+  }
+
+}

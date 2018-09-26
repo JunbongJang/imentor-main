@@ -59,7 +59,7 @@ export class StoryTwoComponent implements OnInit, OnDestroy, AfterViewChecked {
 
     this.modalStartSubscription = this.initialModalService.modalStartClicked.subscribe(
       (modal_state) => {
-        this.storybookService.storybookAudioInitialize.next('1');
+        this.storybookService.storybookSceneAudioInitialize.next('1');
         this.initializeStorybookTwo(); // so that the focus remains.
       }, (error) => {
         console.log('error');
@@ -131,7 +131,7 @@ export class StoryTwoComponent implements OnInit, OnDestroy, AfterViewChecked {
         });
     } else { // not over yet!
       if (this.current_question_num === this.questionStorageService.question_structure.storybook2_3.pgraph1.length) {
-        this.storybookService.storybookAudioInitialize.next('2');
+        this.storybookService.storybookSceneAudioInitialize.next('2');
       }
       this.storyTestForm.get('english_sentence').setValue('');
       this.setCurrentSentences();

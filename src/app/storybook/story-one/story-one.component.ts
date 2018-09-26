@@ -64,7 +64,7 @@ export class StoryOneComponent implements OnInit, OnDestroy  {
 
     this.modalStartSubscription = this.initialModalService.modalStartClicked.subscribe(
       (modal_state) => {
-        this.storybookService.storybookAudioInitialize.next('');
+        this.storybookService.storybookSceneAudioInitialize.next('');
       }, (error) => {
         console.log('error');
         console.log(error);
@@ -197,7 +197,7 @@ export class StoryOneComponent implements OnInit, OnDestroy  {
       } else {  // not all questions are correct
         this.storybookService.storybookSceneComplete.next(false);
         // this.initializeStorybookOne();
-        // this.storybookService.storybookAudioInitialize.next('');
+        // this.storybookService.storybookSceneAudioInitialize.next('');
       }
     }
   }
