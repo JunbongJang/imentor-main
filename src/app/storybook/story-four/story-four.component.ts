@@ -13,6 +13,7 @@ import {environment} from '../../../environments/environment.prod';
 
 import 'bootstrap'; // these imports work!!! use them elsewhere too
 import * as $ from 'jquery';
+import {GeneralUtilityService} from '../../core/general-utility.service';
 
 @Component({
   selector: 'story-four',
@@ -40,7 +41,8 @@ export class StoryFourComponent implements OnInit, OnDestroy, AfterViewChecked {
               public questionStorageService: QuestionStorageService,
               private questionGenerateService: QuestionGenerateService,
               private questionSoundService: QuestionSoundService,
-              private initialModalService: InitialModalService) {
+              private initialModalService: InitialModalService,
+              private generalUtilityService: GeneralUtilityService) {
   }
 
   ngOnInit() {
@@ -88,7 +90,7 @@ export class StoryFourComponent implements OnInit, OnDestroy, AfterViewChecked {
   }
 
   checkAnswer(control: FormControl): { [s: string]: boolean } {
-    const english_input = control.value;
+    const english_input = this.generalUtilityService.replaceChineseSpecialCharacters(control.value);
     if (english_input === null || english_input === '') {
       return null;
     } else {
@@ -110,7 +112,7 @@ export class StoryFourComponent implements OnInit, OnDestroy, AfterViewChecked {
   }
 
   onSubmit() {
-    if (this.storyTestForm.get('english_sentence').value === this.current_english_sentence) {
+    if (this.generalUtilityService.replaceChineseSpecialCharacters(this.storyTestForm.get('english_sentence').value) === this.current_english_sentence) {
       console.log('onSubmit: correct sentence');
       this.questionSoundService.feedbackAudioClosure.correct();
       this.storybookService.storybookSetBomb.next(0); // reset the bomb!

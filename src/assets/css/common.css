@@ -1579,9 +1579,10 @@ content:'';
     }
     
     .area_select_bx{
-        position: relative;     
-        background:url(../images/cc_bar.png) no-repeat left top;
-        background-size:100%;
+        position: relative;
+      background:url(../images/w_bar.png) no-repeat left top 142px;
+        /*background:url(../images/cc_bar.png) no-repeat left top;*/
+        /*background-size:100%;*/
         height:205px;           
     }
     
@@ -1945,8 +1946,19 @@ content:'';
 
 
 
-  .wb_book{
-    display: none;
+  .wb_book {
+    position: absolute;
+    left: 15px;
+    top: 23px;
+    display: block;
+    text-indent: -9999em;
+    width: 100px;
+    height: 125px;
+    background: url(../images/book.png) no-repeat;
+  }
+
+  .wb_book_center {
+    left: 49.5px;
   }
     
     
@@ -2058,10 +2070,10 @@ content:'';
    
     
     .pencil:link, .pencil:visited{
-       top:17px;
+       top:15px;
         right:10px;
-       width:38px;
-        height:88px;
+       width:34px;
+        height:80px;
     }
     
     .area_select_bx p{
@@ -2190,9 +2202,10 @@ content:'';
     }
     
     .area_select_bx{
-        position: relative;     
-        background:url(../images/cc_bar.png) no-repeat left top;
-        background-size:100%;
+        position: relative;
+      background:url(../images/w_bar.png) no-repeat left top 92px;
+        /*background:url(../images/cc_bar.png) no-repeat left top;*/
+        /*background-size:100%;*/
         height:142px;           
     }
     
@@ -2551,8 +2564,21 @@ content:'';
         left:23px;
     }
 
-  .wb_book{
-    display: none;
+  .wb_book {
+    position: absolute;
+    left: 15px;
+    top: 10px;
+    display: block;
+    text-indent: -9999em;
+    width: 61px;
+    height: 90px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-image: url(../images/book.png);
+  }
+
+  .wb_book_center {
+    left: 23px;
   }
     
 }

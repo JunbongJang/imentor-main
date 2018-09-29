@@ -67,8 +67,28 @@ export class GeneralUtilityService {
     return (!Array.isArray(an_array) || !an_array.length);
   }
 
+  replaceChineseSpecialCharacters(chinese_string: string): string {
+    if (chinese_string === null || chinese_string === '') {
+      return '';
+    }
 
-  // reloadItself() {
-  //   window.location.reload();
-  // }
+    const start_time = new Date().getMilliseconds();
+    console.log('replaceChineseCharacters: ' + chinese_string);
+
+    chinese_string = chinese_string.replace(/（/g, '(');
+    chinese_string = chinese_string.replace(/）/g, ')');
+    chinese_string = chinese_string.replace(/‘/g, '\'');
+    chinese_string = chinese_string.replace(/’/g, '\'');
+    chinese_string = chinese_string.replace(/“/g, '\"');
+    chinese_string = chinese_string.replace(/”/g, '\"');
+    chinese_string = chinese_string.replace(/。/g, '.');
+    chinese_string = chinese_string.replace(/，/g, ',');
+    chinese_string = chinese_string.replace(/？/g, '?');
+    chinese_string = chinese_string.replace(/！/g, '!');
+
+    console.log('replaceChineseCharacters: ' + chinese_string);
+    const end_time = new Date().getMilliseconds();
+    console.log('time spent: ' + (end_time - start_time));
+    return chinese_string;
+  }
 }

@@ -1,13 +1,11 @@
 import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {Title} from '@angular/platform-browser';
-import {QuestionStorageService} from './question/question-storage.service';
 import {UserService} from '../core/user.service';
-import {Subject, Subscription} from 'rxjs';
+import {Subscription} from 'rxjs';
 import {StorybookService} from './storybook.service';
 import {ViewStateService} from '../core/view-state.service';
 import {Router} from '@angular/router';
 import {QuestionGenerateService} from './question/question-generate.service';
-import {GeneralUtilityService} from '../core/general-utility.service';
 
 @Component({
   selector: 'app-storybook',
@@ -29,7 +27,6 @@ export class StorybookComponent implements OnInit, OnDestroy {
   @ViewChild('bomb3') private bomb3: ElementRef;
 
   constructor(private titleService: Title,
-              public questionStorageService: QuestionStorageService,
               private questionGenerateService: QuestionGenerateService,
               public userService: UserService,
               private storybookService: StorybookService,

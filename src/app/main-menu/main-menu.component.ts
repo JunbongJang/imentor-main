@@ -154,7 +154,12 @@ export class MainMenuComponent implements OnInit, OnDestroy {
       } else {
         this.userService.section = String(parseInt(this.userService.section, 10) + 1);
       }
-      open_url = `/IMENTOR/cn/speaking/?uid=${this.userService.user.uid}&user_id=${this.userService.user.user_id}&ho=${this.userService.ho}&step=speaking${clicked_step}&section=${this.userService.section}&master=${this.userService.master_status}`;
+
+      if (clicked_step === '1' || clicked_step ===  '2') {
+        open_url = `https://welleastern.co.kr/IMENTOR/cn/speaking/index.php?uid=${this.userService.user.uid}&user_id=${this.userService.user.user_id}&ho=${this.userService.ho}&step=speaking${clicked_step}&section=${this.userService.section}&master=${this.userService.master_status}`;
+      } else if (clicked_step === '3') {
+        open_url = `https://welleastern.co.kr/IMENTOR/cn/speaking/index2.php?uid=${this.userService.user.uid}&user_id=${this.userService.user.user_id}&ho=${this.userService.ho}&step=speaking${clicked_step}&section=${this.userService.section}&master=${this.userService.master_status}`;
+      }
 
     } else if (clicked_step_category === 'finaltest') {
       let current_kind = '';

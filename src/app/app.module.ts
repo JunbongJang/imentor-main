@@ -10,6 +10,9 @@ import {CoreModule} from './core/core.module';
 import {HttpClientModule} from '@angular/common/http';
 import {FormsModule} from '@angular/forms';
 
+import 'bootstrap'; // these imports work!!! use them elsewhere too
+import * as $ from 'jquery';
+
 @NgModule({
   declarations: [
     AppComponent,

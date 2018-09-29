@@ -86,7 +86,7 @@ export class StoryThreeComponent implements OnInit, OnDestroy, AfterViewChecked 
   }
 
   checkAnswer(control: FormControl): {[s: string]: boolean} {
-    const english_input = control.value;
+    const english_input = this.generalUtilityService.replaceChineseSpecialCharacters(control.value);
     if (english_input === null || english_input === '') {
       return null;
     } else {
