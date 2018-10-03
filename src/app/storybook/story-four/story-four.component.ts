@@ -10,10 +10,8 @@ import {QuestionStorageService} from '../question/question-storage.service';
 import {QuestionSoundService} from '../question/question-sound.service';
 import {InitialModalService} from '../initial-modal/initial-modal.service';
 import {environment} from '../../../environments/environment.prod';
-
-import 'bootstrap'; // these imports work!!! use them elsewhere too
-import * as $ from 'jquery';
 import {GeneralUtilityService} from '../../core/general-utility.service';
+import * as $ from 'jquery';
 
 @Component({
   selector: 'story-four',
@@ -95,11 +93,16 @@ export class StoryFourComponent implements OnInit, OnDestroy, AfterViewChecked {
       return null;
     } else {
       const current_char_index = english_input.length - 1;
-      if (english_input[current_char_index] === '*') {
+      if (english_input[current_char_index] === '\n') {
+        if (this.onSubmit() === false) {
+          this.storyTestForm.get('english_sentence').setValue(english_input.replace('\n', '').slice(0, current_char_index));
+          return {'answerIsWrong': true};
+        }
+      } else if (english_input[current_char_index] === '*') {
         // ignore this since I, programmer put it. Not the user.
         return {'answerIsWrong': true};
       } else if (english_input[current_char_index] !== this.current_english_sentence[current_char_index]) {
-        this.storyTestForm.get('english_sentence').setValue(english_input.slice(0, current_char_index) + '*');
+        this.storyTestForm.get('english_sentence').setValue(english_input.replace('\n', '').slice(0, current_char_index) + '*');
         return {'answerIsWrong': true};
       } else if (english_input === this.current_english_sentence) {
         console.log('check answer: correct sentence');
@@ -112,17 +115,19 @@ export class StoryFourComponent implements OnInit, OnDestroy, AfterViewChecked {
   }
 
   onSubmit() {
-    if (this.generalUtilityService.replaceChineseSpecialCharacters(this.storyTestForm.get('english_sentence').value) === this.current_english_sentence) {
+    if (this.generalUtilityService.replaceChineseSpecialCharacters(this.storyTestForm.get('english_sentence').value).trim() === this.current_english_sentence) {
       console.log('onSubmit: correct sentence');
       this.questionSoundService.feedbackAudioClosure.correct();
       this.storybookService.storybookSetBomb.next(0); // reset the bomb!
       this.checkNextQuestion();
+      return true;
     } else {
       console.log('onSubmit: wrong sentence');
       this.questionSoundService.feedbackAudioClosure.wrong();
       this.showHint();
       this.wrong_count++;
       this.storybookService.storybookSetBomb.next(this.wrong_count);
+      return false;
     }
   }
 
@@ -177,14 +182,17 @@ export class StoryFourComponent implements OnInit, OnDestroy, AfterViewChecked {
   initialProblemSetup(): void {
     this.wrong_count = 0;
     this.storybookService.storybookSetBomb.next(0); // reset the bomb!
-    let input_size = this.current_english_sentence.length;
-    if (input_size < 2) {
-      input_size = 2;
-    } else if (input_size > 34) {
-      input_size = 34;
+    let textarea_rows = 1;
+    let textarea_cols = this.current_english_sentence.length;
+    if (textarea_cols < 1) {
+      textarea_cols = 1;
+    } else if (textarea_cols > 34) {
+      textarea_cols = 33;
+      textarea_rows = 2;
     }
     const current_english_input = document.getElementById('english_sentence_' + this.current_question_num);
-    current_english_input.style.width = String(input_size + 1) + 'rem';
+    current_english_input.style.width = String(textarea_cols) + 'rem';
+    (<HTMLTextAreaElement>current_english_input).rows = textarea_rows;
     window.setTimeout(() => {
       current_english_input.focus();
     }, 0);

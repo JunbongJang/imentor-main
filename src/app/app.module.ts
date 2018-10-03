@@ -9,9 +9,9 @@ import { MainMenuComponent } from './main-menu/main-menu.component';
 import {CoreModule} from './core/core.module';
 import {HttpClientModule} from '@angular/common/http';
 import {FormsModule} from '@angular/forms';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 import 'bootstrap'; // these imports work!!! use them elsewhere too
-import * as $ from 'jquery';
 
 @NgModule({
   declarations: [
@@ -25,7 +25,8 @@ import * as $ from 'jquery';
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    CoreModule
+    CoreModule,
+    NgbModule
   ],
   bootstrap: [AppComponent]
 })

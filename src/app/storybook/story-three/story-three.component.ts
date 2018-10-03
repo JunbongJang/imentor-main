@@ -207,8 +207,8 @@ export class StoryThreeComponent implements OnInit, OnDestroy, AfterViewChecked 
     let input_size = this.question_english_array[this.current_question_num].length;
     if (input_size < 1) {
       input_size = 1;
-    } else if (input_size > 34) {
-      input_size = 34;
+    } else if (input_size > 33) {
+      input_size = 33;
     }
     const current_english_input = document.getElementById('english_word_' + this.current_question_num);
     current_english_input.style.width = String(input_size) + 'rem';

@@ -178,14 +178,17 @@ export class StoryTwoComponent implements OnInit, OnDestroy, AfterViewChecked {
 
   initialProblemSetup(): void {
     console.log('initialProblemSetupt: ' + this.current_question_num + '  ' + this.current_english_sentence);
-    let input_size = this.current_english_sentence.length;
-    if (input_size < 1) {
-      input_size = 1;
-    } else if (input_size > 34) {
-      input_size = 34;
+    let textarea_rows = 1;
+    let textarea_cols = this.current_english_sentence.length;
+    if (textarea_cols < 1) {
+      textarea_cols = 1;
+    } else if (textarea_cols > 34) {
+      textarea_cols = 33;
+      textarea_rows = 2;
     }
     const current_english_input = document.getElementById('english_sentence_' + this.current_question_num);
-    current_english_input.style.width = String(input_size) + 'rem';
+    current_english_input.style.width = String(textarea_cols) + 'rem';
+    (<HTMLTextAreaElement>current_english_input).rows = textarea_rows;
     window.setTimeout(() => {current_english_input.focus(); }, 0);
     document.getElementById('story_two_div_' + this.current_question_num).scrollIntoView(false); // align to top
   }

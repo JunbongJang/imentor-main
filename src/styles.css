@@ -18,7 +18,7 @@ img {
 }
 
 /*https://www.sanwebe.com/2014/08/css-html-forms-designs*/
-.form-style-4 input[type=email], .form-style-4 input[type=text]
+.form-style-4 input[type=email], .form-style-4 input[type=text], .form-style-4 textarea
 {
   background: transparent;
   border: none;
@@ -28,21 +28,28 @@ img {
   color: BLACK;
 }
 
-.form-style-4 input[type=text]:focus
+.form-style-4 input[type=text]:focus, .form-style-4 textarea:focus
 {
   border-bottom: 1px dashed #D9FFA9;
+}
+
+.form-style-4 input[disabled], .form-style-4 textarea[disabled] {
+  border-bottom: 0px;
+}
+
+.form-style-4 input.input_green_border {
+  border-style: solid;
+  border-color: greenyellow;
+  border-width: 2px;
+  border-radius: 10px
 }
 
 input.ng-invalid.ng-touched {
   /*border: 1px solid red;*/
   border-radius:10px;
+  border: none;
   background-color: #ffa2a5;
 }
-
-.form-style-4 input[disabled] {
-  border-bottom: 0px;
-}
-
 
 .scrollbar-morpheus-den::-webkit-scrollbar-track {
   -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
