@@ -7,6 +7,7 @@ export const appRoutes: Routes = [
   { path: '', redirectTo: '/main', pathMatch: 'full'},
   { path: 'main', component: MainMenuComponent, data: { state: 'main-menu' }},
   { path: 'storybook', loadChildren: './storybook/storybook.module#StorybookModule'},
+  { path: 'speaking', loadChildren: './speaking/speaking.module#SpeakingModule'},
   { path: 'page-not-found', component: PageNotFoundComponent },
 
   // routes get parsed from top to bottom so  always put this double asterisk at the end

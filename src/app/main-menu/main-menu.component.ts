@@ -156,9 +156,9 @@ export class MainMenuComponent implements OnInit, OnDestroy {
       }
 
       if (clicked_step === '1' || clicked_step ===  '2') {
-        open_url = `https://welleastern.co.kr/IMENTOR/cn/speaking/index.php?uid=${this.userService.user.uid}&user_id=${this.userService.user.user_id}&ho=${this.userService.ho}&step=speaking${clicked_step}&section=${this.userService.section}&master=${this.userService.master_status}`;
+        open_url = `https://www.welleastern.co.kr/IMENTOR/cn/speaking/index.php?uid=${this.userService.user.uid}&user_id=${this.userService.user.user_id}&ho=${this.userService.ho}&step=speaking${clicked_step}&section=${this.userService.section}&master=${this.userService.master_status}`;
       } else if (clicked_step === '3') {
-        open_url = `https://welleastern.co.kr/IMENTOR/cn/speaking/index2.php?uid=${this.userService.user.uid}&user_id=${this.userService.user.user_id}&ho=${this.userService.ho}&step=speaking${clicked_step}&section=${this.userService.section}&master=${this.userService.master_status}`;
+        open_url = `https://www.welleastern.co.kr/IMENTOR/cn/speaking/index2.php?uid=${this.userService.user.uid}&user_id=${this.userService.user.user_id}&ho=${this.userService.ho}&step=speaking${clicked_step}&section=${this.userService.section}&master=${this.userService.master_status}`;
       }
 
     } else if (clicked_step_category === 'finaltest') {
