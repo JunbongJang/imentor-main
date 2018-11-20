@@ -1,0 +1,65 @@
+<div class="container">
+  <div class="row">
+    <div class="col-lg-11 mx-auto mt-md-4 mt-0 mb-md-3 mb-0 container-border px-2 px-lg-3">
+
+      <i style="font-size:2.5rem; color: steelblue; right: 1rem; top:.5rem; z-index:100;"
+         class="fa fa-times-circle-o cursor_pointer position-absolute float-right"
+         (click)="this.viewStateChoose(this.viewStateService.IMENTOR_MAIN)"></i>
+
+      <div class="row mt-4 align-items-center mb-md-4 mb-2">
+        <div class="col-md-4 pl-md-5 pl-4" style="font-family: Orbitron-Black;">
+          <h2 style="color: rgb(9,94,129);">
+            Final Test
+          </h2>
+        </div>
+      </div>
+
+
+      <div class="row">
+        <div class="col">
+
+          <ul class="nav nav-tabs ml-md-5 ml-0 border-bottom-0">
+            <li class="nav-item">
+              <a class="nav-link cursor_pointer border border-top rounded nav_active">
+                Scene
+              </a>
+            </li>
+          </ul>
+
+        </div>
+      </div>
+
+      <div class="row p-2">
+        <div class="col final_test_outer_border" style="height: 500px;">
+
+          <div class="row" style="height: 30px;">
+            <div class="col-6 final_test_inner_border">
+              h
+            </div>
+            <div class="col-2 final_test_inner_border">
+              e
+            </div>
+
+            <div class="col-4 final_test_inner_border">
+              w
+            </div>
+          </div>
+
+          <div class="row" style="height: 80px;">
+            <div class="col final_test_inner_border">
+              g
+            </div>
+          </div>
+
+          <router-outlet></router-outlet>
+
+        </div>
+      </div>
+
+
+
+    </div>
+
+
+  </div>
+</div>

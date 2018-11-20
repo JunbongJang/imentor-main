@@ -1,4 +1,5 @@
-import {Subject} from 'rxjs';
+import {UserService} from './user.service';
+import {ActivatedRoute, Router} from '@angular/router';
 
 export class ViewStateService {
 
@@ -20,5 +21,4 @@ export class ViewStateService {
   set view_state(value: string) {
     this._view_state = value;
   }
-
 }

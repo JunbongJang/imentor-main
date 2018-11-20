@@ -268,7 +268,7 @@
       </trans-unit>
       <trans-unit id="45ae05e935846a5501c57a596f0c0481536cf0de" datatype="html">
         <source>Mentor Series의 자기주도 학습</source>
-        <target>Mentor Series Online Learning</target>
+        <target>My Mentor Online Learning</target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/main-menu/main-menu.component.html</context>
           <context context-type="linenumber">6</context>

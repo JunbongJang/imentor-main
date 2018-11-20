@@ -1,0 +1,100 @@
+.final_test_inner_border {
+  border-style: solid;
+  border-width: 0px 1.5px 1.5px 0px;
+}
+
+.final_test_outer_border {
+  border-style: solid;
+  border-width: 1.5px 0px 0px 1.5px;
+}
+
+.nav-link {
+  background:linear-gradient(rgb(191,191,191), gray);
+  color:white;
+  padding-top:3px;
+  padding-bottom:3px;
+  font-size:.9rem;
+  font-weight:bold;
+}
+
+.nav-link:hover {
+  background:rgb(170, 233, 73);
+  color:white;
+}
+
+.nav-link.active {
+  color:white !important;
+  background:linear-gradient(rgb(170, 233, 73), rgb(130, 192, 31)) !important;
+}
+
+.image-container-custom {
+  border-style:solid;
+  border-width:1px;
+  border-color:white;
+  border-radius:15px;
+  background:linear-gradient(135deg, rgb(231, 217, 240), rgb(78, 42, 103));
+  width:270px;
+  z-index: 10;
+  position:relative;
+}
+
+
+.container-border {
+  background-color:white;
+  border-radius: 10px;
+}
+
+/*Medium devices (tablets, 768px and up)*/
+@media (min-width: 768px) {
+  .container-border {
+    background-color:white;
+    border-width: 10px;
+    border-style: solid;
+    border-color: rgb(0, 177, 205);
+    border-radius: 20px;
+  }
+}
+
+
+.inner-container-border {
+  border-radius: 10px;
+  background:linear-gradient(135deg, rgb(246, 246, 246), rgb(221, 221, 221));
+}
+
+/*Large devices (desktops, 992px and up)*/
+@media (min-width: 992px) {
+  .inner-container-border {
+    border-width: 8px; border-style: solid;
+    border-color: rgb(221, 221, 221);
+  }
+}
+
+
+
+.main_background_color {
+  background-color: rgb(0, 177, 205);
+}
+
+html {
+  font-size: 80%;
+}
+
+@media (min-width: 768px) {
+  .main_background_color {
+    background-color:rgb(88, 73, 53);
+  }
+  html {
+    font-size: 90%;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+
+}
+
+@media (min-width: 992px) {
+  html {
+    font-size: 100%;
+  }
+}
+

@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit, Renderer2} from '@angular/core';
+import {Component, OnDestroy, OnInit, Renderer2, ViewEncapsulation} from '@angular/core';
 import {Router} from '@angular/router';
 import {ViewStateService} from '../core/view-state.service';
 import {Title} from '@angular/platform-browser';
@@ -7,10 +7,16 @@ import {ServerService} from '../core/server.service';
 import {Subscription} from 'rxjs';
 declare var $: any;
 
+import '../../assets/js/main-calendar.js';
+declare var CalendarApp: any;
+
 @Component({
   selector: 'app-main-menu',
   templateUrl: './main-menu.component.html',
-  styleUrls: ['./main-menu.component.css']
+  styleUrls: ['./main-menu.component.css'],
+  // this solved calendar style issue,
+  // https://github.com/angular/angular/issues/7845
+  encapsulation: ViewEncapsulation.None
 })
 export class MainMenuComponent implements OnInit, OnDestroy {
 
@@ -35,8 +41,9 @@ export class MainMenuComponent implements OnInit, OnDestroy {
   ngOnInit() {
     console.log('ngOnInit main menu~~~~~~~~~~~');
     const url = new URL(window.location.href);
-    // url.host.indexOf('localhost') !== 0 &&
-    // initialize user if it's not localhost
+    if (url.host.indexOf('localhost') === 0) {
+      new CalendarApp();
+    }
 
     if (this.userService.user_initialized_bool === false) {
 
@@ -45,6 +52,7 @@ export class MainMenuComponent implements OnInit, OnDestroy {
         this.setJindoFromServer(this.userService.step, this.userService.ho);
         this.setCharacterImage();
         this.setBookImage();
+        new CalendarApp();
       },
         (error) => {
           console.log(error);
@@ -53,6 +61,7 @@ export class MainMenuComponent implements OnInit, OnDestroy {
       this.setJindoFromServer(this.userService.step, this.userService.ho); // this is needed when going from storybook to main by finish
       this.setCharacterImage();
       this.setBookImage();
+      new CalendarApp();
     }
 
     document.body.style.backgroundColor = 'rgb(241,210,83)';
@@ -71,7 +80,7 @@ export class MainMenuComponent implements OnInit, OnDestroy {
     }
   }
 
-  viewStateChoose(a_view: string, clicked_step_category: string, clicked_step: string, step_num: number) {
+  viewStateChooseMain(a_view: string, clicked_step_category: string, clicked_step: string, step_num: number) {
     console.log('viewStateChoose');
     console.log(a_view);
     console.log(clicked_step);
@@ -141,18 +150,24 @@ export class MainMenuComponent implements OnInit, OnDestroy {
       open_url = `/IMENTOR/cn/sub.html?uid=${this.userService.user.uid}&user_id=${this.userService.user.user_id}&ho=${this.userService.ho}&step=storybook${clicked_step}&section=${this.userService.section}&master=${this.userService.master_status}`;
 
     } else if (clicked_step_category === 'speaking') { // ----------------------- speaking -------------------------------------
+      let temp_max_section = '1';
       if (clicked_step === '1') {
         this.userService.section = this.userService.jindo.current_speaking1;
+        temp_max_section = this.userService.jindo.max_speaking1;
       } else if (clicked_step === '2') {
         this.userService.section = this.userService.jindo.current_speaking2;
+        temp_max_section = this.userService.jindo.max_speaking2;
       } else if (clicked_step === '3') {
         this.userService.section = this.userService.jindo.current_speaking3;
+        temp_max_section = this.userService.jindo.max_speaking3;
       }
 
       if (isNaN(parseInt(this.userService.section, 10))) {
         this.userService.section = '1';
       } else {
-        this.userService.section = String(parseInt(this.userService.section, 10) + 1);
+        if (parseInt(this.userService.section, 10) < parseInt(temp_max_section, 10)) {
+          this.userService.section = String(parseInt(this.userService.section, 10) + 1);
+        }
       }
 
       if (clicked_step === '1' || clicked_step ===  '2') {
@@ -266,6 +281,10 @@ export class MainMenuComponent implements OnInit, OnDestroy {
         this.userService.jindo.max_storybook2 = jindo_xml.getElementsByTagName('section_storybook2')[0].getAttribute('maxSection');
         this.userService.jindo.max_storybook3 = jindo_xml.getElementsByTagName('section_storybook3')[0].getAttribute('maxSection');
         this.userService.jindo.max_storybook4 = jindo_xml.getElementsByTagName('section_storybook4')[0].getAttribute('maxSection');
+
+        this.userService.jindo.max_speaking1 = jindo_xml.getElementsByTagName('section_speaking1')[0].getAttribute('maxSection');
+        this.userService.jindo.max_speaking2 = jindo_xml.getElementsByTagName('section_speaking2')[0].getAttribute('maxSection');
+        this.userService.jindo.max_speaking3 = jindo_xml.getElementsByTagName('section_speaking3')[0].getAttribute('maxSection');
 
         this.userService.jindo.point_vocabulary4 = jindo_xml.getElementsByTagName('point')[0].getAttribute('vocabulary4');
         this.userService.jindo.point_grammar5 = jindo_xml.getElementsByTagName('point')[0].getAttribute('grammer5');

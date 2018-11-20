@@ -6,10 +6,6 @@ import {SpeakingRoutingModule} from './speaking-routing.module';
 import {CommonModule} from '@angular/common';
 import {NgModule} from '@angular/core';
 
-import * as bowser from 'bowser';
-import * as bootstrap from 'bootstrap';
-declare var jQuery: any;
-
 
 @NgModule({
   declarations: [SpeakingComponent, SpeakingOneComponent, SpeakingThreeComponent],

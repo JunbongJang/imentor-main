@@ -257,8 +257,8 @@ body{
 
     
     .cld{
-        margin:13px 0 7px;
-        height:190px;
+        margin: 0px;
+        height:204px;
     }
     
     .character_bx{
@@ -2039,7 +2039,7 @@ width:100%;
     
     .side_m{
         width:100%;
-        height:150px;
+        height:190px;
     }
     
     .side_m:after{
@@ -2055,14 +2055,14 @@ content:'';
     }
     
     .side_m>div.cld{
-     margin-right:0;   
+      margin-right:0;
         margin-top:0;
         height:116px;
         width:160px;
     }
     
      .side_m>div.character_bx{
-     background: none;   
+       display:none;
         margin-right:0;
          width:160px;
     }
@@ -2070,10 +2070,10 @@ content:'';
    
     
     .pencil:link, .pencil:visited{
-       top:15px;
-        right:10px;
-       width:34px;
-        height:80px;
+      top: 36px;
+      right: 10px;
+      width: 43px;
+      height: 100px;
     }
     
     .area_select_bx p{
@@ -2203,10 +2203,10 @@ content:'';
     
     .area_select_bx{
         position: relative;
-      background:url(../images/w_bar.png) no-repeat left top 92px;
+        background:url(../images/w_bar.png) no-repeat left top 130px;
         /*background:url(../images/cc_bar.png) no-repeat left top;*/
         /*background-size:100%;*/
-        height:142px;           
+        height:192px;
     }
     
    
@@ -2566,19 +2566,19 @@ content:'';
 
   .wb_book {
     position: absolute;
-    left: 15px;
-    top: 10px;
+    left: 10px;
+    top: 25px;
     display: block;
     text-indent: -9999em;
-    width: 61px;
-    height: 90px;
+    width: 80px;
+    height: 120px;
     background-size: contain;
     background-repeat: no-repeat;
     background-image: url(../images/book.png);
   }
 
   .wb_book_center {
-    left: 23px;
+    left: 36px;
   }
     
 }

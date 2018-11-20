@@ -8,6 +8,7 @@ export const appRoutes: Routes = [
   { path: 'main', component: MainMenuComponent, data: { state: 'main-menu' }},
   { path: 'storybook', loadChildren: './storybook/storybook.module#StorybookModule'},
   { path: 'speaking', loadChildren: './speaking/speaking.module#SpeakingModule'},
+  { path: 'finaltest', loadChildren: './finaltest/finaltest.module#FinaltestModule'},
   { path: 'page-not-found', component: PageNotFoundComponent },
 
   // routes get parsed from top to bottom so  always put this double asterisk at the end

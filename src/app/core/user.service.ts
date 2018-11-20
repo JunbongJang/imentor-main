@@ -44,6 +44,10 @@ export class UserService {
     max_storybook3: '7',
     max_storybook4: '7',
 
+    max_speaking1: '7',
+    max_speaking2: '7',
+    max_speaking3: '3',
+
     point_vocabulary4: '23',
     point_grammar5: '34',
     point_speaking1: '54',
@@ -132,11 +136,11 @@ export class UserService {
     this._user = value;
   }
 
-  get jindo(): { book_title: string; level: string; step: string; section: string; current_storybook1: string; current_storybook2: string; current_storybook3: string; current_storybook4: string; current_speaking1: string; current_speaking2: string; current_speaking3: string; current_finaltest: string; max_storybook1: string; max_storybook2: string; max_storybook3: string; max_storybook4: string; point_vocabulary4: string; point_grammar5: string; point_speaking1: string; point_speaking2: string; point_speaking3: string; point_finaltest_speaking: string; point_finaltest_writing: string; is_complete: string } {
+  get jindo(): { book_title: string; level: string; step: string; section: string; current_storybook1: string; current_storybook2: string; current_storybook3: string; current_storybook4: string; current_speaking1: string; current_speaking2: string; current_speaking3: string; current_finaltest: string; max_storybook1: string; max_storybook2: string; max_storybook3: string; max_storybook4: string; max_speaking1: string; max_speaking2: string; max_speaking3: string; point_vocabulary4: string; point_grammar5: string; point_speaking1: string; point_speaking2: string; point_speaking3: string; point_finaltest_speaking: string; point_finaltest_writing: string; is_complete: string } {
     return this._jindo;
   }
 
-  set jindo(value: { book_title: string; level: string; step: string; section: string; current_storybook1: string; current_storybook2: string; current_storybook3: string; current_storybook4: string; current_speaking1: string; current_speaking2: string; current_speaking3: string; current_finaltest: string; max_storybook1: string; max_storybook2: string; max_storybook3: string; max_storybook4: string; point_vocabulary4: string; point_grammar5: string; point_speaking1: string; point_speaking2: string; point_speaking3: string; point_finaltest_speaking: string; point_finaltest_writing: string; is_complete: string }) {
+  set jindo(value: { book_title: string; level: string; step: string; section: string; current_storybook1: string; current_storybook2: string; current_storybook3: string; current_storybook4: string; current_speaking1: string; current_speaking2: string; current_speaking3: string; current_finaltest: string; max_storybook1: string; max_storybook2: string; max_storybook3: string; max_storybook4: string; max_speaking1: string; max_speaking2: string; max_speaking3: string; point_vocabulary4: string; point_grammar5: string; point_speaking1: string; point_speaking2: string; point_speaking3: string; point_finaltest_speaking: string; point_finaltest_writing: string; is_complete: string }) {
     this._jindo = value;
   }
 

@@ -17,7 +17,7 @@
         <div class="area_select_bx">
           <span class="wb_book" [ngStyle]="{ 'background-image': 'url(' + this.book_url + ')'}" [ngClass]="{wb_book_center: !this.checkMasterPerm()}">책</span>
           <a class="pencil" href="javascript:void(0)" (click)="this.openChooseBook()" i18n *ngIf="this.checkMasterPerm()">교재선택</a>
-          <p i18n>학습을 시작하셔야<br>권장학습일이 표시됩니다.</p>
+          <p i18n style="margin-bottom:10px;">학습을 시작하셔야<br>권장학습일이 표시됩니다.</p>
           <div class="select_bx">
             <h2 class="sbx_title" i18n>교재선택</h2>
 
@@ -68,10 +68,82 @@
             <a class="btn_select" href="javascript:void(0)" (click)="this.chooseBook();">choose</a>
           </div>
         </div>
+
+        <!-------------------------------------------------calendar --------------------------------------------->
         <div class="cld">
-          &nbsp;
+
+
+          <div class="calendar" id="calendar-app">
+            <div class="calendar--day-view" id="day-view">
+              <span class="day-view-exit" id="day-view-exit">&times;</span>
+              <span class="day-view-date" id="day-view-date">MAY 29 2016</span>
+              <div class="day-view-content">
+                <div class="day-highlight">
+                  You <span class="day-events" id="day-events">had no events for today</span>. &nbsp; <span tabindex="0" onkeyup="if(event.keyCode != 13) return; this.click();" class="day-events-link" id="add-event" data-date>Add a new event?</span>
+                </div>
+                <div class="day-add-event" id="add-day-event-box" data-active="false">
+                  <div class="row">
+                    <div class="half">
+                      <label class="add-event-label">
+                        Name of event
+                        <input type="text" class="add-event-edit add-event-edit--long" placeholder="New event" id="input-add-event-name">
+
+                      </label>
+                    </div>
+                    <div class="qtr">
+                      <label class="add-event-label">
+                        Start Time
+                        <input type="text" class="add-event-edit" placeholder="8:15" id="input-add-event-start-time" data-options="1,2,3,4,5,6,7,8,9,10,11,12" data-format="datetime">
+                        <input type="text" class="add-event-edit" placeholder="am" id="input-add-event-start-ampm" data-options="a,p,am,pm">
+                      </label>
+                    </div>
+                    <div class="qtr">
+                      <label class="add-event-label">
+                        End Time
+                        <input type="text" class="add-event-edit" placeholder="9" id="input-add-event-end-time" data-options="1,2,3,4,5,6,7,8,9,10,11,12" data-format="datetime">
+                        <input type="text" class="add-event-edit" placeholder="am" id="input-add-event-end-ampm" data-options="a,p,am,pm">
+                      </label>
+                    </div>
+                    <div class="half">
+                      <a onkeyup="if(event.keyCode != 13) return; this.click();" tabindex="0" id="add-event-save" class="event-btn--save event-btn">save</a>
+                      <a tabindex="0" id="add-event-cancel" class="event-btn--cancel event-btn">cancel</a>
+                    </div>
+                  </div>
+
+                </div>
+                <div id="day-events-list" class="day-events-list">
+
+                </div>
+                <div class="day-inspiration-quote" id="inspirational-quote">
+                  Every child is an artist.  The problem is how to remain an artist once he grows up. –Pablo Picasso
+                </div>
+              </div>
+            </div>
+            <div class="calendar--view" id="calendar-view">
+              <div class="cview__month">
+                <span class="cview__month-last" id="calendar-month-last">Apr</span>
+                <span class="cview__month-current" id="calendar-month">May</span>
+                <span class="cview__month-next" id="calendar-month-next">Jun</span>
+              </div>
+              <div class="cview__header">Sun</div>
+              <div class="cview__header">Mon</div>
+              <div class="cview__header">Tue</div>
+              <div class="cview__header">Wed</div>
+              <div class="cview__header">Thu</div>
+              <div class="cview__header">Fri</div>
+              <div class="cview__header">Sat</div>
+              <div class="calendar--view" id="dates">
+              </div>
+            </div>
+            <div class="footer" style="display:none;">
+              <span><span id="footer-date" class="footer__link">Today is May 30</span></span>
+            </div>
+          </div>
+
+
+
         </div>
-        <p class="cc_text" i18n>본 학습은 30일 학습기간을 제공합니다.</p>
+        <p class="cc_text" i18n style="margin-bottom:10px; margin-top: 5px;">본 학습은 30일 학습기간을 제공합니다.</p>
         <div class="character_bx" [ngStyle]="{ 'background-image': 'url(' + this.character_url + ')'}">
         </div>
       </div>
@@ -159,7 +231,7 @@
                 </ng-template>
               </li>
 
-              <li class="round_list06" (click)="this.viewStateChoose('story-one', 'storybook', '1', 10)">
+              <li class="round_list06" (click)="this.viewStateChooseMain('story-one', 'storybook', '1', 10)">
                 <ng-template [ngIf]="this.step_num <= 10" [ngIfElse]="studied_step10">
                   <a class="on" href="javascript:void(0)">storybook1</a>
                   <span class="area_btn_start" *ngIf="this.checkMasterPerm() || this.step_num == 10">
@@ -229,7 +301,7 @@
                 </ng-template>
               </li>
 
-              <li class="round_list11" (click)="this.viewStateChoose('story-two', 'storybook', '2', 11)">
+              <li class="round_list11" (click)="this.viewStateChooseMain('story-two', 'storybook', '2', 11)">
                 <ng-template [ngIf]="this.step_num <= 11" [ngIfElse]="studied_step11">
                   <a class="on" href="javascript:void(0)">storybook2</a>
                   <span class="area_btn_start" *ngIf="this.checkMasterPerm() || this.step_num == 11">
@@ -242,7 +314,7 @@
                 </ng-template>
               </li>
 
-              <li class="round_list12" (click)="this.viewStateChoose('story-three', 'storybook', '3', 12)">
+              <li class="round_list12" (click)="this.viewStateChooseMain('story-three', 'storybook', '3', 12)">
                 <ng-template [ngIf]="this.step_num <= 12" [ngIfElse]="studied_step12">
                   <a class="on" href="javascript:void(0)">storybook3</a>
                   <span class="area_btn_start" *ngIf="this.checkMasterPerm() || this.step_num == 12">
@@ -255,7 +327,7 @@
                 </ng-template>
               </li>
 
-              <li class="round_list13" (click)="this.viewStateChoose('story-four', 'storybook', '4', 13)">
+              <li class="round_list13" (click)="this.viewStateChooseMain('story-four', 'storybook', '4', 13)">
                 <ng-template [ngIf]="this.step_num <= 13" [ngIfElse]="studied_step13">
                   <a class="on" href="javascript:void(0)">storybook4</a>
                   <span class="area_btn_start" *ngIf="this.checkMasterPerm() || this.step_num == 13">
@@ -296,7 +368,7 @@
                 </ng-template>
               </li>
 
-              <li class="round_list16" (click)="this.openPopup('finaltest', '', 18)" style="position:absolute; z-index:5;">
+              <li class="round_list16" (click)="this.viewStateChooseMain('writing', 'finaltest', '', 18)" style="position:absolute; z-index:5;">
                 <ng-template [ngIf]="this.step_num <= 18" [ngIfElse]="studied_step18">
                   <a class="on" href="javascript:void(0)">Writing Test</a>
                   <span class="area_btn_start" *ngIf="this.checkMasterPerm() || this.step_num == 18">
@@ -313,7 +385,7 @@
                 </ng-template>
               </li>
 
-              <li class="round_list17" (click)="this.openPopup('finaltest', '', 17)">
+              <li class="round_list17" (click)="this.viewStateChooseMain('speaking', 'finaltest', '', 17)">
                 <ng-template [ngIf]="this.step_num <= 17" [ngIfElse]="studied_step17">
                   <a class="on" href="javascript:void(0)">Speaking Test</a>
                   <span class="area_btn_start" *ngIf="this.checkMasterPerm() || this.step_num == 17">
@@ -371,16 +443,16 @@
   <!--</div>-->
   <!--<div class="row mt-3">-->
     <!--<div class="col">-->
-      <!--<button class="btn btn-primary" (click)="this.viewStateChoose('story-one', 'storybook', '1')">-->
+      <!--<button class="btn btn-primary" (click)="this.viewStateChooseMain('story-one', 'storybook', '1')">-->
         <!--Storybook1-->
       <!--</button>-->
-      <!--<button class="btn btn-primary" (click)="this.viewStateChoose('story-two', 'storybook', '2')">-->
+      <!--<button class="btn btn-primary" (click)="this.viewStateChooseMain('story-two', 'storybook', '2')">-->
         <!--Storybook2-->
       <!--</button>-->
-      <!--<button class="btn btn-primary" (click)="this.viewStateChoose('story-three', 'storybook', '3')">-->
+      <!--<button class="btn btn-primary" (click)="this.viewStateChooseMain('story-three', 'storybook', '3')">-->
         <!--Storybook3-->
       <!--</button>-->
-      <!--<button class="btn btn-primary" (click)="this.viewStateChoose('story-four', 'storybook', '4')">-->
+      <!--<button class="btn btn-primary" (click)="this.viewStateChooseMain('story-four', 'storybook', '4')">-->
         <!--Storybook4-->
       <!--</button>-->
     <!--</div>-->
