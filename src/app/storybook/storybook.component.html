@@ -50,17 +50,21 @@
 
 
         </div>
-        <div class="col-lg-8">
-          <div class="row pt-3 inner-container-border" style="height: 470px;">
+        <div class="col-lg-8 pt-3 inner-container-border"  style="height: 470px;">
+
+          <div class="row">
             <div class="col-12 scrollbar-deep-blue" style="height: 390px; overflow-y: scroll;">
               <router-outlet></router-outlet>
             </div>
+          </div>
 
-            <div class="col-12 justify-content-center d-flex" style="height: 40px;">
-              <button class="btn btn-info mr-3" (click)="this.retryScene()" id="storybook_next_button" disabled>Retry</button>
-              <button class="btn btn-primary" id="storybook_finish_button" (click)="this.finishStorybook()" disabled>Finish</button>
+          <div class="row">
+            <div class="col-12 text-center" style="height: 40px;">
+              <button class="btn btn-info btn-sm mr-3" (click)="this.retryScene()" id="storybook_next_button" disabled>Retry</button>
+              <button class="btn btn-primary btn-sm" id="storybook_finish_button" (click)="this.finishStorybook()" disabled>Finish</button>
             </div>
           </div>
+
         </div>
       </div>
 

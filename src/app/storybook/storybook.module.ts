@@ -22,8 +22,7 @@ import {QuestionGradeService} from './question/question-grade.service';
 import {QuestionSoundService} from './question/question-sound.service';
 import {GeneralUtilityService} from '../core/general-utility.service';
 
-import * as bowser from 'bowser';
-import * as bootstrap from 'bootstrap';
+// import * as bootstrap from 'bootstrap';
 declare var jQuery: any;
 
 @NgModule({

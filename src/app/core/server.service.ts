@@ -33,7 +33,7 @@ export class ServerService {
       );
   }
 
-  getCalendarFromServer(a_month: string, a_ho: string, a_year: string) {
+  getCalendarFromServer(a_ho: string, a_month: string, a_year: string) {
     return this.httpClient.get<string>(`/IMENTOR/get-calendar.php?month=${a_month}&ho=${a_ho}&year=${a_year}`)
       .pipe(
         retry(2), // retry a failed request up to 3 times
@@ -41,12 +41,22 @@ export class ServerService {
       );
   }
 
-  getQuestionFromServer(a_step: string | null, a_ho: string | null, a_section: string | null) {
-    return this.httpClient.get<string>('/IMENTOR/get-question-utf8.php?step=' + a_step + '&ho=' + a_ho + '&section=' + a_section)
-      .pipe(
-        retry(2), // retry a failed request up to 3 times
-        catchError(this.handleError) // then handle the error
-      );
+  getQuestionFromServer(a_step: string | null, a_ho: string | null, a_section: string | null, a_kind = 'speaking') {
+    if (a_step === 'finaltest') {
+      return this.httpClient.get<string>(
+        '/IMENTOR/get-question-json.php?step=' + a_step + '&ho=' + a_ho + '&kind=' + a_kind)
+        .pipe(
+          retry(2), // retry a failed request up to 3 times
+          catchError(this.handleError) // then handle the error
+        );
+    } else {
+      return this.httpClient.get<string>(
+        '/IMENTOR/get-question-utf8.php?step=' + a_step + '&ho=' + a_ho + '&section=' + a_section)
+        .pipe(
+          retry(2), // retry a failed request up to 3 times
+          catchError(this.handleError) // then handle the error
+        );
+    }
   }
 
   getJindoFromServer(a_step: string | null, a_ho: string | null) {
@@ -87,6 +97,24 @@ export class ServerService {
         catchError(this.handleError) // then handle the error
       );
   }
+
+  postTestScoreToServer(quest: string, kind: string, uid: string, user_id: string, step: string, ho: string) {
+    const body = {
+      'quest': quest,
+      'kind': kind,
+      'uid': uid,
+      'user_id': user_id,
+      'ho': ho,
+      'step': step
+    };
+
+    return this.httpClient.post<string>('/IMENTOR/save_json.php', body, {headers: {'Content-Type': 'application/json'}})
+      .pipe(
+        retry(2), // retry a failed request up to 3 times
+        catchError(this.handleError) // then handle the error
+      );
+  }
+
 
   logoutUser() {
     return this.httpClient.get<string>('/IMENTOR/log-out.php')

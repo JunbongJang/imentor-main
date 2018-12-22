@@ -53,26 +53,26 @@
   font-weight: 600;
   font-family: "Avenir", sans-serif;
 }
-.row{
+.calendar-row{
   width: 100%;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
 }
-.row .qtr{
+.calendar-row .qtr{
   width: 40%;
 }
-.row .half{
+.calendar-row .half{
   width: 100%;
 }
 @media (min-width: 800px){
-  .row{
+  .calendar-row{
     flex-wrap: nowrap;
   }
-  .row .half{
+  .calendar-row .half{
     width: 35%;
   }
-  .row .qtr{
+  .calendar-row .qtr{
     width: 25%;
   }
 }

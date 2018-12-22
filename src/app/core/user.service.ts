@@ -13,6 +13,12 @@ export class UserService {
   private _step: string | null = 'vocabulary1';
   private _section: string | null = '1';
   private _master_status: string | null = 'true';
+  private _kind: string | null = 'speaking';
+
+  private _calendar = {
+    month: '1',
+    year: '2019'
+  };
 
   private _user = {
     uid: '1000050543',
@@ -118,6 +124,13 @@ export class UserService {
     this._section = value;
   }
 
+  get kind(): string | null {
+    return this._kind;
+  }
+
+  set kind(value: string | null) {
+    this._kind = value;
+  }
 
   get master_status(): string | null {
     return this._master_status;
@@ -142,6 +155,14 @@ export class UserService {
 
   set jindo(value: { book_title: string; level: string; step: string; section: string; current_storybook1: string; current_storybook2: string; current_storybook3: string; current_storybook4: string; current_speaking1: string; current_speaking2: string; current_speaking3: string; current_finaltest: string; max_storybook1: string; max_storybook2: string; max_storybook3: string; max_storybook4: string; max_speaking1: string; max_speaking2: string; max_speaking3: string; point_vocabulary4: string; point_grammar5: string; point_speaking1: string; point_speaking2: string; point_speaking3: string; point_finaltest_speaking: string; point_finaltest_writing: string; is_complete: string }) {
     this._jindo = value;
+  }
+
+  get calendar(): { month: string; year: string } {
+    return this._calendar;
+  }
+
+  set calendar(value: { month: string; year: string }) {
+    this._calendar = value;
   }
 
   setUserFromServer() {

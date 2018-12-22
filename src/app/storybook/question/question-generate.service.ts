@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import {QuestionStorageService} from './question-storage.service';
 import {ServerService} from '../../core/server.service';
 import {UserService} from '../../core/user.service';
-import {current} from '../../../../node_modules/codelyzer/util/syntaxKind';
 @Injectable()
 export class QuestionGenerateService {
 

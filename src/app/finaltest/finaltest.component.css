@@ -1,30 +1,35 @@
-.final_test_inner_border {
-  border-style: solid;
-  border-width: 0px 1.5px 1.5px 0px;
+.countdown-timer {
+  font-family: 'Share Tech Mono', monospace;
+  color: #ffffff;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  color: #daf6ff;
+  text-shadow: 0 0 20px #0aafe6, 0 0 20px rgba(10, 175, 230, 0);
+  font-size: 1.2rem;
+  padding: 5px 0;
 }
+.countdown-timer .date {
 
-.final_test_outer_border {
-  border-style: solid;
-  border-width: 1.5px 0px 0px 1.5px;
 }
 
 .nav-link {
-  background:linear-gradient(rgb(191,191,191), gray);
+  background:linear-gradient(135deg, rgb(147, 147, 147), #333333);
   color:white;
-  padding-top:3px;
-  padding-bottom:3px;
-  font-size:.9rem;
+  padding:5px;
+  padding-left: 17px;
+  padding-right: 17px;
+  font-size:.8rem;
   font-weight:bold;
 }
 
 .nav-link:hover {
-  background:rgb(170, 233, 73);
   color:white;
+  background:linear-gradient(135deg, rgb(141, 153, 233), rgb(28, 40, 192)) !important;
 }
 
 .nav-link.active {
   color:white !important;
-  background:linear-gradient(rgb(170, 233, 73), rgb(130, 192, 31)) !important;
+  background:linear-gradient(135deg, rgb(141, 153, 233), rgb(28, 40, 192)) !important;
 }
 
 .image-container-custom {
@@ -40,36 +45,14 @@
 
 
 .container-border {
-  background-color:white;
+  background-color: rgb(0, 139, 205);
   border-radius: 10px;
 }
-
-/*Medium devices (tablets, 768px and up)*/
-@media (min-width: 768px) {
-  .container-border {
-    background-color:white;
-    border-width: 10px;
-    border-style: solid;
-    border-color: rgb(0, 177, 205);
-    border-radius: 20px;
-  }
-}
-
 
 .inner-container-border {
   border-radius: 10px;
   background:linear-gradient(135deg, rgb(246, 246, 246), rgb(221, 221, 221));
 }
-
-/*Large devices (desktops, 992px and up)*/
-@media (min-width: 992px) {
-  .inner-container-border {
-    border-width: 8px; border-style: solid;
-    border-color: rgb(221, 221, 221);
-  }
-}
-
-
 
 .main_background_color {
   background-color: rgb(0, 177, 205);
@@ -79,7 +62,24 @@ html {
   font-size: 80%;
 }
 
+
+/*Medium devices (tablets, 768px and up)*/
 @media (min-width: 768px) {
+  .container-border {
+    background-color: rgb(0, 139, 205);
+    border-width: 15px;
+    border-style: solid;
+    border-color: rgb(0, 139, 205);
+    border-radius: 15px;
+  }
+
+  .nav-link {
+    padding-left: 25px;
+    padding-right: 25px;
+    margin-right: 3px;
+    font-size: 0.9rem;
+  }
+
   .main_background_color {
     background-color:rgb(88, 73, 53);
   }
@@ -87,14 +87,15 @@ html {
     font-size: 90%;
   }
 }
-
-@media only screen and (min-width: 768px) {
-
-}
-
+/*Large devices (desktops, 992px and up)*/
 @media (min-width: 992px) {
   html {
     font-size: 100%;
+  }
+
+  .inner-container-border {
+    border-width: 8px; border-style: solid;
+    border-color: rgb(221, 221, 221);
   }
 }
 

@@ -44,6 +44,21 @@ img {
   border-radius: 10px
 }
 
+.final_test_inner_border {
+  border-style: solid;
+  border-width: 0px 1.5px 0px 0px;
+}
+
+.final_test_outer_border {
+  border-style: solid;
+  border-width: 1.5px 1.5px 0px 1.5px;
+}
+
+.final_test_full_border {
+  border-style: solid;
+  border-width: 1.5px 1.5px 1.5px 1.5px;
+}
+
 input.ng-invalid.ng-touched {
   /*border: 1px solid red;*/
   border-radius:10px;

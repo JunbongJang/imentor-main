@@ -5,6 +5,7 @@ import { SpeakingTestComponent } from './speaking-test/speaking-test.component';
 import { WritingTestComponent } from './writing-test/writing-test.component';
 import {ReactiveFormsModule} from '@angular/forms';
 import {FinaltestRoutingModule} from './finaltest-routing.module';
+import {FinaltestService} from './finaltest.service';
 
 @NgModule({
   imports: [
@@ -12,6 +13,9 @@ import {FinaltestRoutingModule} from './finaltest-routing.module';
     ReactiveFormsModule,
     FinaltestRoutingModule
   ],
-  declarations: [FinaltestComponent, SpeakingTestComponent, WritingTestComponent]
+  declarations: [FinaltestComponent, SpeakingTestComponent, WritingTestComponent],
+  providers: [
+    FinaltestService
+  ]
 })
 export class FinaltestModule { }

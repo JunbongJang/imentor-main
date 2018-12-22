@@ -64,6 +64,15 @@ export class MainMenuComponent implements OnInit, OnDestroy {
       new CalendarApp();
     }
 
+    this.serverService.getCalendarFromServer(this.userService.ho, '1', '2019').subscribe(
+      (calendar_xml_string) => {
+        console.log('calendar');
+        console.log(calendar_xml_string);
+      }, (error) => {
+        console.log('calendar error');
+        console.log(error);
+      });
+
     document.body.style.backgroundColor = 'rgb(241,210,83)';
     this.titleService.setTitle( 'i-MENTOR Home' );
 
@@ -81,15 +90,25 @@ export class MainMenuComponent implements OnInit, OnDestroy {
   }
 
   viewStateChooseMain(a_view: string, clicked_step_category: string, clicked_step: string, step_num: number) {
-    console.log('viewStateChoose');
-    console.log(a_view);
-    console.log(clicked_step);
-    console.log(clicked_step_category);
     if (this.checkMasterPerm() || this.step_num >= step_num) {
       this.updateUserState(clicked_step_category, clicked_step);
       if (this.viewStateService.view_state !== a_view) {
         this.viewStateService.view_state = a_view;
         this.router.navigate([clicked_step_category + '/' + a_view]);
+      }
+    } else {
+      alert('Finish previous sections first!');
+    }
+  }
+
+  viewStateChooseTest(a_step: string, a_kind: string, step_num: number) {
+    if (this.checkMasterPerm() || this.step_num >= step_num) {
+      this.userService.kind = a_kind;
+      this.userService.step = a_step;
+      const a_view =  a_step + '_' + a_kind;
+      if (this.viewStateService.view_state !== a_view) {
+        this.viewStateService.view_state = a_view;
+        this.router.navigate(['finaltest' + '/' + this.userService.kind]);
       }
     } else {
       alert('Finish previous sections first!');
@@ -177,12 +196,12 @@ export class MainMenuComponent implements OnInit, OnDestroy {
       }
 
     } else if (clicked_step_category === 'finaltest') {
-      let current_kind = '';
       if (clicked_step === '1') {
-        current_kind = 'speaking';
+        this.userService.kind = 'speaking';
       } else if (clicked_step === '2') { // this.userService.jindo.current_finaltest
-        current_kind = 'writing';
+        this.userService.kind = 'writing';
       }
+      const current_kind = this.userService.kind;
       open_url = `/IMENTOR/cn/my-result-final.html?uid=${this.userService.user.uid}&user_id=${this.userService.user.user_id}&ho=${this.userService.ho}&step=finaltest&kind=${current_kind}&master=${this.userService.master_status}`;
     }
     return open_url;

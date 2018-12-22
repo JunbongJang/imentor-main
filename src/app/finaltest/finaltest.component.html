@@ -1,57 +1,102 @@
 <div class="container">
-  <div class="row">
-    <div class="col-lg-11 mx-auto mt-md-4 mt-0 mb-md-3 mb-0 container-border px-2 px-lg-3">
+  <div class="row justify-content-center">
+    <div class="col-lg-11 col-12 mt-md-4 mt-0 mb-md-3 mb-0 container-border">
 
-      <i style="font-size:2.5rem; color: steelblue; right: 1rem; top:.5rem; z-index:100;"
+      <i style="font-size:2.5rem; color: #ffbec4; right: .5rem; top:0.1rem; z-index:100;"
          class="fa fa-times-circle-o cursor_pointer position-absolute float-right"
          (click)="this.viewStateChoose(this.viewStateService.IMENTOR_MAIN)"></i>
 
-      <div class="row mt-4 align-items-center mb-md-4 mb-2">
-        <div class="col-md-4 pl-md-5 pl-4" style="font-family: Orbitron-Black;">
-          <h2 style="color: rgb(9,94,129);">
-            Final Test
+      <div class="row mt-4 align-items-center mb-1">
+        <div class="col-md-9 pl-md-5 pl-4" style="font-family: Orbitron-Black;">
+          <h2 style="color: white;">
+            {{ this.userService.kind | titlecase }} Final Test
           </h2>
         </div>
       </div>
 
 
       <div class="row">
-        <div class="col">
+        <div class="col d-flex justify-content-end">
 
           <ul class="nav nav-tabs ml-md-5 ml-0 border-bottom-0">
-            <li class="nav-item">
-              <a class="nav-link cursor_pointer border border-top rounded nav_active">
-                Scene
-              </a>
-            </li>
+            <ng-container *ngFor="let scene_num of [1, 2, 3, 4]; ">
+              <button class="nav-item nav-link cursor_pointer"
+                      [ngClass]="scene_num-1 === this.finalTestService.current_question_index ? 'active' : 'inactive'"
+                      style="color: white;">
+                <!--(click)="this.navigateQuestion(scene_num)"-->
+                  Q <span style="color: yellow;">0{{scene_num}}</span>
+              </button>
+            </ng-container>
           </ul>
 
         </div>
       </div>
 
-      <div class="row p-2">
-        <div class="col final_test_outer_border" style="height: 500px;">
+      <div class="row p-2 bg-white rounded">
+        <div class="col" style="min-height: 500px;">
 
-          <div class="row" style="height: 30px;">
-            <div class="col-6 final_test_inner_border">
-              h
+          <div class="row final_test_outer_border" style="background-color: #0f3854">
+            <div class="col-6 final_test_inner_border py-1" style="color:white; border-color: black;">
+              {{ this.finalTestService.getCurrentQuestion(this.userService.kind).sub_kind_kor}}
             </div>
-            <div class="col-2 final_test_inner_border">
-              e
-            </div>
-
-            <div class="col-4 final_test_inner_border">
-              w
+            <div class="col-6 py-1" style="color:white;">
+              Minimum Sentences: {{ this.finalTestService.getCurrentQuestion(this.userService.kind).opt_length }}
             </div>
           </div>
 
-          <div class="row" style="height: 80px;">
-            <div class="col final_test_inner_border">
-              g
+          <div class="row final_test_outer_border" style="background-color: #0f3854">
+            <div class="col-6 final_test_inner_border py-1">
+              <span style="color:white;">Prepare: </span>
+              <span class="countdown-timer" id="prep_timer">
+                {{ this.clockDisplayHTML(this.finalTestService.getCurrentQuestion(this.userService.kind).opt_time | number) }}
+              </span>
+            </div>
+
+            <div class="col-6 py-1">
+              <span style="color:white;">Time Limit: </span>
+              <span class="countdown-timer" id="total_timer">
+                {{ this.clockDisplayHTML(this.finalTestService.getCurrentQuestion(this.userService.kind).opt_time2 | number) }}
+              </span>
             </div>
           </div>
+
+          <div class="row final_test_outer_border" style="min-height: 60px;">
+            <div class="col-12 col-sm-8 order-1 order-sm-0 pt-0 pt-sm-2">
+              <p id="translatable_quest">{{ this.finalTestService.getCurrentQuestion(this.userService.kind).quest }}</p>
+            </div>
+            <div class=" p-2 text-right col-12 col-sm-4 order-0 order-sm-1 text-center">
+              <button class="btn btn-sm"
+                      style="background:radial-gradient(orange,rgb(207, 100, 8));"
+                      (click)="this.translateQuest()">
+                Translate
+              </button>
+            </div>
+          </div>
+
 
           <router-outlet></router-outlet>
+
+
+
+          <div class="row mt-2 text-center">
+            <div class="col-12"
+              *ngIf="this.userService.kind ==='speaking'">
+              <button class="btn peach-gradient">Record</button>
+              <button class="btn purple-gradient">Listen</button>
+              <button class="btn aqua-gradient">Try Again</button>
+            </div>
+            <div class="col-12">
+              <button class="btn btn-light"
+                      style="background:radial-gradient(#a0fdff,rgb(0,158,167));"
+                      (click)="this.nextQuestion();"
+                      *ngIf="this.finalTestService.current_question_index < 3">Next</button>
+              <button class="btn btn-light"
+                      style="background:radial-gradient(#ff6972,rgb(167,36,32));"
+                      (click)="this.nextQuestion();"
+                      *ngIf="this.finalTestService.current_question_index === 3">Finish</button>
+            </div>
+
+          </div>
 
         </div>
       </div>
