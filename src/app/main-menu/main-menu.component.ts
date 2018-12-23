@@ -43,6 +43,9 @@ export class MainMenuComponent implements OnInit, OnDestroy {
     const url = new URL(window.location.href);
     if (url.host.indexOf('localhost') === 0) {
       new CalendarApp();
+      const a_year = new Date().getFullYear().toString(10);
+      const a_month = new Date().getMonth().toString(10);
+      this.updateCalendarMark(a_month, a_year);
     }
 
     if (this.userService.user_initialized_bool === false) {
@@ -53,7 +56,10 @@ export class MainMenuComponent implements OnInit, OnDestroy {
         this.setCharacterImage();
         this.setBookImage();
         new CalendarApp();
-      },
+        const a_year = new Date().getFullYear().toString(10);
+        const a_month = new Date().getMonth().toString(10);
+        this.updateCalendarMark(a_month, a_year);
+        },
         (error) => {
           console.log(error);
         });
@@ -62,16 +68,10 @@ export class MainMenuComponent implements OnInit, OnDestroy {
       this.setCharacterImage();
       this.setBookImage();
       new CalendarApp();
+      const a_year = new Date().getFullYear().toString(10);
+      const a_month = new Date().getMonth().toString(10);
+      this.updateCalendarMark(a_month, a_year);
     }
-
-    this.serverService.getCalendarFromServer(this.userService.ho, '1', '2019').subscribe(
-      (calendar_xml_string) => {
-        console.log('calendar');
-        console.log(calendar_xml_string);
-      }, (error) => {
-        console.log('calendar error');
-        console.log(error);
-      });
 
     document.body.style.backgroundColor = 'rgb(241,210,83)';
     this.titleService.setTitle( 'i-MENTOR Home' );
@@ -345,5 +345,32 @@ export class MainMenuComponent implements OnInit, OnDestroy {
     return parseInt(this.userService.user.mb_level, 10) > 1;
   }
 
+
+  updateCalendarMark(a_month: string, a_year: string) {
+    this.serverService.getCalendarFromServer(this.userService.ho, a_month, a_year).subscribe(
+      (calendar_json_string) => {
+        console.log('calendar');
+        const parsed_json: {'0': object, 'days': string} = JSON.parse(calendar_json_string);
+        console.log(parsed_json);
+        const days_list = parsed_json.days.split(',');
+        const today = new Date().getDate();
+
+        for (let i = 1; i < today; i++) {
+          if (days_list.includes(i.toString(10))) {
+            document.getElementById('cview_day_' + i).innerHTML = `<span class="fa-stack">
+    <i class="fa fa-circle-thin fa-stack-2x" style="color: orangered; margin-top:-4px;"></i>
+      <span class="fa-stack-1x" style="margin-top:-4px;">${i}</span> </span>`;
+          } else {
+            document.getElementById('cview_day_' + i).innerHTML = `<span class="fa-stack">
+    <i class="fa fa-times fa-stack-2x" style="color: #0340cc; margin-top:-4px;"></i>
+      <span class="fa-stack-1x" style="margin-top:-4px;">${i}</span> </span>`;
+          }
+        }
+
+      }, (error) => {
+        console.log('calendar error');
+        console.log(error);
+      });
+  }
 
 }

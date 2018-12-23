@@ -346,6 +346,7 @@ input.add-event-edit:-ms-input-placeholder {
 .cview--date{
   font-size: .7rem;
   font-weight: 400;
+  height: 23.2px;
   cursor: pointer;
 }
 .has-events::after{
@@ -366,7 +367,7 @@ input.add-event-edit:-ms-input-placeholder {
   background: rgba(255,255,255,0.2);
 }
 .cview--date.today{
-  color: #111;
+  color: white;
 }
 .cview--date.today::before{
   animation: popIn 200ms 1 forwards;
@@ -420,6 +421,6 @@ input.add-event-edit:-ms-input-placeholder {
 
   .calendar{
     padding: 5px 0px 0px 0px;
-    height: 190px;
+    height: 200px;
   }
 }

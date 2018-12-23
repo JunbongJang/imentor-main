@@ -89,7 +89,9 @@ CalendarApp.prototype.showView = function(date){
       y = now.getFullYear(),
       m = now.getMonth();
   var today = new Date();
-  
+
+  // updateCalendarMarkJs(m, y);  // I was unable to call angular function in standalone javascript file
+
   var lastDayOfM = new Date(y, m + 1, 0).getDate();
   var startingD = new Date(y, m, 1).getDay();
   var lastM = new Date(y, now.getMonth()-1, 1);
@@ -114,6 +116,7 @@ CalendarApp.prototype.showView = function(date){
     var _date = new Date(y, m ,z);
     var day = document.createElement("div");
     day.className = "cview--date";
+    day.id = 'cview_day_' + z;
     day.textContent = z;
     day.setAttribute("data-date", _date);
     // day.onclick = this.showDay.bind(this); // TODO do something with this

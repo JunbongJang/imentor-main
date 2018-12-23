@@ -34,7 +34,7 @@ export class ServerService {
   }
 
   getCalendarFromServer(a_ho: string, a_month: string, a_year: string) {
-    return this.httpClient.get<string>(`/IMENTOR/get-calendar.php?month=${a_month}&ho=${a_ho}&year=${a_year}`)
+    return this.httpClient.get<string>(`/IMENTOR/get-calendar-json.php?month=${a_month}&ho=${a_ho}&year=${a_year}`)
       .pipe(
         retry(2), // retry a failed request up to 3 times
         catchError(this.handleError) // then handle the error
