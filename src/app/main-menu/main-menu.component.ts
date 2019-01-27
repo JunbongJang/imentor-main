@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit, Renderer2, ViewEncapsulation} from '@angular/core';
+import {AfterViewInit, Component, OnDestroy, OnInit, Renderer2, ViewEncapsulation} from '@angular/core';
 import {Router} from '@angular/router';
 import {ViewStateService} from '../core/view-state.service';
 import {Title} from '@angular/platform-browser';
@@ -8,6 +8,8 @@ import {Subscription} from 'rxjs';
 declare var $: any;
 
 import '../../assets/js/main-calendar.js';
+import {environment} from '../../environments/environment.prod';
+import {ql} from '@angular/core/src/render3';
 declare var CalendarApp: any;
 
 @Component({
@@ -18,7 +20,7 @@ declare var CalendarApp: any;
   // https://github.com/angular/angular/issues/7845
   encapsulation: ViewEncapsulation.None
 })
-export class MainMenuComponent implements OnInit, OnDestroy {
+export class MainMenuComponent implements OnInit, OnDestroy, AfterViewInit {
 
   public character_url = '';
   public book_url = '';
@@ -35,11 +37,9 @@ export class MainMenuComponent implements OnInit, OnDestroy {
               private viewStateService: ViewStateService,
               public userService: UserService,
               private titleService: Title,
-              private serverService: ServerService,
-              private renderer: Renderer2) { }
+              private serverService: ServerService) { }
 
   ngOnInit() {
-    console.log('ngOnInit main menu~~~~~~~~~~~');
     const url = new URL(window.location.href);
     if (url.host.indexOf('localhost') === 0) {
       new CalendarApp();
@@ -89,6 +89,10 @@ export class MainMenuComponent implements OnInit, OnDestroy {
     }
   }
 
+  ngAfterViewInit() {
+    this.pencilLanguage();
+  }
+
   viewStateChooseMain(a_view: string, clicked_step_category: string, clicked_step: string, step_num: number) {
     if (this.checkMasterPerm() || this.step_num >= step_num) {
       this.updateUserState(clicked_step_category, clicked_step);
@@ -102,9 +106,12 @@ export class MainMenuComponent implements OnInit, OnDestroy {
   }
 
   viewStateChooseTest(a_step: string, a_kind: string, step_num: number) {
-    if (this.checkMasterPerm() || this.step_num >= step_num) {
-      this.userService.kind = a_kind;
+    if (a_kind === 'speaking' && environment.chinese === false) {
+      const open_url = `/IMENTOR/my-result-final.html?uid=${this.userService.user.uid}&user_id=${this.userService.user.user_id}&ho=${this.userService.ho}&step=finaltest&kind=speaking&master=${this.userService.master_status}`;
+      window.open(open_url, '_blank');
+    } else if (this.checkMasterPerm() || this.step_num >= step_num) {
       this.userService.step = a_step;
+      this.userService.kind = a_kind;
       const a_view =  a_step + '_' + a_kind;
       if (this.viewStateService.view_state !== a_view) {
         this.viewStateService.view_state = a_view;
@@ -137,11 +144,15 @@ export class MainMenuComponent implements OnInit, OnDestroy {
     this.userService.section = '';
 
     let open_url = '';
-    if (clicked_step_category === 'vocabulary') {  // ----------------------- vocabulary -------------------------------------
-      open_url = `/IMENTOR/cn/vocabulary/?uid=${this.userService.user.uid}&user_id=${this.userService.user.user_id}&ho=${this.userService.ho}&step=vocabulary${clicked_step}&master=${this.userService.master_status}`;
+    let path_url = '/IMENTOR/';
+    if (environment.chinese) {
+      path_url = '/IMENTOR/cn/';
+    }
 
+    if (clicked_step_category === 'vocabulary') {  // ----------------------- vocabulary -------------------------------------
+      open_url = path_url + `vocabulary/?uid=${this.userService.user.uid}&user_id=${this.userService.user.user_id}&ho=${this.userService.ho}&step=vocabulary${clicked_step}&master=${this.userService.master_status}`;
     } else if (clicked_step_category === 'grammar') { // ----------------------- grammar -------------------------------------
-      open_url = `/IMENTOR/cn/grammar/?uid=${this.userService.user.uid}&user_id=${this.userService.user.user_id}&ho=${this.userService.ho}&step=grammer${clicked_step}&master=${this.userService.master_status}`;
+      open_url = path_url +  `grammar/?uid=${this.userService.user.uid}&user_id=${this.userService.user.user_id}&ho=${this.userService.ho}&step=grammer${clicked_step}&master=${this.userService.master_status}`;
 
     } else if (clicked_step_category === 'storybook') { // ----------------------- storybook -------------------------------------
       let temp_max_section = '';
@@ -166,7 +177,7 @@ export class MainMenuComponent implements OnInit, OnDestroy {
         }
       }
 
-      open_url = `/IMENTOR/cn/sub.html?uid=${this.userService.user.uid}&user_id=${this.userService.user.user_id}&ho=${this.userService.ho}&step=storybook${clicked_step}&section=${this.userService.section}&master=${this.userService.master_status}`;
+      open_url = path_url + `sub.html?uid=${this.userService.user.uid}&user_id=${this.userService.user.user_id}&ho=${this.userService.ho}&step=storybook${clicked_step}&section=${this.userService.section}&master=${this.userService.master_status}`;
 
     } else if (clicked_step_category === 'speaking') { // ----------------------- speaking -------------------------------------
       let temp_max_section = '1';
@@ -190,9 +201,9 @@ export class MainMenuComponent implements OnInit, OnDestroy {
       }
 
       if (clicked_step === '1' || clicked_step ===  '2') {
-        open_url = `https://www.welleastern.co.kr/IMENTOR/cn/speaking/index.php?uid=${this.userService.user.uid}&user_id=${this.userService.user.user_id}&ho=${this.userService.ho}&step=speaking${clicked_step}&section=${this.userService.section}&master=${this.userService.master_status}`;
+        open_url = 'https://www.welleastern.co.kr' + path_url + `speaking/index.php?uid=${this.userService.user.uid}&user_id=${this.userService.user.user_id}&ho=${this.userService.ho}&step=speaking${clicked_step}&section=${this.userService.section}&master=${this.userService.master_status}`;
       } else if (clicked_step === '3') {
-        open_url = `https://www.welleastern.co.kr/IMENTOR/cn/speaking/index2.php?uid=${this.userService.user.uid}&user_id=${this.userService.user.user_id}&ho=${this.userService.ho}&step=speaking${clicked_step}&section=${this.userService.section}&master=${this.userService.master_status}`;
+        open_url = 'https://www.welleastern.co.kr' + path_url + `speaking/index2.php?uid=${this.userService.user.uid}&user_id=${this.userService.user.user_id}&ho=${this.userService.ho}&step=speaking${clicked_step}&section=${this.userService.section}&master=${this.userService.master_status}`;
       }
 
     } else if (clicked_step_category === 'finaltest') {
@@ -202,7 +213,7 @@ export class MainMenuComponent implements OnInit, OnDestroy {
         this.userService.kind = 'writing';
       }
       const current_kind = this.userService.kind;
-      open_url = `/IMENTOR/cn/my-result-final.html?uid=${this.userService.user.uid}&user_id=${this.userService.user.user_id}&ho=${this.userService.ho}&step=finaltest&kind=${current_kind}&master=${this.userService.master_status}`;
+      open_url = path_url + `my-result-final.html?uid=${this.userService.user.uid}&user_id=${this.userService.user.user_id}&ho=${this.userService.ho}&step=finaltest&kind=${current_kind}&master=${this.userService.master_status}`;
     }
     return open_url;
   }
@@ -333,7 +344,11 @@ export class MainMenuComponent implements OnInit, OnDestroy {
     this.serverService.logoutUser().subscribe(
       (logout_string: string) => {
         console.log('logged out: ' + logout_string);
-        window.open('/onacademy/', '_self');
+        if (environment.chinese) {
+          window.open('/onacademy/', '_self');
+        } else {
+          window.open('/user/?goto=/IMENTOR/main/', '_self');
+        }
       },
       (error) => {
         console.log('logout error');
@@ -371,6 +386,14 @@ export class MainMenuComponent implements OnInit, OnDestroy {
         console.log('calendar error');
         console.log(error);
       });
+  }
+
+  pencilLanguage() {
+    if (environment.chinese) {
+      document.getElementById('pencil_image').style.backgroundImage = 'url(\'assets/images/pencil_chinese.png\')';
+    } else {
+      document.getElementById('pencil_image').style.backgroundImage = 'url(\'assets/images/pencil.png\')';
+    }
   }
 
 }

@@ -12,7 +12,7 @@ export const appRoutes: Routes = [
   { path: 'page-not-found', component: PageNotFoundComponent },
 
   // routes get parsed from top to bottom so  always put this double asterisk at the end
-  // { path: '**', redirectTo: '/page-not-found' }
+  { path: '**', redirectTo: '/page-not-found' }
 ];
 
 // only call forRoot in app module. call forChild anywhere else

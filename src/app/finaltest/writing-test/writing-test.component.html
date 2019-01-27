@@ -1,15 +1,16 @@
-<div class="row final_test_outer_border text-center" style="min-height: 150px;">
-  <div class="col">
-    <ng-container *ngIf="this.finalTestService.current_question_index !== 3; else nopicture">
-      <img class="img-fluid p-2"
-          [src]="'/IMENTOR/img/finaltest/' + this.finalTestService.getCurrentQuestion('writing').ex_img"
-           alt="Question Image">
-    </ng-container>
-
-    <ng-template #nopicture>
+<div class="row final_test_outer_border text-center align-items-center" style="min-height: 150px;">
+  <div class="col-12 col-md-6" *ngIf="this.rawTextExist();"
+       [ngClass]="{'col-md-12': this.current_image_none}">
       <p [innerHTML] = "this.rawTextToParagraph()"></p>
-    </ng-template>
-
+  </div>
+  <div class="col-12" [ngClass]="{
+  'd-none':this.current_image_none,
+  'col-md-6': this.rawTextExist(),
+  'col-md-12': !this.rawTextExist()}">
+    <img class="img-fluid p-2"
+         [src]="'/IMENTOR/img/finaltest/' + this.finalTestService.getCurrentQuestion('writing').ex_img"
+         (error)="this.current_image_none = true;"
+         alt="Question Image">
   </div>
 </div>
 
@@ -23,7 +24,7 @@
                 (focus)="this.textarea_focused = true"
                 (blur)="this.textarea_focused = false;"
                 [value]="this.finalTestService.answer_list[this.finalTestService.current_question_index]"></textarea>
-      <label for="answer_textarea" [ngClass]="this.textarea_focused ? 'active' : 'inactive'">Write your answer here</label>
+      <label for="answer_textarea" [ngClass]="this.textarea_focused ? 'active' : 'inactive'" i18n>Write your answer here</label>
     </div>
 
   </div>

@@ -1,6 +1,7 @@
 import {ServerService} from './server.service';
 import {Injectable} from '@angular/core';
 import {Subject} from 'rxjs';
+import {environment} from '../../environments/environment.prod';
 
 @Injectable()
 export class UserService {
@@ -187,7 +188,11 @@ export class UserService {
           this.user_initialized_bool = true;
           this.userInitialized.next(true);
         } else {
-          window.open('/user/cn/?goto=/IMENTOR/cn/main/', '_self');
+          if (environment.chinese) {
+            window.open('/onacademy/', '_self');
+          } else {
+            window.open('/user/?goto=/IMENTOR/main/', '_self');
+          }
         }
       },
       (error) => {

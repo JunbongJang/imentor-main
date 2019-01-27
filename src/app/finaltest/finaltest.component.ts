@@ -6,6 +6,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {ServerService} from '../core/server.service';
 import {FinaltestService} from './finaltest.service';
 import {P} from '@angular/core/src/render3';
+import {environment} from '../../environments/environment.prod';
 
 @Component({
   selector: 'finaltest',
@@ -14,6 +15,7 @@ import {P} from '@angular/core/src/render3';
 })
 export class FinaltestComponent implements OnInit {
 
+  current_timer_id = 'prep_timer'; // prep_timer or total_timer
   count_down_interval; // there is only one setinterval
   quest_translate_toggle = false;
 
@@ -33,6 +35,7 @@ export class FinaltestComponent implements OnInit {
       .subscribe(
       (question_json_string) => {
         const parsed_json = JSON.parse(question_json_string);
+        console.log(parsed_json);
         this.finalTestService.questionObject = parsed_json;
         this.finalTestService.current_question_index = 0;
         this.finalTestService.questionInitialized.next(true);
@@ -66,8 +69,39 @@ export class FinaltestComponent implements OnInit {
         parseInt(this.finalTestService.getCurrentQuestion(this.userService.kind).opt_time, 10), true);
     } else {
       clearInterval(this.count_down_interval);
+
+      if (this.userService.kind === 'writing') {
+        this.finalTestService.answer_list[this.finalTestService.current_question_index] =
+          (<HTMLTextAreaElement>document.getElementById('answer_textarea')).value; // in case data sent before answer is saved
+        this.serverService.postTestScoreToServer(this.buildQuestString(),
+          this.userService.kind, this.userService.user.uid,
+          this.userService.user.user_id, this.userService.step, this.userService.ho).subscribe(
+          (post_reply) => {
+            console.log('postTestScoreToServer: ' + post_reply);
+            this.viewStateService.view_state = this.viewStateService.IMENTOR_MAIN;
+            this.router.navigate(['main']);
+          }, (error) => {
+            console.log('error');
+            console.log(error);
+          });
+      } else { // 'speaking'
+
+      }
     }
+
+  } // nextQuestion ends
+
+  buildQuestString() {
+    let start_index = 5;
+    let quest_string = '';
+    // e.g. 5^[@@]6^dsfdsfsdgfdg[@@]7^dsfdsfdsfddsfsd[@@]8^sdfdsfdsdfdssdf
+    for (const an_answer of this.finalTestService.answer_list) {
+      quest_string += start_index + '^' + an_answer + '[@@]';
+      start_index += 1;
+    }
+    return quest_string;
   }
+
 
   prepDone() {
     clearInterval(this.count_down_interval);
@@ -78,9 +112,10 @@ export class FinaltestComponent implements OnInit {
 
   countDownTimer(timer_id: string, start_time: number, prep_timer_bool: boolean) {
     let time_left = start_time;
+    this.current_timer_id = timer_id;
     document.getElementById(timer_id).innerHTML = this.clockDisplayHTML(time_left);
     this.count_down_interval = setInterval(() => {
-      console.log('count_down');
+      console.log('count down');
       if (time_left > 0) {
         time_left -= 1;
         document.getElementById(timer_id).innerHTML = this.clockDisplayHTML(time_left);
@@ -132,5 +167,24 @@ export class FinaltestComponent implements OnInit {
       document.getElementById('translatable_quest').innerText = this.finalTestService.getCurrentQuestion(this.userService.kind).quest;
     }
   }
+
+  translateButtonLabel() {
+    let button_lable = '';
+    if (this.quest_translate_toggle) {
+      if (environment.chinese) {
+        button_lable = 'translate';
+      } else {
+        button_lable = '영문 보기';
+      }
+    } else {
+      if (environment.chinese) {
+        button_lable = 'translate';
+      } else {
+        button_lable = '한글 해석';
+      }
+    }
+    return button_lable;
+  }
+
 
 }

@@ -16,8 +16,9 @@
       <div class="side_m">
         <div class="area_select_bx">
           <span class="wb_book" [ngStyle]="{ 'background-image': 'url(' + this.book_url + ')'}" [ngClass]="{wb_book_center: !this.checkMasterPerm()}">책</span>
-          <a class="pencil" href="javascript:void(0)" (click)="this.openChooseBook()" i18n *ngIf="this.checkMasterPerm()">교재선택</a>
-          <p i18n style="margin-bottom:10px;">학습을 시작하셔야<br>권장학습일이 표시됩니다.</p>
+          <a id='pencil_image' class="pencil" href="javascript:void(0)" (click)="this.openChooseBook()"
+             i18n *ngIf="this.checkMasterPerm()">교재선택</a>
+          <p i18n style="margin-bottom:10px; padding-top:10px;">권장학습일은 30일 입니다.</p>
           <div class="select_bx">
             <h2 class="sbx_title" i18n>교재선택</h2>
 

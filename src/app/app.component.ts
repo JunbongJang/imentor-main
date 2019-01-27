@@ -1,7 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {ViewStateService} from './core/view-state.service';
-import {UserService} from './core/user.service';
-import {ServerService} from './core/server.service';
 
 @Component({
   selector: 'app-root',
@@ -10,9 +7,7 @@ import {ServerService} from './core/server.service';
 })
 export class AppComponent implements OnInit {
 
-  constructor(private viewStateService: ViewStateService,
-              private userService: UserService,
-              private serverService: ServerService) {
+  constructor() {
   }
 
   ngOnInit() {

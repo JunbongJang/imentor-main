@@ -44,7 +44,7 @@ export class FinaltestService {
     dab: string;
     ex_img: string;
     ex_mp3: string;
-    ex_txt: string;
+    ex_txt: string | null;
     kind: string;
     mark3: null;
     opt_length: string;

@@ -223,7 +223,6 @@ body{
         position:absolute;
      display:block;
         text-indent:-9999em;
-        background:url(../images/pencil_chinese.png) no-repeat left top;
         background-size:100%;
     }
 
@@ -368,6 +367,7 @@ width:100%;
         padding:3px 0 3px 30px;
         margin-left:5px;
         vertical-align:middle;
+        margin-bottom: 0px;
     }
 
     .select_list>li>input{
@@ -928,6 +928,7 @@ width:100%;
         padding:3px 0 3px 30px;
         margin-left:5px;
         vertical-align:middle;
+        margin-bottom: 0px;
     }
 
     .select_list>li>input{
@@ -1509,11 +1510,12 @@ content:'';
     }
 
     .select_list>li>label{
-    font-size:13px;
+        font-size:13px;
         font-weight:500;
         padding:3px 0 3px 30px;
         margin-left:5px;
         vertical-align:middle;
+        margin-bottom: 0px;
     }
 
     .select_list>li>input{
@@ -2137,6 +2139,7 @@ content:'';
         padding:3px 0 3px 30px;
         margin-left:5px;
         vertical-align:middle;
+        margin-bottom: 0px;
     }
 
     .select_list>li>input{
