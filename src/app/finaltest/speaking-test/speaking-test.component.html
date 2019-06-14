@@ -5,3 +5,44 @@
            alt="Question Image">
   </div>
 </div>
+<div class="row mt-2 text-center">
+  <div class="col-12">
+    <button class="btn peach-gradient" *ngIf="!this.recording_bool"
+            [disabled]="this.isRecordButtonDisabled()"
+            (click)="this.recordVoice();" i18n>
+      <i class="fas fa-microphone-alt"></i>
+      녹음하기
+    </button>
+    <button class="btn blue-gradient" *ngIf="this.recording_bool"
+            (click)="this.stopRecordVoice();" i18n>
+      <i class="fas fa-microphone-alt"></i>
+      녹음중지
+    </button>
+    <button class="btn purple-gradient" *ngIf="!this.listening_voice_bool"
+            [disabled]="!this.recorded_bool"
+            (click)="this.listenVoice();" i18n>
+      <i class="fas fa-headphones"></i>
+      듣기
+    </button>
+    <button class="btn blue-gradient" *ngIf="this.listening_voice_bool"
+            (click)="this.stopListenVoice();" i18n>
+      <i class="fas fa-headphones"></i>
+      듣기중지
+    </button>
+
+    <button class="btn aqua-gradient"
+            [disabled]="!this.listened_voice_bool"
+            (click)="this.redoRecordVoice();" i18n>
+      <i class="fas fa-redo"></i>
+      다시하기
+    </button>
+
+  </div>
+  <div class="col-12">
+    <audio id="recorded_voice_audio"
+           controls src=""
+           [ngStyle]="{'display':this.recorded_bool ? '' : 'none' }"
+           (ended)="this.stopListenVoice();"></audio>
+  </div>
+</div>
+

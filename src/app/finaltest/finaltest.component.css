@@ -45,7 +45,7 @@
 
 
 .container-border {
-  background-color: rgb(0, 139, 205);
+  background-color: #6699cc;
   border-radius: 10px;
 }
 
@@ -55,8 +55,15 @@
 }
 
 .main_background_color {
-  background-color: rgb(0, 177, 205);
+  background-color: #6699cc;
 }
+
+.shadow_effect1{
+  -moz-box-shadow: 4px 4px 4px #5e5e5e;
+  -webkit-box-shadow: 4px 4px 4px #5e5e5e;
+  box-shadow: 4px 4px 4px #5e5e5e;
+}
+
 
 html {
   font-size: 80%;
@@ -66,10 +73,10 @@ html {
 /*Medium devices (tablets, 768px and up)*/
 @media (min-width: 768px) {
   .container-border {
-    background-color: rgb(0, 139, 205);
+    background-color: #6699cc;
     border-width: 15px;
     border-style: solid;
-    border-color: rgb(0, 139, 205);
+    border-color: #6699cc;
     border-radius: 15px;
   }
 

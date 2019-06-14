@@ -24,16 +24,19 @@
         </ng-template>
 
         <ng-template #question_highlight>
-          <form class="form-style-4 form-inline"
+          <form class="form-style-4 form-inline md-form mb-0 mt-3"
                 [formGroup]="storyTestForm">
+
             <textarea rows="1"
                       type="text"
                      class=""
                      formControlName="english_sentence"
                      autocomplete="off"
-                     [placeholder]="this.current_english_sentence"
+                    (focus)="this.input_foucsed = true"
+                    (blur)="this.input_foucsed = false;"
                      [id]="'english_sentence_'+ idx">
             </textarea>
+            <label [for]="'english_sentence_'+ idx" [ngClass]="this.input_foucsed ? 'active' : 'inactive'">{{this.current_english_sentence}}</label>
           </form>
         </ng-template>
 

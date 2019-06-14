@@ -22,6 +22,7 @@ export class StoryTwoComponent implements OnInit, OnDestroy, AfterViewChecked {
   public current_question_num = 0;
   public total_question_num = 0;
   private nextQuestionCalled = false;
+  public input_foucsed = false;
 
   storyTestForm: FormGroup;
   current_english_sentence = '';
@@ -190,7 +191,7 @@ export class StoryTwoComponent implements OnInit, OnDestroy, AfterViewChecked {
     current_english_input.style.width = String(textarea_cols) + 'rem';
     (<HTMLTextAreaElement>current_english_input).rows = textarea_rows;
     window.setTimeout(() => {current_english_input.focus(); }, 0);
-    document.getElementById('story_two_div_' + this.current_question_num).scrollIntoView(false); // align to top
+    document.getElementById('story_two_div_' + this.current_question_num).scrollIntoView(false); // align to bottom
   }
 
   /**

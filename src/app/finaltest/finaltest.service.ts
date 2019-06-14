@@ -10,6 +10,7 @@ export class FinaltestService {
   nextQuestionCalled = new Subject<boolean>();
   prepDoneCalled = new Subject<boolean>();
   questionInitialized = new Subject<boolean>();
+  listenedVoice = new Subject<boolean>();
 
   questionObject = [{
     dab: 'Tiger is strong, but he is not smart. *[@@][@@]* 난이도 안내',

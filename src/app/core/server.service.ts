@@ -98,7 +98,7 @@ export class ServerService {
       );
   }
 
-  postTestScoreToServer(quest: string, kind: string, uid: string, user_id: string, step: string, ho: string) {
+  postTestAnswerToServer(quest: string, kind: string, uid: string, user_id: string, step: string, ho: string) {
     const body = {
       'quest': quest,
       'kind': kind,
@@ -109,6 +109,32 @@ export class ServerService {
     };
 
     return this.httpClient.post<string>('/IMENTOR/save_json.php', body, {headers: {'Content-Type': 'application/json'}})
+      .pipe(
+        retry(2), // retry a failed request up to 3 times
+        catchError(this.handleError) // then handle the error
+      );
+  }
+
+  postRecordedVoiceToServer(file_content, filename: string) {
+    const uploadData = new FormData();
+    uploadData.append('recorded_voice_blob', file_content, filename);
+
+    // how to replace FormData
+    // https://github.com/angular/angular/issues/13241
+    // const fileFormData: Object = {file: file_content, filename: filename};
+    // const formBody = [];
+    // for (const key of Object.keys(fileFormData)) {
+    //   const encodedKey = encodeURIComponent(key);
+    //   const encodedValue = encodeURIComponent(fileFormData[key]);
+    //   formBody.push(encodedKey + '=' + encodedValue);
+    // }
+    // const encoded_form = formBody.join('&');
+
+    // https://gist.github.com/joyrexus/524c7e811e4abf9afe56
+    // application/x-www-form-urlencoded vs  multipart/form-data
+
+
+    return this.httpClient.post<string>('/IMENTOR/recorded-voice-upload.php', uploadData)
       .pipe(
         retry(2), // retry a failed request up to 3 times
         catchError(this.handleError) // then handle the error

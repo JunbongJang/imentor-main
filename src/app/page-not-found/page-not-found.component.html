@@ -15,7 +15,7 @@
         <a class="btn btn-primary btn-lg mt-3" (click)="this.router.navigate(['/'])" i18n><i class="fa fa-home"></i>
           메인화면
         </a>
-        <a href="https://www.welleastern.co.kr/pc/cs/cs04.php" class="btn btn-light btn-lg mt-3" target="_blank" i18n>
+        <a [href]="this.customerCenterLink()" class="btn btn-light btn-lg mt-3" target="_blank" i18n>
           <i class="fa fa-user-circle"></i>
           고객센터
         </a>

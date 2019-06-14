@@ -12,7 +12,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     const url = new URL(window.location.href);
-    console.log(window.location.href);
+    // console.log(window.location.href);
   }
 
   getState(outlet: any) {

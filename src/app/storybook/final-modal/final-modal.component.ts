@@ -16,7 +16,6 @@ export class FinalModalComponent implements OnInit {
   private modal_final_score = 0;
 
   constructor(public finalModalService: FinalModalService,
-              public questionGradeService: QuestionGradeService,
               public viewStateService: ViewStateService) { }
 
   ngOnInit() {

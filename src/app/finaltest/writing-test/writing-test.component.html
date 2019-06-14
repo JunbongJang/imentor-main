@@ -19,7 +19,7 @@
     <!--Material textarea-->
     <!--Textarea with icon prefix-->
     <div class="md-form amber-textarea active-amber-textarea">
-      <i class="fa fa-pencil prefix" [ngClass]="this.textarea_focused ? 'active' : 'inactive'"></i>
+      <i class="fas fa-pencil-alt" [ngClass]="this.textarea_focused ? 'active' : 'inactive'"></i>
       <textarea type="text" id="answer_textarea" class="md-textarea form-control" rows="3" disabled="true"
                 (focus)="this.textarea_focused = true"
                 (blur)="this.textarea_focused = false;"

@@ -68,6 +68,7 @@ export class StorybookComponent implements OnInit, OnDestroy {
 
     this.storybookSceneCompleteSubscription = this.storybookService.storybookSceneComplete.subscribe( (all_correct_bool: boolean) => {
       // this.initializeAudio();
+      window.scrollTo(0, document.body.scrollHeight);
       (<HTMLButtonElement>document.getElementById('storybook_finish_button')).disabled = !all_correct_bool;
       const storybook_element = document.getElementById('storybook_next_button');
       (<HTMLButtonElement>storybook_element).disabled = false;

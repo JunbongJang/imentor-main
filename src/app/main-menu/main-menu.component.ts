@@ -5,13 +5,13 @@ import {Title} from '@angular/platform-browser';
 import {UserService} from '../core/user.service';
 import {ServerService} from '../core/server.service';
 import {Subscription} from 'rxjs';
-declare var $: any;
 
 import '../../assets/js/main-calendar.js';
 import {environment} from '../../environments/environment.prod';
-import {ql} from '@angular/core/src/render3';
-declare var CalendarApp: any;
+import * as Bowser from 'bowser';
 
+declare var CalendarApp: any;
+declare var $: any;
 @Component({
   selector: 'app-main-menu',
   templateUrl: './main-menu.component.html',
@@ -41,6 +41,7 @@ export class MainMenuComponent implements OnInit, OnDestroy, AfterViewInit {
 
   ngOnInit() {
     const url = new URL(window.location.href);
+
     if (url.host.indexOf('localhost') === 0) {
       new CalendarApp();
       const a_year = new Date().getFullYear().toString(10);
@@ -106,10 +107,11 @@ export class MainMenuComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   viewStateChooseTest(a_step: string, a_kind: string, step_num: number) {
-    if (a_kind === 'speaking' && environment.chinese === false) {
-      const open_url = `/IMENTOR/my-result-final.html?uid=${this.userService.user.uid}&user_id=${this.userService.user.user_id}&ho=${this.userService.ho}&step=finaltest&kind=speaking&master=${this.userService.master_status}`;
-      window.open(open_url, '_blank');
-    } else if (this.checkMasterPerm() || this.step_num >= step_num) {
+    // if (a_kind === 'speaking' && environment.chinese === false) {
+    //   const open_url = `/IMENTOR/my-result-final.html?uid=${this.userService.user.uid}&user_id=${this.userService.user.user_id}&ho=${this.userService.ho}&step=finaltest&kind=speaking&master=${this.userService.master_status}`;
+    //   window.open(open_url, '_blank');
+    // }
+    if (this.checkMasterPerm() || this.step_num >= step_num) {
       this.userService.step = a_step;
       this.userService.kind = a_kind;
       const a_view =  a_step + '_' + a_kind;
@@ -200,13 +202,21 @@ export class MainMenuComponent implements OnInit, OnDestroy, AfterViewInit {
         }
       }
 
-      if (clicked_step === '1' || clicked_step ===  '2') {
-        open_url = 'https://www.welleastern.co.kr' + path_url + `speaking/index.php?uid=${this.userService.user.uid}&user_id=${this.userService.user.user_id}&ho=${this.userService.ho}&step=speaking${clicked_step}&section=${this.userService.section}&master=${this.userService.master_status}`;
-      } else if (clicked_step === '3') {
-        open_url = 'https://www.welleastern.co.kr' + path_url + `speaking/index2.php?uid=${this.userService.user.uid}&user_id=${this.userService.user.user_id}&ho=${this.userService.ho}&step=speaking${clicked_step}&section=${this.userService.section}&master=${this.userService.master_status}`;
+      let speaking_version = 'speaking';
+      if (Bowser.parse(window.navigator.userAgent).platform.type !== 'desktop' && environment.chinese === false) {
+        speaking_version = 'speaking_mobile';
       }
 
-    } else if (clicked_step_category === 'finaltest') {
+      if (clicked_step === '1' || clicked_step ===  '2') {
+        open_url = 'https://www.welleastern.co.kr' + path_url + speaking_version + `/index.php?uid=${this.userService.user.uid}&user_id=${this.userService.user.user_id}&ho=${this.userService.ho}&step=speaking${clicked_step}&section=${this.userService.section}&master=${this.userService.master_status}`;
+      } else if (clicked_step === '3') {
+        open_url = 'https://www.welleastern.co.kr' + path_url + speaking_version + `/index2.php?uid=${this.userService.user.uid}&user_id=${this.userService.user.user_id}&ho=${this.userService.ho}&step=speaking${clicked_step}&section=${this.userService.section}&master=${this.userService.master_status}`;
+      }
+
+
+
+
+    } else if (clicked_step_category === 'finaltest') {   // ------------------- fianl test ----------------------------
       if (clicked_step === '1') {
         this.userService.kind = 'speaking';
       } else if (clicked_step === '2') { // this.userService.jindo.current_finaltest
@@ -364,10 +374,13 @@ export class MainMenuComponent implements OnInit, OnDestroy, AfterViewInit {
   updateCalendarMark(a_month: string, a_year: string) {
     this.serverService.getCalendarFromServer(this.userService.ho, a_month, a_year).subscribe(
       (calendar_json_string) => {
-        console.log('calendar');
+        console.log('updateCalendarMark');
         const parsed_json: {'0': object, 'days': string} = JSON.parse(calendar_json_string);
         console.log(parsed_json);
-        const days_list = parsed_json.days.split(',');
+        let days_list: string[] = [];
+        if (parsed_json.days !== null) {
+           days_list = parsed_json.days.split(',');
+        }
         const today = new Date().getDate();
 
         for (let i = 1; i < today; i++) {

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Title} from '@angular/platform-browser';
 import {UserService} from '../core/user.service';
 import {ViewStateService} from '../core/view-state.service';
@@ -7,17 +7,22 @@ import {ServerService} from '../core/server.service';
 import {FinaltestService} from './finaltest.service';
 import {P} from '@angular/core/src/render3';
 import {environment} from '../../environments/environment.prod';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'finaltest',
   templateUrl: './finaltest.component.html',
   styleUrls: ['./finaltest.component.css']
 })
-export class FinaltestComponent implements OnInit {
+export class FinaltestComponent implements OnInit, OnDestroy {
 
   current_timer_id = 'prep_timer'; // prep_timer or total_timer
   count_down_interval; // there is only one setinterval
   quest_translate_toggle = false;
+  listened_voice_bool = false;
+
+  getQuestionFromServerSubs: Subscription;
+  listenedVoiceSubs: Subscription;
 
   constructor(private titleService: Title,
               public userService: UserService,
@@ -31,7 +36,7 @@ export class FinaltestComponent implements OnInit {
     document.body.style.backgroundColor = 'rgb(88, 73, 53)';
     this.titleService.setTitle( 'i-MENTOR Storybook' );
 
-    this.serverService.getQuestionFromServer(this.userService.step, this.userService.ho, this.userService.section, this.userService.kind)
+    this.getQuestionFromServerSubs = this.serverService.getQuestionFromServer(this.userService.step, this.userService.ho, this.userService.section, this.userService.kind)
       .subscribe(
       (question_json_string) => {
         const parsed_json = JSON.parse(question_json_string);
@@ -41,11 +46,28 @@ export class FinaltestComponent implements OnInit {
         this.finalTestService.questionInitialized.next(true);
         this.countDownTimer('prep_timer',
           parseInt(this.finalTestService.getCurrentQuestion(this.userService.kind).opt_time, 10), true);
+        // this.countDownTimer('prep_timer', 1, true);
       },
       (error) => {
         console.log('error');
         console.log(error);
       });
+
+    this.listenedVoiceSubs = this.finalTestService.listenedVoice.subscribe(
+        (recorded_bool: boolean) => {
+          console.log('listened_bool: ' + recorded_bool);
+          this.listened_voice_bool = recorded_bool;
+        },
+        (error) => {
+          console.log('error');
+          console.log(error);
+        });
+
+  }
+
+  ngOnDestroy() {
+    this.getQuestionFromServerSubs.unsubscribe();
+    this.listenedVoiceSubs.unsubscribe();
   }
 
   viewStateChoose(a_view: string) {
@@ -62,18 +84,20 @@ export class FinaltestComponent implements OnInit {
 
   nextQuestion() {
     this.finalTestService.nextQuestionCalled.next(true); // save the data in buffer
+    this.listened_voice_bool = false;
+
     if (this.finalTestService.current_question_index < 3) { // because there are four questions max!
       this.finalTestService.current_question_index++;
       this.initializeClock();
       this.countDownTimer('prep_timer',
         parseInt(this.finalTestService.getCurrentQuestion(this.userService.kind).opt_time, 10), true);
-    } else {
+    } else { // --------------- This was the last question ---------------------------
       clearInterval(this.count_down_interval);
 
       if (this.userService.kind === 'writing') {
         this.finalTestService.answer_list[this.finalTestService.current_question_index] =
           (<HTMLTextAreaElement>document.getElementById('answer_textarea')).value; // in case data sent before answer is saved
-        this.serverService.postTestScoreToServer(this.buildQuestString(),
+        this.serverService.postTestAnswerToServer(this.buildQuestString(),
           this.userService.kind, this.userService.user.uid,
           this.userService.user.user_id, this.userService.step, this.userService.ho).subscribe(
           (post_reply) => {
@@ -84,21 +108,42 @@ export class FinaltestComponent implements OnInit {
             console.log('error');
             console.log(error);
           });
-      } else { // 'speaking'
 
+      } else { // kind === 'speaking'
+        this.serverService.postTestAnswerToServer(this.buildQuestString(),
+          this.userService.kind, this.userService.user.uid,
+          this.userService.user.user_id, this.userService.step, this.userService.ho).subscribe(
+          (post_reply) => {
+            console.log('postTestScoreToServer: ' + post_reply);
+            this.viewStateService.view_state = this.viewStateService.IMENTOR_MAIN;
+            this.router.navigate(['main']);
+          }, (error) => {
+            console.log('error');
+            console.log(error);
+          });
       }
     }
 
   } // nextQuestion ends
 
   buildQuestString() {
-    let start_index = 5;
+    let start_index = 1;
     let quest_string = '';
-    // e.g. 5^[@@]6^dsfdsfsdgfdg[@@]7^dsfdsfdsfddsfsd[@@]8^sdfdsfdsdfdssdf
-    for (const an_answer of this.finalTestService.answer_list) {
-      quest_string += start_index + '^' + an_answer + '[@@]';
-      start_index += 1;
+    if (this.userService.kind === 'writing') {
+      // example:. 5^[@@]6^dsfdsfsdgfdg[@@]7^dsfdsfdsfddsfsd[@@]8^sdfdsfdsdfdssdf
+      start_index = 5;
+      for (const an_answer of this.finalTestService.answer_list) {
+        quest_string += start_index + '^' + an_answer + '[@@]';
+        start_index += 1;
+      }
+    } else {
+      // example: 1^1000050540_1_201931722318.wma[@@]2^1000050540_1_201931722342.wma[@@]3^1000050540_1_201931722358.wma[@@]4^1000050540_1_2019317221439.wma
+      for (const an_answer of this.finalTestService.answer_list) {
+        quest_string += start_index + '^' + an_answer + '[@@]';
+        start_index += 1;
+      }
     }
+
     return quest_string;
   }
 
@@ -184,6 +229,19 @@ export class FinaltestComponent implements OnInit {
       }
     }
     return button_lable;
+  }
+
+  isNextQuestionButtonDisabled() {
+    let next_question_button_disabled = true;
+    if (this.current_timer_id === 'prep_timer') {
+      next_question_button_disabled = true;
+    } else if (this.userService.kind === 'writing' && this.current_timer_id !== 'prep_timer') {
+      next_question_button_disabled = false;
+    } else if (this.userService.kind === 'speaking' && this.listened_voice_bool) {
+      next_question_button_disabled = false;
+    }
+
+    return next_question_button_disabled;
   }
 
 
