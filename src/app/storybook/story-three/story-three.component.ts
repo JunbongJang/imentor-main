@@ -64,7 +64,7 @@ export class StoryThreeComponent implements OnInit, OnDestroy, AfterViewChecked 
 
     this.modalStartSubscription = this.initialModalService.modalStartClicked.subscribe(
       (modal_state) => {
-        this.storybookService.storybookSceneAudioInitialize.next('1');
+        this.storybookService.storybookSceneAudioInitialize.next((this.current_pgraph_num + 1).toString(10));
         this.initializeStorybookThree(); // so that the focus remains.
       }, (error) => {
         console.log('error');
@@ -112,7 +112,8 @@ export class StoryThreeComponent implements OnInit, OnDestroy, AfterViewChecked 
   }
 
   checkNextQuestion() {
-    this.storyTestForm.get('english_word').setValue(''); //  always clean after yourself! since going to another scene is also affected by it
+    //  always set to '' afterwards, since going to another scene is also affected by it
+    this.storyTestForm.get('english_word').setValue('');
     if (this.current_question_num >= this.question_english_array.length) { // solved all the problems
       this.serverService.postUserScoreToServer('storybook',
         '0',
@@ -131,23 +132,30 @@ export class StoryThreeComponent implements OnInit, OnDestroy, AfterViewChecked 
           console.log(error);
         });
     } else { // not over yet!
-      if (this.question_index_array[this.current_question_num] >= this.questionStorageService.question_structure.storybook2_3.pgraph1.length &&
-        this.current_pgraph_num === 0) {
-        this.current_pgraph_num = 1;
-        this.storybookService.storybookSceneAudioInitialize.next('2');
+      if (this.question_index_array[this.current_question_num] >= this.addPrevParaNums(this.current_pgraph_num + 1) &&
+        this.questionStorageService.question_structure.storybook2_3.length > (this.current_pgraph_num + 1)) {
+        this.current_pgraph_num = this.current_pgraph_num + 1;
+        this.storybookService.storybookSceneAudioInitialize.next((this.current_pgraph_num + 1).toString(10));
       }
       this.nextQuestionCalled = true; // this will cause ngAfterViewChecked() to call initialProblemSetup() when generateQuestion is over.
     }
   }
 
+  private chooseCurrentPgraph(a_key: number) {
+    const max_pgraph_num = this.questionStorageService.question_structure.storybook2_3.length;
+    let a_pgraph_num = 0;
+    for (let i = 0; i < max_pgraph_num; i++) {
+      if (a_key - this.addPrevParaNums(i) >= 0) {
+        a_pgraph_num = i;
+      }
+    }
+    return a_pgraph_num;
+  }
+
   initializeStorybookThree() {
     this.current_question_num = 0;
     this.current_pgraph_num = 0;
-    if (this.generalUtilityService.checkEmptyArray(this.questionStorageService.question_structure.storybook2_3.pgraph2)) {
-      this.pgraph_list = [1];
-    } else {
-      this.pgraph_list = [1, 2];
-    }
+    this.pgraph_list = this.makeListFromMax(this.questionStorageService.question_structure.storybook2_3.length);
 
     this.initializeSentences();
     setTimeout(() => {
@@ -157,23 +165,27 @@ export class StoryThreeComponent implements OnInit, OnDestroy, AfterViewChecked 
     }, 0);
   }
 
+  private makeListFromMax(max_val: number) {
+    const a_list = [];
+    for (let i = 0; i < max_val; i++) {
+      a_list.push(i);
+    }
+    return a_list;
+  }
+
   initializeSentences() {
     this.split_sentences = [[], []];
     this.question_index_array = [];
     this.question_english_array = [];
     let current_row_index = 0;
     for (let a_pgraph = 0; a_pgraph < this.pgraph_list.length; a_pgraph++) {
-      let current_pgrah;
-      if (a_pgraph === 0) {
-        current_pgrah = this.questionStorageService.question_structure.storybook2_3.pgraph1;
-      } else {
-        current_pgrah = this.questionStorageService.question_structure.storybook2_3.pgraph2;
-      }
+      const current_pgrah = this.questionStorageService.question_structure.storybook2_3[a_pgraph];
+
       for (let i = 0; i < current_pgrah.length; i++) {
-        if (current_pgrah[i].eng.match(/\[\w*\]/)) { // found a question
-          const answer = current_pgrah[i].eng.match(/\[\w*\]/)[0];
-          const question_start_index = current_pgrah[i].eng.search(/\[\w*\]/);
-          const question_end_index = current_pgrah[i].eng.search(/\[\w*\]/) + answer.length;
+        if (current_pgrah[i].eng.match(/\[.*\]/)) { // found a question
+          const answer = current_pgrah[i].eng.match(/\[.*\]/)[0];
+          const question_start_index = current_pgrah[i].eng.search(/\[.*\]/);
+          const question_end_index = current_pgrah[i].eng.search(/\[.*\]/) + answer.length;
           this.split_sentences[a_pgraph].push({
             answer: answer.replace('[', '').replace(']', ''),
             left_phrase: current_pgrah[i].eng.substring(0, question_start_index),
@@ -205,8 +217,8 @@ export class StoryThreeComponent implements OnInit, OnDestroy, AfterViewChecked 
   initialProblemSetup(): void {
     // console.log('initialProblemSetupt: ' + this.current_question_num + '  ' + this.question_english_array[this.current_question_num]);
     let input_size = this.question_english_array[this.current_question_num].length;
-    if (input_size < 1) {
-      input_size = 1;
+    if (input_size < 5) {
+      input_size = 5;
     } else if (input_size > 33) {
       input_size = 33;
     }
@@ -219,10 +231,19 @@ export class StoryThreeComponent implements OnInit, OnDestroy, AfterViewChecked 
   // because there are two paragraphs!!!
   indexConverter(index: number, pgraph_num: number) {
     if (pgraph_num > 0) {
-      return index + this.questionStorageService.question_structure.storybook2_3.pgraph1.length;
+      return index + this.addPrevParaNums(pgraph_num);
     } else {
       return index;
     }
   }
 
+  private addPrevParaNums(current_pgraph_num: number) {
+    let total_prev_nums = 0;
+    for (let i = 0; i < current_pgraph_num; i++) {
+      if (i < this.questionStorageService.question_structure.storybook2_3.length) {
+        total_prev_nums += this.questionStorageService.question_structure.storybook2_3[i].length;
+      }
+    }
+    return total_prev_nums;
+  }
 }

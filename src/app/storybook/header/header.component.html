@@ -30,20 +30,34 @@
       </div>
     </div>
 
-    <div ngbDropdown class="dropdown show float-right d-md-none d-block mr-2">
-      <button ngbDropdownToggle class="btn btn-secondary dropdown-toggle rounded border border-danger text-danger font-weight-bold"
-              type="button" style="background-color: rgb(250,247,185);"
-              id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        {{ decideMainViewString() }}
-      </button>
+<!--    <div ngbDropdown class="dropdown show float-right d-md-none mr-2">-->
+<!--      <button ngbDropdownToggle class="btn btn-secondary dropdown-toggle rounded border border-danger text-danger font-weight-bold"-->
+<!--              type="button" style="background-color: rgb(250,247,185);"-->
+<!--              id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
+<!--        {{ decideMainViewString() }}-->
+<!--      </button>-->
 
-      <div ngbDropdownMenu class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
-        <a class="dropdown-item text-dark" (click) = "viewStateChoose(this.viewStateService.STORYBOOK_ONE)" style="background-color: rgb(250,247,185);">storybook1</a>
-        <a class="dropdown-item text-dark" (click) = "viewStateChoose(this.viewStateService.STORYBOOK_TWO)" style="background-color: rgb(250,247,185);">storybook2</a>
-        <a class="dropdown-item text-dark" (click) = "viewStateChoose(this.viewStateService.STORYBOOK_THREE)" style="background-color: rgb(250,247,185);">storybook3</a>
-        <a class="dropdown-item text-dark" (click) = "viewStateChoose(this.viewStateService.STORYBOOK_FOUR)" style="background-color: rgb(250,247,185);">storybook4</a>
+<!--      <div ngbDropdownMenu class="dropdown-menu dropdown-menu-right btn-group" aria-labelledby="dropdownMenuLink">-->
+<!--        <button ngbDropdownItem class="dropdown-item text-dark" (click) = "viewStateChoose(this.viewStateService.STORYBOOK_ONE)" style="background-color: rgb(250,247,185);">storybook1</button>-->
+<!--        <button ngbDropdownItem class="dropdown-item text-dark" (click) = "viewStateChoose(this.viewStateService.STORYBOOK_TWO)" style="background-color: rgb(250,247,185);">storybook2</button>-->
+<!--        <button ngbDropdownItem class="dropdown-item text-dark" (click) = "viewStateChoose(this.viewStateService.STORYBOOK_THREE)" style="background-color: rgb(250,247,185);">storybook3</button>-->
+<!--        <button ngbDropdownItem class="dropdown-item text-dark" (click) = "viewStateChoose(this.viewStateService.STORYBOOK_FOUR)" style="background-color: rgb(250,247,185);">storybook4</button>-->
+<!--      </div>-->
+<!--    </div>-->
+
+    <div class="junbong-dropdown float-right d-md-none mr-2">
+      <button (click)="this.toggleDropBtn()"
+              class="junbong-dropbtn btn rounded border font-weight-bold">  {{ decideMainViewString() }} </button>
+      <div id="myDropdown" class="junbong-dropdown-content btn-group"  aria-labelledby="dropdownMenuLink"  style="z-index: 11;">
+        <button ngbDropdownItem class="dropdown-item text-dark" (click) = "viewStateChoose(this.viewStateService.STORYBOOK_ONE)" style="background-color: rgb(250,247,185);">storybook1</button>
+        <button ngbDropdownItem class="dropdown-item text-dark" (click) = "viewStateChoose(this.viewStateService.STORYBOOK_TWO)" style="background-color: rgb(250,247,185);">storybook2</button>
+        <button ngbDropdownItem class="dropdown-item text-dark" (click) = "viewStateChoose(this.viewStateService.STORYBOOK_THREE)" style="background-color: rgb(250,247,185);">storybook3</button>
+        <button ngbDropdownItem class="dropdown-item text-dark" (click) = "viewStateChoose(this.viewStateService.STORYBOOK_FOUR)" style="background-color: rgb(250,247,185);">storybook4</button>
       </div>
     </div>
+
   </div>
 
 </div>
+
+

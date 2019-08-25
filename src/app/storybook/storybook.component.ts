@@ -109,10 +109,8 @@ export class StorybookComponent implements OnInit, OnDestroy {
   }
 
   setStorybookAudio(audio_part: string) {
-    if (audio_part === '1' || audio_part === '2') {
+    if (audio_part === '1' || audio_part === '2' || audio_part === '3' || audio_part === '4' || audio_part === '5') {
       return '/IMENTOR/mp3/storybook/' + this.userService.ho + '_' + this.userService.section + '_' + audio_part + '.mp3';
-    } else if (audio_part === '3') {
-      return '';
     } else {
       return '/IMENTOR/mp3/storybook/' + this.userService.ho + '_' + this.userService.section + '.mp3';
     }

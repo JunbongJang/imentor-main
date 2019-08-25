@@ -15,7 +15,7 @@
     <div class="area_contents">
       <div class="side_m">
         <div class="area_select_bx">
-          <span class="wb_book" [ngStyle]="{ 'background-image': 'url(' + this.book_url + ')'}" [ngClass]="{wb_book_center: !this.checkMasterPerm()}">책</span>
+          <span class="wb_book" [ngStyle]="{ 'background-image': 'url(' + this.book_url.replace('best', '') + ')'}" [ngClass]="{wb_book_center: !this.checkMasterPerm()}">책</span>
           <a id='pencil_image' class="pencil" href="javascript:void(0)" (click)="this.openChooseBook()"
              i18n *ngIf="this.checkMasterPerm()">교재선택</a>
           <p i18n style="margin-bottom:10px; padding-top:10px;">권장학습일은 30일 입니다.</p>
@@ -23,47 +23,104 @@
             <h2 class="sbx_title" i18n>교재선택</h2>
 
             <form #book_select_form="ngForm">
-              <div class="area_select_list">
-                <ul class="select_list select_list01">
+              <ng-template [ngIf]="!chinese_bool">
+                <div class="area_select_list">
+                  <ul class="select_list select_list01">
 
-                  <ng-container *ngFor="let a_book of this.NUM_BOOK_LIST; ">
-                    <li *ngIf="a_book < 9">
-                      <input [id]="'book_select_' + a_book" type="radio"
-                             [name]="'book_select_' + a_book"
-                             [(ngModel)]="book_select_num"
-                             [value]="a_book">
-                      <label class="r_book" [for]="'book_select_' + a_book" i18n>{{a_book}}호</label>
-                    </li>
-                  </ng-container>
+                    <ng-container *ngFor="let a_book of this.NUM_BOOK_LIST; ">
+                      <li *ngIf="a_book < 9">
+                        <input [id]="'book_select_' + a_book" type="radio"
+                               [name]="'book_select_' + a_book"
+                               [(ngModel)]="book_select_num"
+                               [value]="a_book">
+                        <label class="r_book" [for]="'book_select_' + a_book" i18n>{{a_book}}호</label>
+                      </li>
+                    </ng-container>
 
-                </ul>
-                <ul class="select_list select_list02">
+                  </ul>
+                  <ul class="select_list select_list02">
 
-                  <ng-container *ngFor="let a_book of this.NUM_BOOK_LIST;">
-                    <li *ngIf="a_book > 8 && a_book < 17">
-                      <input [id]="'book_select_' + a_book" type="radio"
-                             [name]="'book_select_' + a_book"
-                             [(ngModel)]="book_select_num"
-                             [value]="a_book">
-                      <label class="g_book" [for]="'book_select_' + a_book" i18n>{{a_book}}호</label>
-                    </li>
-                  </ng-container>
+                    <ng-container *ngFor="let a_book of this.NUM_BOOK_LIST;">
+                      <li *ngIf="a_book > 8 && a_book < 17">
+                        <input [id]="'book_select_' + a_book" type="radio"
+                               [name]="'book_select_' + a_book"
+                               [(ngModel)]="book_select_num"
+                               [value]="a_book">
+                        <label class="g_book" [for]="'book_select_' + a_book" i18n>{{a_book}}호</label>
+                      </li>
+                    </ng-container>
 
-                </ul>
-                <ul class="select_list select_list03">
+                  </ul>
+                  <ul class="select_list select_list03">
 
-                  <ng-container *ngFor="let a_book of this.NUM_BOOK_LIST;">
-                    <li *ngIf="a_book > 16 && a_book < 25">
-                      <input [id]="'book_select_' + a_book" type="radio"
-                             [name]="'book_select_' + a_book"
-                             [(ngModel)]="book_select_num"
-                             [value]="a_book">
-                      <label class="b_book" [for]="'book_select_' + a_book" i18n>{{a_book}}호</label>
-                    </li>
-                  </ng-container>
+                    <ng-container *ngFor="let a_book of this.NUM_BOOK_LIST;">
+                      <li *ngIf="a_book > 16 && a_book < 25">
+                        <input [id]="'book_select_' + a_book" type="radio"
+                               [name]="'book_select_' + a_book"
+                               [(ngModel)]="book_select_num"
+                               [value]="a_book">
+                        <label class="b_book" [for]="'book_select_' + a_book" i18n>{{a_book}}호</label>
+                      </li>
+                    </ng-container>
 
-                </ul>
-              </div>
+                  </ul>
+                </div>
+              </ng-template>
+
+              <ng-template [ngIf]="chinese_bool && !version_best_bool">
+                <div class="area_select_list">
+                  <ul class="select_list select_list01">
+                    <ng-container *ngFor="let a_book of this.NUM_BOOK_LIST; ">
+                      <li *ngIf="a_book < 6">
+                        <input [id]="'book_select_' + a_book" type="radio"
+                               [name]="'book_select_' + a_book"
+                               [(ngModel)]="book_select_num"
+                               [value]="a_book">
+                        <label class="r_book" [for]="'book_select_' + a_book">{{a_book}}</label>
+                      </li>
+                    </ng-container>
+                  </ul>
+                  <ul class="select_list select_list02">
+                    <ng-container *ngFor="let a_book of this.NUM_BOOK_LIST;">
+                      <li *ngIf="a_book > 5 && a_book < 11">
+                        <input [id]="'book_select_' + a_book" type="radio"
+                               [name]="'book_select_' + a_book"
+                               [(ngModel)]="book_select_num"
+                               [value]="a_book">
+                        <label class="g_book" [for]="'book_select_' + a_book">{{a_book}}</label>
+                      </li>
+                    </ng-container>
+                  </ul>
+                </div>
+              </ng-template>
+
+              <ng-template [ngIf]="chinese_bool && version_best_bool">
+                <div class="area_select_list">
+                  <ul class="select_list select_list01">
+                    <ng-container *ngFor="let a_book of this.NUM_BOOK_LIST; ">
+                      <li *ngIf="a_book < 6">
+                        <input [id]="'book_select_' + a_book" type="radio"
+                               [name]="'book_select_' + a_book"
+                               [(ngModel)]="book_select_num"
+                               [value]="'best' + a_book">
+                        <label class="g_book" [for]="'book_select_' + a_book">Best{{a_book}}</label>
+                      </li>
+                    </ng-container>
+                  </ul>
+                  <ul class="select_list select_list02">
+                    <ng-container *ngFor="let a_book of this.NUM_BOOK_LIST;">
+                      <li *ngIf="a_book > 5 && a_book < 9">
+                        <input [id]="'book_select_' + a_book" type="radio"
+                               [name]="'book_select_' + a_book"
+                               [(ngModel)]="book_select_num"
+                               [value]="'best' + a_book">
+                        <label class="b_book" [for]="'book_select_' + a_book">Best{{a_book}}</label>
+                      </li>
+                    </ng-container>
+                  </ul>
+                </div>
+              </ng-template>
+
             </form>
             <a class="btn_close" href="javascript:void(0)" (click)="this.closeChooseBook();">close</a>
             <a class="btn_select" href="javascript:void(0)" (click)="this.chooseBook();">choose</a>
@@ -161,7 +218,7 @@
       <div class="main_con">
         <div class="area_mc">
           <div class="area_mc_title">
-            <h2 class="mc_title" i18n>{{this.userService.ho}}호 / {{this.userService.jindo.book_title}}</h2>
+            <h2 class="mc_title" i18n>{{this.userService.view_ho}}호 / {{this.userService.jindo.book_title}}</h2>
           </div>
           <div class="round_bx">
             <ul class="round_list">

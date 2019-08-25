@@ -822,7 +822,8 @@ width:100%;
     }
 
     .user_name {
-    right:90px;
+      top:15px;
+      left:0;
     }
 
     .btn_login:link, .btn_login:visited {
@@ -1402,8 +1403,8 @@ width:100%;
 
 
     .user_name {
-        top:10px;
-    left:0;
+        top:105px;
+        left:0;
         font-size:1.3em;
     }
 
@@ -2026,8 +2027,8 @@ width:100%;
 
 
     .user_name {
-        top:10px;
-    left:0;
+        top:65px;
+        left:0;
         font-size:1.2em;
     }
 

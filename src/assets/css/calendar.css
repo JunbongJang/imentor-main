@@ -406,8 +406,14 @@ input.add-event-edit:-ms-input-placeholder {
 }
 /* tablet start */
 @media screen and (min-width:480px) and (max-width:929px){
+  .cview--spacer, .cview__header, .cview--date{
+    padding: 5px 0px;
+    font-weight: 700;
+  }
+
   .calendar {
     padding: 5px 0px 0px 0px;
+    height: 198px;
   }
 }
 
@@ -415,12 +421,16 @@ input.add-event-edit:-ms-input-placeholder {
 @media screen and (max-width:479px) {
 
   .cview--spacer, .cview__header, .cview--date{
-    padding: 2px 2px 4px 2px;
+    padding: 5px 0px;
     font-weight: 700;
   }
 
   .calendar{
     padding: 5px 0px 0px 0px;
-    height: 200px;
+    height: 185px;
+  }
+
+  .cview--date{
+    font-size: .6rem;
   }
 }

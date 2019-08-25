@@ -252,10 +252,56 @@
       </trans-unit>
       <trans-unit id="ngb.timepicker.AM" datatype="html">
         <source>AM</source>
-        <target>AM</target>
+        <target>PM</target>
         <context-group purpose="location">
           <context context-type="sourcefile">../node_modules/@ng-bootstrap/ng-bootstrap/timepicker/timepicker.d.ts</context>
           <context context-type="linenumber">66</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="30f9b4667c73709c31c26e62c466f1164444c8b2" datatype="html">
+        <source>
+        에구머니나!</source>
+        <target>OOPS!</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/page-not-found/page-not-found.component.html</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="445667a880a5dcd040e7dc6853adf672df85755b" datatype="html">
+        <source>
+        죄송합니다, 현재 찾을 수 없는 페이지를 요청하셨습니다! <x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br/&gt;"/>
+        궁금한 점이 있으시면 언제든 고객센터에 문의해 주시기 바랍니다.
+      </source>
+      <target>Sorry, your requested page could not be found! <x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br/&gt;"/></target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/page-not-found/page-not-found.component.html</context>
+          <context context-type="linenumber">10</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="b14f9edc874bcaff6b3bead729b302a683756e19" datatype="html">
+        <source><x id="START_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;i&gt;"/><x id="CLOSE_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;/i&gt;"/>
+          메인화면
+        </source>
+        <target><x id="START_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;i&gt;"/><x id="CLOSE_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;/i&gt;"/>
+          Main Menu
+        </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/page-not-found/page-not-found.component.html</context>
+          <context context-type="linenumber">15</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="c762560f98dc7c8132b727637a17ef912bb99048" datatype="html">
+        <source>
+          <x id="START_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;i&gt;"/><x id="CLOSE_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;/i&gt;"/>
+          고객센터
+        </source>
+        <target>
+          <x id="START_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;i&gt;"/><x id="CLOSE_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;/i&gt;"/>
+          Customer Support
+        </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/page-not-found/page-not-found.component.html</context>
+          <context context-type="linenumber">18</context>
         </context-group>
       </trans-unit>
       <trans-unit id="0bbb7bf9816b2a30adae2be0685208d95c7cd374" datatype="html">
@@ -268,7 +314,7 @@
       </trans-unit>
       <trans-unit id="45ae05e935846a5501c57a596f0c0481536cf0de" datatype="html">
         <source>Mentor Series의 자기주도 학습</source>
-        <target>My Mentor Online Learning</target>
+        <target>i-Mentor Online Learning</target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/main-menu/main-menu.component.html</context>
           <context context-type="linenumber">6</context>
@@ -276,7 +322,7 @@
       </trans-unit>
       <trans-unit id="34757c88cb9515c5f12fcd5f9acedd3b5e05ecfe" datatype="html">
         <source>hi! <x id="INTERPOLATION" equiv-text="{{this.userService.user.name}}"/>님</source>
-        <target></target>
+        <target>hi! <x id="INTERPOLATION" equiv-text="{{this.userService.user.name}}"/></target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/main-menu/main-menu.component.html</context>
           <context context-type="linenumber">10</context>
@@ -287,19 +333,19 @@
         <target>选择教材</target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/main-menu/main-menu.component.html</context>
-          <context context-type="linenumber">19</context>
+          <context context-type="linenumber">20</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">app/main-menu/main-menu.component.html</context>
-          <context context-type="linenumber">22</context>
+          <context context-type="linenumber">23</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="c14a3d566ff6a612e3a585d90c7115aaabbe3f5b" datatype="html">
-        <source>학습을 시작하셔야<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br/&gt;"/>권장학습일이 표시됩니다.</source>
-        <target>Start the online study<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br/&gt;"/>to show Recommended Date.</target>
+      <trans-unit id="f144153b481176461a53aac5d91e9ade8091cd43" datatype="html">
+        <source>권장학습일은 30일 입니다.</source>
+        <target>本学习提供30天有效学习期</target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/main-menu/main-menu.component.html</context>
-          <context context-type="linenumber">20</context>
+          <context context-type="linenumber">21</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1bad85f1465fe78b87a8d1a3747ae4799e5d2218" datatype="html">
@@ -307,31 +353,173 @@
         <target><x id="INTERPOLATION" equiv-text="{{a_book}}"/></target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/main-menu/main-menu.component.html</context>
-          <context context-type="linenumber">34</context>
+          <context context-type="linenumber">35</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">app/main-menu/main-menu.component.html</context>
-          <context context-type="linenumber">47</context>
+          <context context-type="linenumber">48</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">app/main-menu/main-menu.component.html</context>
-          <context context-type="linenumber">60</context>
+          <context context-type="linenumber">61</context>
         </context-group>
       </trans-unit>
       <trans-unit id="005eff01dfca2fe0e975619a104b0fb7d70567ab" datatype="html">
         <source>본 학습은 30일 학습기간을 제공합니다.</source>
-        <target>本学习提供30天有效学习期</target>
+        <target></target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/main-menu/main-menu.component.html</context>
-          <context context-type="linenumber">75</context>
+          <context context-type="linenumber">156</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="0cfd64460a4f73abd1869176c2c181ff426fa2bb" datatype="html">
-        <source><x id="INTERPOLATION" equiv-text="{{this.userService.ho}}"/>호 / <x id="INTERPOLATION_1" equiv-text="{{this.userService.jindo.book_title}}"/></source>
-        <target>Book<x id="INTERPOLATION" equiv-text="{{this.userService.ho}}"/> / <x id="INTERPOLATION_1" equiv-text="{{this.userService.jindo.book_title}}"/></target>
+      <trans-unit id="4de3903e19cb1e5b2062338d2a313666eb8ada36" datatype="html">
+        <source><x id="INTERPOLATION" equiv-text="{{this.userService.view_ho}}"/>호 / <x id="INTERPOLATION_1" equiv-text="{{this.userService.jindo.book_title}}"/></source>
+        <target><x id="INTERPOLATION" equiv-text="Volume {{this.userService.view_ho}}"/> / <x id="INTERPOLATION_1" equiv-text="{{this.userService.jindo.book_title}}"/></target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/main-menu/main-menu.component.html</context>
-          <context context-type="linenumber">82</context>
+          <context context-type="linenumber">164</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="349c62e1502b726c8ad7181c351228ef83cde1ee" datatype="html">
+        <source>
+          최소 문장: <x id="INTERPOLATION" equiv-text="{{ this.finalTestService.getCurrentQuestion(this.userService.kind).opt_length }}"/>
+        </source>
+        <target>
+          Minimum Sentences: <x id="INTERPOLATION" equiv-text="{{ this.finalTestService.getCurrentQuestion(this.userService.kind).opt_length }}"/>
+        </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/finaltest/finaltest.component.html</context>
+          <context context-type="linenumber">42</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="83973910bd6420ed365ed521df1b455739ec64f8" datatype="html">
+        <source>준비: </source>
+        <target>Prepare: </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/finaltest/finaltest.component.html</context>
+          <context context-type="linenumber">49</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="35e980e713ecc6861455a6851cfbb49969ec4af8" datatype="html">
+        <source>작성 제한시간: </source>
+        <target>Time Limit: </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/finaltest/finaltest.component.html</context>
+          <context context-type="linenumber">56</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7cf9679ffb7ee7f38b107ed69c88409356f550e4" datatype="html">
+        <source>
+          <x id="INTERPOLATION" equiv-text="{{this.translateButtonLabel()}}"/>
+        </source>
+        <target>
+          <x id="INTERPOLATION" equiv-text="{{this.translateButtonLabel()}}"/>
+        </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/finaltest/finaltest.component.html</context>
+          <context context-type="linenumber">70</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="e2feb3813eef33b48a8e4c924dd3db4def5149e9" datatype="html">
+        <source>다음단계
+          <x id="START_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;i&gt;"/><x id="CLOSE_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;/i&gt;"/>
+        </source>
+        <target>Next
+          <x id="START_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;i&gt;"/><x id="CLOSE_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;/i&gt;"/>
+        </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/finaltest/finaltest.component.html</context>
+          <context context-type="linenumber">86</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="f526c4f21eab8cef017d327445744395c1a4b054" datatype="html">
+        <source>마치기
+          <x id="START_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;i&gt;"/><x id="CLOSE_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;/i&gt;"/>
+        </source>
+        <target>Finish
+          <x id="START_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;i&gt;"/><x id="CLOSE_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;/i&gt;"/>
+        </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/finaltest/finaltest.component.html</context>
+          <context context-type="linenumber">93</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="036f1e7a41236b23ef5276d63921a01881a7890c" datatype="html">
+        <source>Write your answer here</source>
+        <target>Write your answer here</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/finaltest/writing-test/writing-test.component.html</context>
+          <context context-type="linenumber">27</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="daf406b7ec31ddee8ffc9e863a5b5ca36eeb430c" datatype="html">
+        <source>
+          <x id="START_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;i&gt;"/><x id="CLOSE_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;/i&gt;"/>
+          녹음하기
+        </source>
+        <target>
+          <x id="START_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;i&gt;"/><x id="CLOSE_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;/i&gt;"/>
+          Record
+        </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/finaltest/speaking-test/speaking-test.component.html</context>
+          <context context-type="linenumber">12</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="bbe21275d02f2861bc4da64203e0060c149101fd" datatype="html">
+        <source>
+           <x id="START_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;i&gt;"/><x id="CLOSE_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;/i&gt;"/>
+           녹음중지
+         </source>
+         <target>
+           <x id="START_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;i&gt;"/><x id="CLOSE_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;/i&gt;"/>
+           Stop
+         </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/finaltest/speaking-test/speaking-test.component.html</context>
+          <context context-type="linenumber">17</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6a6f7c121c4de4536c07093f964dae4a0a8387a6" datatype="html">
+        <source>
+          <x id="START_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;i&gt;"/><x id="CLOSE_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;/i&gt;"/>
+          듣기
+        </source>
+        <target>
+              <x id="START_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;i&gt;"/><x id="CLOSE_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;/i&gt;"/>
+              Listen
+        </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/finaltest/speaking-test/speaking-test.component.html</context>
+          <context context-type="linenumber">23</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="f0d7cbef5468dcdb0c0c2b24cbad89530e0720b4" datatype="html">
+        <source>
+          <x id="START_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;i&gt;"/><x id="CLOSE_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;/i&gt;"/>
+          듣기중지
+        </source>
+        <target>
+          <x id="START_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;i&gt;"/><x id="CLOSE_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;/i&gt;"/>
+          Stop
+        </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/finaltest/speaking-test/speaking-test.component.html</context>
+          <context context-type="linenumber">28</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ec89645603d256a824bc8bc9d4f71ab414b68b8b" datatype="html">
+        <source>
+          <x id="START_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;i&gt;"/><x id="CLOSE_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;/i&gt;"/>
+          다시하기
+        </source>
+         <target>
+          <x id="START_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;i&gt;"/><x id="CLOSE_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;/i&gt;"/>
+          Try again
+        </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/finaltest/speaking-test/speaking-test.component.html</context>
+          <context context-type="linenumber">35</context>
         </context-group>
       </trans-unit>
       <trans-unit id="c5a6fae48dc8707f3d2046a982b96517c9d762b5" datatype="html">
@@ -343,10 +531,10 @@
           학습 기록이 저장됩니다.
         </source>
         <target>
-        下面学习正文。<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br/&gt;"/>
-        请在听取正文的同时，<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br/&gt;"/>
-        点击正确单词。<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br/&gt;"/>
-        听正文可按scenes保存学习记录。
+          下面学习正文。<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br/&gt;"/>
+          请在听取正文的同时，<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br/&gt;"/>
+          点击正确单词。<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br/&gt;"/>
+          听正文可按scenes保存学习记录。
         </target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/storybook/initial-modal/initial-modal.component.html</context>
@@ -429,11 +617,11 @@
       </trans-unit>
       <trans-unit id="dbe43745942155ce76cb26b46e34285e99f5345b" datatype="html">
         <source>
-          <x id="START_TAG_DIV" ctype="x-div" equiv-text="&lt;div&gt;"/>
-            본문 <x id="INTERPOLATION" equiv-text="{{stateCongratulationString(this.modal_view_state)}}"/> 학습을<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br/&gt;"/>
-            완료하였습니다.
-          <x id="CLOSE_TAG_DIV" ctype="x-div" equiv-text="&lt;/div&gt;"/>
-        </source>
+        <x id="START_TAG_DIV" ctype="x-div" equiv-text="&lt;div&gt;"/>
+          본문 <x id="INTERPOLATION" equiv-text="{{stateCongratulationString(this.modal_view_state)}}"/> 학습을<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br/&gt;"/>
+          완료하였습니다.
+        <x id="CLOSE_TAG_DIV" ctype="x-div" equiv-text="&lt;/div&gt;"/>
+      </source>
       <target>
        You just finished <x id="INTERPOLATION" equiv-text="{{stateCongratulationString(this.modal_view_state)}}"/> section.
       </target>
@@ -444,7 +632,7 @@
       </trans-unit>
       <trans-unit id="846af83182bf3931ac569414877df9c879c76996" datatype="html">
         <source>재학습</source>
-        <target>Redo</target>
+        <target>Try again</target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/storybook/final-modal/final-modal.component.html</context>
           <context context-type="linenumber">21</context>

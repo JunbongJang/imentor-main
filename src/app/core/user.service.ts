@@ -10,7 +10,19 @@ export class UserService {
   userInitialized = new Subject<boolean>();
   user_initialized_bool = false;
 
+  imentor_best_ho_map = {
+    'best1': 13,
+    'best2': 16,
+    'best3': 18,
+    'best4': 20,
+    'best5': 21,
+    'best6': 22,
+    'best7': 19,
+    'best8': 24,
+  }
+
   private _ho: string | null = '1';
+  private _view_ho: string | null = '1';
   private _step: string | null = 'vocabulary1';
   private _section: string | null = '1';
   private _master_status: string | null = 'true';
@@ -109,6 +121,14 @@ export class UserService {
     this._ho = value;
   }
 
+  get view_ho(): string | null {
+    return this._view_ho;
+  }
+
+  set view_ho(value: string | null) {
+    this._view_ho = value;
+  }
+
   get step(): string | null {
     return this._step;
   }
@@ -185,6 +205,7 @@ export class UserService {
 
           this.master_status = (parseInt(this.user.mb_level, 10) > 2) ? 'true' : 'false';
           this.ho = this.user.level;
+          this.view_ho = this.hoToViewHo(this.ho);
           this.user_initialized_bool = true;
           this.userInitialized.next(true);
         } else {
@@ -199,5 +220,75 @@ export class UserService {
         console.log('error');
         console.log(error);
       });
+  }
+
+  /**
+   * newly added on 6/21/2019 because of china.
+   * 중국용 호수 변경
+   * @param input_ho
+   */
+  hoToViewHo(input_ho: string): string {
+    let local_view_ho: string = input_ho;
+    if (environment.chinese) {
+      if (input_ho === '10') {
+        local_view_ho = '9';
+      } else if (input_ho === '11') {
+        local_view_ho = '10';
+      } else if (input_ho === '13') {
+        local_view_ho = 'Best1';
+      } else if (input_ho === '16') {
+        local_view_ho = 'Best2';
+      } else if (input_ho === '18') {
+        local_view_ho = 'Best3';
+      } else if (input_ho === '20') {
+        local_view_ho = 'Best4';
+      } else if (input_ho === '21') {
+        local_view_ho = 'Best5';
+      } else if (input_ho === '22') {
+        local_view_ho = 'Best6';
+      } else if (input_ho === '19') {
+        local_view_ho = 'Best7';
+      } else if (input_ho === '24') {
+        local_view_ho = 'Best8';
+      }
+    }
+    return local_view_ho;
+  }
+
+  viewHoToHo(view_ho: string): string {
+    let local_ho: string = view_ho;
+    if (environment.chinese) {
+      if (view_ho === '9') {
+        local_ho = '10';
+      } else if (view_ho === '10') {
+        local_ho = '11';
+      } else if (view_ho === 'Best1') {
+        local_ho = '13';
+      } else if (view_ho === 'Best2') {
+        local_ho = '16';
+      } else if (view_ho === 'Best3') {
+        local_ho = '18';
+      } else if (view_ho === 'Best4') {
+        local_ho = '20';
+      } else if (view_ho === 'Best5') {
+        local_ho = '21';
+      } else if (view_ho === 'Best6') {
+        local_ho = '22';
+      } else if (view_ho === 'Best7') {
+        local_ho = '19';
+      } else if (view_ho === 'Best8') {
+        local_ho = '24';
+      }
+    }
+
+    return local_ho;
+  }
+
+  isImentorBest(): boolean {
+    if (parseInt(this.ho, 10) < 12) {
+      return false;
+    } else {
+      return true;
+    }
   }
 }

@@ -1,5 +1,5 @@
 <div class="row pt-2 pb-2 pr-md-3 pl-md-3 pr-2 pl-2"
-     *ngFor="let a_paragraph of this.pgraph_list; let pgraph_index = index"
+     *ngFor="let pgraph_index of this.pgraph_list"
      [id]="'story_three_pgraph_'+pgraph_index">
   <div class="col-12 pl-3 pr-3 pt-2 pb-2 storybook_body_text"
        [ngClass]="this.current_pgraph_num === pgraph_index? 'question_statement_box_selected': 'question_statement_box'">

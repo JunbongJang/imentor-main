@@ -26,7 +26,7 @@ export class StoryTwoComponent implements OnInit, OnDestroy, AfterViewChecked {
 
   storyTestForm: FormGroup;
   current_english_sentence = '';
-  current_translation_sentence = '';
+  private current_pgraph_num = 0;
 
   questionInitializedSubscription: Subscription;
   modalStartSubscription: Subscription;
@@ -95,6 +95,8 @@ export class StoryTwoComponent implements OnInit, OnDestroy, AfterViewChecked {
       if (english_input[current_char_index] === '*') {
         // ignore this since I, programmer put it. Not the user.
         return {'answerIsWrong': true};
+      } else if (this.current_english_sentence[current_char_index] === undefined) { // in case user puts word in between * ex) **dsfdsfds**
+        return {'answerIsWrong': true};
       } else if (english_input[current_char_index] !== this.current_english_sentence[current_char_index]) {
         this.storyTestForm.get('english_sentence').setValue(english_input.slice(0, current_char_index) + '*');
         this.questionSoundService.feedbackAudioClosure.wrong();
@@ -131,21 +133,25 @@ export class StoryTwoComponent implements OnInit, OnDestroy, AfterViewChecked {
           console.log(error);
         });
     } else { // not over yet!
-      if (this.current_question_num === this.questionStorageService.question_structure.storybook2_3.pgraph1.length) {
-        this.storybookService.storybookSceneAudioInitialize.next('2');
+      if (this.current_question_num === this.addPrevParaNums(this.current_pgraph_num)) {
+        this.current_pgraph_num = this.current_pgraph_num + 1;
+        this.storybookService.storybookSceneAudioInitialize.next((this.current_pgraph_num).toString());
       }
       this.storyTestForm.get('english_sentence').setValue('');
-      this.setCurrentSentences();
+      this.setCurrentEnglishSentence();
       this.nextQuestionCalled = true; // this will cause ngAfterViewChecked() to call initialProblemSetup() when generateQuestion is over.
     }
   }
 
   initializeStorybookTwo() {
     this.current_question_num = 0;
-    this.total_question_num = this.questionStorageService.question_structure.storybook2_3.pgraph1.length + this.questionStorageService.question_structure.storybook2_3.pgraph2.length;
-
+    this.current_pgraph_num = 0;
+    this.total_question_num = 0;
+    for ( let i = 0; i < this.questionStorageService.question_structure.storybook2_3.length; i++) {
+      this.total_question_num += this.questionStorageService.question_structure.storybook2_3[i].length;
+    }
     this.storyTestForm.get('english_sentence').setValue('');
-    this.setCurrentSentences();
+    this.setCurrentEnglishSentence();
     setTimeout(() => {
         this.initialProblemSetup();
         // document.getElementById('story_two_div_' + (this.questionStorageService.question_structure.storybook2_3.pgraph1.length - 1)).classList.add('pb-4');
@@ -154,35 +160,12 @@ export class StoryTwoComponent implements OnInit, OnDestroy, AfterViewChecked {
       }, 0);
   }
 
-  setCurrentSentences() {
-    // set current english sentence
-    if (this.current_question_num < this.questionStorageService.question_structure.storybook2_3.pgraph1.length) {
-      this.current_english_sentence = this.questionStorageService.question_structure.storybook2_3.pgraph1[this.current_question_num].eng;
-      // set current translation sentence
-      if (environment.chinese) {
-        this.current_translation_sentence = this.questionStorageService.question_structure.storybook2_3.pgraph1[this.current_question_num].cn;
-      } else {
-        this.current_translation_sentence = this.questionStorageService.question_structure.storybook2_3.pgraph1[this.current_question_num].kor;
-      }
-
-    } else {
-      const pgraph2_index = this.current_question_num - this.questionStorageService.question_structure.storybook2_3.pgraph1.length;
-      this.current_english_sentence = this.questionStorageService.question_structure.storybook2_3.pgraph2[pgraph2_index].eng;
-      // set current translation sentence
-      if (environment.chinese) {
-        this.current_translation_sentence = this.questionStorageService.question_structure.storybook2_3.pgraph2[pgraph2_index].cn;
-      } else {
-        this.current_translation_sentence = this.questionStorageService.question_structure.storybook2_3.pgraph2[pgraph2_index].kor;
-      }
-    }
-  }
-
   initialProblemSetup(): void {
-    console.log('initialProblemSetupt: ' + this.current_question_num + '  ' + this.current_english_sentence);
+    // console.log('initialProblemSetupt: ' + this.current_question_num + '  ' + this.current_english_sentence);
     let textarea_rows = 1;
     let textarea_cols = this.current_english_sentence.length;
-    if (textarea_cols < 1) {
-      textarea_cols = 1;
+    if (textarea_cols < 5) {
+      textarea_cols = 5;
     } else if (textarea_cols > 34) {
       textarea_cols = 33;
       textarea_rows = 2;
@@ -206,44 +189,47 @@ export class StoryTwoComponent implements OnInit, OnDestroy, AfterViewChecked {
     return list;
   }
 
+  setCurrentEnglishSentence() {
+    this.current_english_sentence = this.displayEnglishSentences(this.current_question_num);
+  }
+
   displayEnglishSentences(a_key: number) {
-    if (a_key < this.questionStorageService.question_structure.storybook2_3.pgraph1.length) { // pgraph1
-      return this.questionStorageService.question_structure.storybook2_3.pgraph1[a_key].eng;
-    } else { // pgraph2
-      if (this.generalUtilityService.checkEmptyArray(this.questionStorageService.question_structure.storybook2_3.pgraph2)) {
-        return '';
-      } else {
-        return this.questionStorageService.question_structure.storybook2_3.pgraph2[a_key - this.questionStorageService.question_structure.storybook2_3.pgraph1.length].eng;
+    const max_pgraph_num = this.questionStorageService.question_structure.storybook2_3.length;
+    let a_pgraph_num = 0;
+    for (let i = 0; i < max_pgraph_num; i++) {
+      if (a_key - this.addPrevParaNums(i) >= 0) {
+        a_pgraph_num = i;
       }
     }
+
+    return this.questionStorageService.question_structure.storybook2_3[a_pgraph_num][a_key - this.addPrevParaNums(a_pgraph_num)].eng;
   }
 
   displayTranslationSentences(a_key: number) {
-    if (environment.chinese) {
-      if (a_key < this.questionStorageService.question_structure.storybook2_3.pgraph1.length) { // pgraph1
-        return this.questionStorageService.question_structure.storybook2_3.pgraph1[a_key].cn;
-      } else { // pgraph2
-        if (this.generalUtilityService.checkEmptyArray(this.questionStorageService.question_structure.storybook2_3.pgraph2)) {
-          return '';
-        } else {
-          return this.questionStorageService.question_structure.storybook2_3.pgraph2[a_key - this.questionStorageService.question_structure.storybook2_3.pgraph1.length].cn;
-        }
-      }
-
-    } else {
-      if (a_key < this.questionStorageService.question_structure.storybook2_3.pgraph1.length) { // pgraph1
-        return this.questionStorageService.question_structure.storybook2_3.pgraph1[a_key].kor;
-      } else {   // pgraph2
-        if (this.generalUtilityService.checkEmptyArray(this.questionStorageService.question_structure.storybook2_3.pgraph2)) {
-          return '';
-        } else {
-          return this.questionStorageService.question_structure.storybook2_3.pgraph2[a_key - this.questionStorageService.question_structure.storybook2_3.pgraph1.length].kor;
-        }
+    const max_pgraph_num = this.questionStorageService.question_structure.storybook2_3.length;
+    let a_pgraph_num = 0;
+    for (let i = 0; i < max_pgraph_num; i++) {
+      if (a_key - this.addPrevParaNums(i) >= 0) {
+        a_pgraph_num = i;
       }
     }
 
+    if (environment.chinese) {
+      return this.questionStorageService.question_structure.storybook2_3[a_pgraph_num][a_key - this.addPrevParaNums(a_pgraph_num)].cn;
+    } else {
+      return this.questionStorageService.question_structure.storybook2_3[a_pgraph_num][a_key - this.addPrevParaNums(a_pgraph_num)].kor;
+    }
   }
 
+  private addPrevParaNums(current_pgraph_num: number) {
+    let total_prev_nums = 0;
+    for (let i = 0; i < current_pgraph_num; i++) {
+      if (i < this.questionStorageService.question_structure.storybook2_3.length) {
+        total_prev_nums += this.questionStorageService.question_structure.storybook2_3[i].length;
+      }
+    }
+    return total_prev_nums;
+  }
 
 
 }

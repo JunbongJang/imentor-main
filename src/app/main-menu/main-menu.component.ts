@@ -11,6 +11,8 @@ import {environment} from '../../environments/environment.prod';
 import * as Bowser from 'bowser';
 
 declare var CalendarApp: any;
+declare var AndroidJJ: any;
+declare var mobile_app_bool: boolean;
 declare var $: any;
 @Component({
   selector: 'app-main-menu',
@@ -24,6 +26,8 @@ export class MainMenuComponent implements OnInit, OnDestroy, AfterViewInit {
 
   public character_url = '';
   public book_url = '';
+  public chinese_bool: boolean = environment.chinese;
+  public version_best_bool: boolean = environment.version_best;
 
   NUM_BOOK_TOTAL = 24;
   NUM_BOOK_LIST = [];
@@ -81,6 +85,8 @@ export class MainMenuComponent implements OnInit, OnDestroy, AfterViewInit {
     for (let i = 1; i <= this.NUM_BOOK_TOTAL; i++) {
       this.NUM_BOOK_LIST.push(i);
     }
+
+    AndroidJJ.respondToJavascript(); // this should be at the end because AndroidJJ causes error on pc browser
   }
 
   ngOnDestroy() {
@@ -133,7 +139,7 @@ export class MainMenuComponent implements OnInit, OnDestroy, AfterViewInit {
     console.log('openPopup: ' + step_num + '   ' + this.step_num);
     if (this.checkMasterPerm() || this.step_num >= step_num) {
       const open_url = this.updateUserState(clicked_step_category, clicked_step_num);
-      window.open(open_url, '_blank');
+      window.open(open_url, '_self');
     } else {
       alert('Finish previous sections first!');
     }
@@ -152,10 +158,15 @@ export class MainMenuComponent implements OnInit, OnDestroy, AfterViewInit {
     }
 
     if (clicked_step_category === 'vocabulary') {  // ----------------------- vocabulary -------------------------------------
+      if (clicked_step === '4' && parseInt(this.userService.jindo.point_vocabulary4, 10) > 0) {
+        clicked_step = '5'; // show result page instead
+      }
       open_url = path_url + `vocabulary/?uid=${this.userService.user.uid}&user_id=${this.userService.user.user_id}&ho=${this.userService.ho}&step=vocabulary${clicked_step}&master=${this.userService.master_status}`;
     } else if (clicked_step_category === 'grammar') { // ----------------------- grammar -------------------------------------
+      if (clicked_step === '5' && parseInt(this.userService.jindo.point_grammar5, 10) > 0) {
+        clicked_step = '6'; // show result page instead
+      }
       open_url = path_url +  `grammar/?uid=${this.userService.user.uid}&user_id=${this.userService.user.user_id}&ho=${this.userService.ho}&step=grammer${clicked_step}&master=${this.userService.master_status}`;
-
     } else if (clicked_step_category === 'storybook') { // ----------------------- storybook -------------------------------------
       let temp_max_section = '';
       if (clicked_step === '1') {
@@ -203,8 +214,10 @@ export class MainMenuComponent implements OnInit, OnDestroy, AfterViewInit {
       }
 
       let speaking_version = 'speaking';
-      if (Bowser.parse(window.navigator.userAgent).platform.type !== 'desktop' && environment.chinese === false) {
+      if (Bowser.parse(window.navigator.userAgent).platform.type !== 'desktop' && !mobile_app_bool && environment.chinese === false) {
         speaking_version = 'speaking_mobile';
+        alert('구글 플레이스토어 에서\n웰이스턴 M러닝 앱을\n다운로드 받으세요.');
+        return '/IMENTOR/main/';
       }
 
       if (clicked_step === '1' || clicked_step ===  '2') {
@@ -212,9 +225,6 @@ export class MainMenuComponent implements OnInit, OnDestroy, AfterViewInit {
       } else if (clicked_step === '3') {
         open_url = 'https://www.welleastern.co.kr' + path_url + speaking_version + `/index2.php?uid=${this.userService.user.uid}&user_id=${this.userService.user.user_id}&ho=${this.userService.ho}&step=speaking${clicked_step}&section=${this.userService.section}&master=${this.userService.master_status}`;
       }
-
-
-
 
     } else if (clicked_step_category === 'finaltest') {   // ------------------- fianl test ----------------------------
       if (clicked_step === '1') {
@@ -238,7 +248,8 @@ export class MainMenuComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   chooseBook() {
-    this.userService.ho = String(this.book_select_num);
+    this.userService.ho = this.userService.viewHoToHo(String(this.book_select_num));
+    this.userService.view_ho = this.userService.hoToViewHo(this.userService.ho);
     this.setJindoFromServer(this.userService.step, this.userService.ho);
     this.setCharacterImage();
     this.setBookImage();
@@ -291,7 +302,7 @@ export class MainMenuComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   setBookImage() {
-    this.book_url = '/IMENTOR/img/book/' + this.userService.ho + '.png';
+    this.book_url = '/IMENTOR/img/book/' + this.userService.view_ho + '.png';
   }
 
   setJindoFromServer(a_step: string, a_ho: string) {
@@ -386,7 +397,7 @@ export class MainMenuComponent implements OnInit, OnDestroy, AfterViewInit {
         for (let i = 1; i < today; i++) {
           if (days_list.includes(i.toString(10))) {
             document.getElementById('cview_day_' + i).innerHTML = `<span class="fa-stack">
-    <i class="fa fa-circle-thin fa-stack-2x" style="color: orangered; margin-top:-4px;"></i>
+    <i class="far fa-circle fa-stack-2x" style="color: orangered; margin-top:-4px;"></i>
       <span class="fa-stack-1x" style="margin-top:-4px;">${i}</span> </span>`;
           } else {
             document.getElementById('cview_day_' + i).innerHTML = `<span class="fa-stack">

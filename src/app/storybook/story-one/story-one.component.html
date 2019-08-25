@@ -7,16 +7,10 @@
     <span [id]="'storybook_pair_' + idx" style="font-size: 1.7rem; color:black; font-weight: bold;">
     </span>
 
-    <span [id]="'pair_first_word_' + idx" (click)="this.pairWordClick('first', idx)" style="cursor:pointer;">
-      ({{pair_words[idx].first_word}},
-    </span>
-    <span [id]="'pair_second_word_' + idx" (click)="this.pairWordClick('second', idx)" style="cursor:pointer;">
-      {{pair_words[idx].second_word}})
-    </span>
+    <span [id]="'pair_first_word_' + idx" (click)="this.pairWordClick('first', idx)" style="cursor:pointer;"> ({{pair_words[idx].first_word}}, </span>
+    <span [id]="'pair_second_word_' + idx" (click)="this.pairWordClick('second', idx)" style="cursor:pointer;">{{pair_words[idx].second_word}})</span>
 
-    <span>
-      {{a_sentence.right_phrase}}
-    </span>
+    <span> {{a_sentence.right_phrase}}</span>
   </ng-container>
 </div>
 

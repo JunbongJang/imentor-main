@@ -13,18 +13,10 @@ export class QuestionStorageService {
       o_word: '',
       x_word: ''
     }],
-    storybook2_3: {
-      pgraph1: [{
+    storybook2_3: [[{
           eng: '',
           kor: '',
-          cn: ''
-      }],
-      pgraph2: [{
-        eng: '',
-        kor: '',
-        cn: ''
-      }]
-    },
+          cn: ''}]],
     storybook4: [{
       eng: '',
       kor: '',
@@ -57,10 +49,10 @@ export class QuestionStorageService {
       {eng: 'He is [sleeping]. He is sleeping under the tree.', o_word: 'sleeping', x_word: 'lying'}
     ];
 
-    this.question_structure.storybook2_3.pgraph1 = [
+    this.question_structure.storybook2_3[0] = [
       {eng: 'Let\'s go. Let\'s drink water [together].[@@] Let\'s …ong, [too].[@@] We [are] afraid. We are [afraid].', kor: '가자. 마시자 물을 함께.\\n가자 그리고 먹자 과일을 함께.\\n안 돼. 호랑이는 매우 …쟁이야.\\n그는 이다 매우 강한, 또한.\\n우리는 이다 두려운. 우리는 이다 두려운.', cn: ''}
     ];
-    this.question_structure.storybook2_3.pgraph2 = [
+    this.question_structure.storybook2_3[1] = [
       {eng: 'Tiger is strong, [but] he is [not] [smart].[@@] I … [sleeping]. He is sleeping [under] [the] [tree].', kor: '호랑이는 이다 강한, 그러나 그는 아니다 영리한.\\n나는 아니다 강한, 그러나 나는 이다…을 호랑이는 하고 있는 중이니?\\n그는 자는 중이다. 그는 자는 중이다 나무 아래에서.', cn: ''}
     ];
 
@@ -127,11 +119,11 @@ export class QuestionStorageService {
     this._total_question_number = value;
   }
 
-  get question_structure(): { storybook1: { eng: string; o_word: string; x_word: string }[]; storybook2_3: { pgraph1: { eng: string; kor: string; cn: string }[]; pgraph2: { eng: string; kor: string; cn: string }[] }; storybook4: { eng: string; kor: string; cn: string }[]; max_section: string } {
+  get question_structure(): { storybook2_3: { cn: string; eng: string; kor: string }[][]; storybook4: { cn: string; eng: string; kor: string }[]; max_section: string; storybook1: { o_word: string; x_word: string; eng: string }[] } {
     return this._question_structure;
   }
 
-  set question_structure(value: { storybook1: { eng: string; o_word: string; x_word: string }[]; storybook2_3: { pgraph1: { eng: string; kor: string; cn: string }[]; pgraph2: { eng: string; kor: string; cn: string }[] }; storybook4: { eng: string; kor: string; cn: string }[]; max_section: string }) {
+  set question_structure(value: { storybook2_3: { cn: string; eng: string; kor: string }[][]; storybook4: { cn: string; eng: string; kor: string }[]; max_section: string; storybook1: { o_word: string; x_word: string; eng: string }[] }) {
     this._question_structure = value;
   }
 }

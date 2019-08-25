@@ -93,6 +93,7 @@ export class StoryFourComponent implements OnInit, OnDestroy, AfterViewChecked {
       return null;
     } else {
       const current_char_index = english_input.length - 1;
+      console.log(current_char_index + ' ' + english_input[current_char_index] + ' ' + this.current_english_sentence[current_char_index]);
       if (english_input[current_char_index] === '\n') {
         if (this.onSubmit() === false) {
           this.storyTestForm.get('english_sentence').setValue(english_input.replace('\n', '').slice(0, current_char_index));
@@ -100,6 +101,8 @@ export class StoryFourComponent implements OnInit, OnDestroy, AfterViewChecked {
         }
       } else if (english_input[current_char_index] === '*') {
         // ignore this since I, programmer put it. Not the user.
+        return {'answerIsWrong': true};
+      } else if (this.current_english_sentence[current_char_index] === undefined) { // in case user puts word in between * ex) **dsfdsfds**
         return {'answerIsWrong': true};
       } else if (english_input[current_char_index] !== this.current_english_sentence[current_char_index]) {
         this.storyTestForm.get('english_sentence').setValue(english_input.replace('\n', '').slice(0, current_char_index) + '*');
@@ -132,7 +135,10 @@ export class StoryFourComponent implements OnInit, OnDestroy, AfterViewChecked {
   }
 
   checkNextQuestion() {
-    if (this.current_question_num >= this.total_question_num - 1) { // solved all the problems when current_question_num is equal to the total - 1
+    this.current_question_num++;
+    this.storyTestForm.get('english_sentence').setValue('');
+
+    if (this.current_question_num >= this.total_question_num ) { // solved all the problems when current_question_num is equal to the total - 1
       this.serverService.postUserScoreToServer('storybook',
         '0',
         '100',
@@ -150,8 +156,6 @@ export class StoryFourComponent implements OnInit, OnDestroy, AfterViewChecked {
           console.log(error);
         });
     } else { // not over yet!
-      this.current_question_num++;
-      this.storyTestForm.get('english_sentence').setValue('');
       this.setCurrentSentences();
       this.nextQuestionCalled = true; // this will cause ngAfterViewChecked() to call initialProblemSetup() when generateQuestion is over.
     }

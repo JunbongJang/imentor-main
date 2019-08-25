@@ -63,7 +63,7 @@ export class QuestionGenerateService {
     if (current_step === 'storybook1') {
       this.questionStorageService.question_structure.storybook1 = [];
       for (let i = 0; xml_object.getElementsByTagName('eng')[i] !== undefined; i++) {
-        // dynamic JSON filling in
+        // dynamically filling in JSON
         const a_object = {eng: '', o_word: '', x_word: ''};
         a_object.eng = xml_object.getElementsByTagName('eng')[i].childNodes[0].nodeValue;
         if (xml_object.getElementsByTagName('o_word')[i].childNodes[0] !== undefined) {
@@ -76,38 +76,28 @@ export class QuestionGenerateService {
       }
 
     } else if (current_step === 'storybook2' || current_step === 'storybook3') {
-        this.questionStorageService.question_structure.storybook2_3 = {pgraph1: [], pgraph2: []};
-        const pgraph1 = xml_object.getElementsByTagName('pgraph')[0];
-        const pgraph2 = xml_object.getElementsByTagName('pgraph')[1];
+        this.questionStorageService.question_structure.storybook2_3 = [];
 
-        for (let i = 0; pgraph1.getElementsByTagName('eng')[i] !== undefined; i++) {
-          // dynamic JSON filling in
-          const a_object = {eng: '', kor: '', cn: ''};
-          a_object.eng = pgraph1.getElementsByTagName('eng')[i].childNodes[0].nodeValue;
-          if (pgraph1.getElementsByTagName('kor')[i].childNodes[0] !== undefined) {
-            a_object.kor = pgraph1.getElementsByTagName('kor')[i].childNodes[0].nodeValue;
-          }
-          if (pgraph1.getElementsByTagName('cn')[i].childNodes[0] !== undefined) {
-            a_object.cn = pgraph1.getElementsByTagName('cn')[i].childNodes[0].nodeValue;
-          }
-          this.questionStorageService.question_structure.storybook2_3.pgraph1.push(a_object);
-        }
-        if (pgraph2 !== undefined) { // pgraph2 doesn't exist for some sections
-          for (let i = 0; pgraph2.getElementsByTagName('eng')[i] !== undefined; i++) {
-            // dynamic JSON filling in
-            const a_object = {eng: '', kor: '', cn: ''};
-            a_object.eng = pgraph2.getElementsByTagName('eng')[i].childNodes[0].nodeValue;
-            if (pgraph2.getElementsByTagName('kor')[i].childNodes[0] !== undefined) {
-              a_object.kor = pgraph2.getElementsByTagName('kor')[i].childNodes[0].nodeValue;
+        for (let pgraph_num = 0; pgraph_num < 5; pgraph_num++) {
+          const pgraph_obj = xml_object.getElementsByTagName('pgraph')[pgraph_num];
+          if (pgraph_obj !== undefined) { // pgraph2 doesn't exist for some sections
+            this.questionStorageService.question_structure.storybook2_3[pgraph_num] = [];
+            for (let i = 0; pgraph_obj.getElementsByTagName('eng')[i] !== undefined; i++) {
+              // dynamic JSON filling in
+              const a_object = {eng: '', kor: '', cn: ''};
+
+              a_object.eng = pgraph_obj.getElementsByTagName('eng')[i].childNodes[0].nodeValue;
+              if (pgraph_obj.getElementsByTagName('kor')[i].childNodes[0] !== undefined) {
+                a_object.kor = pgraph_obj.getElementsByTagName('kor')[i].childNodes[0].nodeValue;
+              }
+              if (pgraph_obj.getElementsByTagName('cn')[i] !== undefined && pgraph_obj.getElementsByTagName('cn')[i].childNodes[0] !== undefined) {
+                a_object.cn = pgraph_obj.getElementsByTagName('cn')[i].childNodes[0].nodeValue;
+              }
+              this.questionStorageService.question_structure.storybook2_3[pgraph_num].push(a_object);
             }
-            if (pgraph2.getElementsByTagName('cn')[i].childNodes[0] !== undefined) {
-              a_object.cn = pgraph2.getElementsByTagName('cn')[i].childNodes[0].nodeValue;
-            }
-            this.questionStorageService.question_structure.storybook2_3.pgraph2.push(a_object);
           }
-        } else {
-          this.questionStorageService.question_structure.storybook2_3.pgraph2 = [];
         }
+
 
       } else {
         this.questionStorageService.question_structure.storybook4 = [];
@@ -118,7 +108,7 @@ export class QuestionGenerateService {
           if (xml_object.getElementsByTagName('kor')[i].childNodes[0] !== undefined) {
             a_object.kor = xml_object.getElementsByTagName('kor')[i].childNodes[0].nodeValue;
           }
-          if (xml_object.getElementsByTagName('cn')[i].childNodes[0] !== undefined) {
+          if (xml_object.getElementsByTagName('cn')[i] !== undefined && xml_object.getElementsByTagName('cn')[i].childNodes[0] !== undefined) {
             a_object.cn = xml_object.getElementsByTagName('cn')[i].childNodes[0].nodeValue;
           }
           this.questionStorageService.question_structure.storybook4.push(a_object);

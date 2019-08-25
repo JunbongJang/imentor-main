@@ -64,7 +64,7 @@ export class SpeakingTestComponent implements OnInit, OnDestroy {
       console.log(error);
     });
 
-    AndroidJJ.respondToJavascript(); // this should be at the end just in case on pc browser AndroidJJ causes error
+    AndroidJJ.respondToJavascript(); // this should be at the end because AndroidJJ causes error on pc browser
   }
 
   ngOnDestroy() {
@@ -216,7 +216,7 @@ export class SpeakingTestComponent implements OnInit, OnDestroy {
       const dateObj = new Date();
       const filename = this.userService.user.uid + '_' +
         this.userService.ho + '_' +
-        dateObj.getFullYear() + (dateObj.getMonth() + 1) + dateObj.getDate() + dateObj.getHours() + dateObj.getMinutes() + dateObj.getSeconds() + '.mp4';
+        dateObj.getFullYear() + (dateObj.getMonth() + 1) + dateObj.getDate() + dateObj.getHours() + dateObj.getMinutes() + dateObj.getSeconds() + '.mp3';
 
       this.finalTestService.answer_list[this.finalTestService.current_question_index] = filename;
 
@@ -228,7 +228,7 @@ export class SpeakingTestComponent implements OnInit, OnDestroy {
       const dateObj = new Date();
       const filename = this.userService.user.uid + '_' +
         this.userService.ho + '_' +
-        dateObj.getFullYear() + (dateObj.getMonth() + 1) + dateObj.getDate() + dateObj.getHours() + dateObj.getMinutes() + dateObj.getSeconds() + '.mp4';
+        dateObj.getFullYear() + (dateObj.getMonth() + 1) + dateObj.getDate() + dateObj.getHours() + dateObj.getMinutes() + dateObj.getSeconds() + '.mp3';
 
       this.finalTestService.answer_list[this.finalTestService.current_question_index] = filename;
 

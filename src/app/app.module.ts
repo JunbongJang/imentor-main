@@ -11,7 +11,8 @@ import {HttpClientModule} from '@angular/common/http';
 import {FormsModule} from '@angular/forms';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
-import 'bootstrap'; // these imports work!!! use them elsewhere too
+import 'bootstrap';
+import {MDBBootstrapModule} from 'angular-bootstrap-md'; // these imports work!!! use them elsewhere too
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import 'bootstrap'; // these imports work!!! use them elsewhere too
     HttpClientModule,
     FormsModule,
     CoreModule,
-    NgbModule
+    NgbModule,
+    MDBBootstrapModule.forRoot()
   ],
   bootstrap: [AppComponent]
 })

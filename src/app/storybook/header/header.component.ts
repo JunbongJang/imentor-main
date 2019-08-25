@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {UserService} from '../../core/user.service';
 import {ViewStateService} from '../../core/view-state.service';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'story-header',
@@ -18,7 +19,30 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit() {
+    // https://www.w3schools.com/howto/howto_js_dropdown.asp
+    // Close the dropdown menu if the user clicks outside of it
+    window.onclick = (event) => {
+      if (!(<any>event.target).matches('.junbong-dropbtn')) {
+        const dropdowns = document.getElementsByClassName('junbong-dropdown-content');
+        let i;
+        for (i = 0; i < dropdowns.length; i++) {
+          const openDropdown = dropdowns[i];
+          if (openDropdown.classList.contains('show')) {
+            openDropdown.classList.remove('show');
+          }
+        }
+      }
+    };
   }
+
+
+
+    /* When the user clicks on the button,
+  toggle between hiding and showing the dropdown content */
+  toggleDropBtn() {
+    document.getElementById('myDropdown').classList.toggle('show');
+  }
+
 
   viewStateChoose(a_view: string) {
     if (a_view === this.viewStateService.IMENTOR_MAIN) {
