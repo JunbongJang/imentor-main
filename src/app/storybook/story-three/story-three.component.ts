@@ -26,7 +26,7 @@ export class StoryThreeComponent implements OnInit, OnDestroy, AfterViewChecked 
     answer: string,
     left_phrase: string,
     right_phrase: string
-  }[]> = [[], []];
+  }[]> = [];
   public question_english_array = [];
   public question_index_array = [];
 
@@ -174,13 +174,15 @@ export class StoryThreeComponent implements OnInit, OnDestroy, AfterViewChecked 
   }
 
   initializeSentences() {
-    this.split_sentences = [[], []];
+    this.split_sentences = [];
     this.question_index_array = [];
     this.question_english_array = [];
     let current_row_index = 0;
+    console.log('initializeSentences');
     for (let a_pgraph = 0; a_pgraph < this.pgraph_list.length; a_pgraph++) {
+      this.split_sentences[a_pgraph] = [];
       const current_pgrah = this.questionStorageService.question_structure.storybook2_3[a_pgraph];
-
+      console.log(current_pgrah);
       for (let i = 0; i < current_pgrah.length; i++) {
         if (current_pgrah[i].eng.match(/\[.*\]/)) { // found a question
           const answer = current_pgrah[i].eng.match(/\[.*\]/)[0];
@@ -203,6 +205,8 @@ export class StoryThreeComponent implements OnInit, OnDestroy, AfterViewChecked 
         current_row_index++;
       }
     }
+    console.log('split_sentences');
+    console.log(this.split_sentences);
   }
 
   initializeNumberForPairs() {
