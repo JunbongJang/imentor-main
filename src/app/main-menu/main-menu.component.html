@@ -435,10 +435,10 @@
                 </ng-template>
               </li>
 
-              <li class="round_list16" (click)="this.viewStateChooseTest('finaltest', 'writing', 18)" style="position:absolute; z-index:5;">
-                <ng-template [ngIf]="this.step_num <= 18" [ngIfElse]="studied_step18">
+              <li class="round_list16" (click)="this.viewStateChooseTest('finaltest', 'writing', this.userService.jindo.step == 'finaltest')" style="position:absolute; z-index:5;">
+                <ng-template [ngIf]="this.userService.jindo.point_finaltest_writing == ''" [ngIfElse]="studied_step18">
                   <a class="on" href="javascript:void(0)">Writing Test</a>
-                  <span class="area_btn_start" *ngIf="this.checkMasterPerm() || this.step_num > 16">
+                  <span class="area_btn_start" *ngIf="this.checkMasterPerm() || this.userService.jindo.step == 'finaltest'">
                     <a class="btn_start" href="javascript:void(0)">Start</a>
                   </span>
                 </ng-template>
@@ -452,10 +452,10 @@
                 </ng-template>
               </li>
 
-              <li class="round_list17" (click)="this.viewStateChooseTest('finaltest', 'speaking', 17)">
-                <ng-template [ngIf]="this.step_num <= 17" [ngIfElse]="studied_step17">
+              <li class="round_list17" (click)="this.viewStateChooseTest('finaltest', 'speaking', this.userService.jindo.step == 'finaltest')">
+                <ng-template [ngIf]="this.userService.jindo.point_finaltest_speaking == ''" [ngIfElse]="studied_step17">
                   <a class="on" href="javascript:void(0)">Speaking Test</a>
-                  <span class="area_btn_start" *ngIf="this.checkMasterPerm() || this.step_num == 17">
+                  <span class="area_btn_start" *ngIf="this.checkMasterPerm() || this.userService.jindo.step == 'finaltest'">
                     <a class="btn_start btn_start03" href="javascript:void(0)">Start</a>
                   </span>
                 </ng-template>

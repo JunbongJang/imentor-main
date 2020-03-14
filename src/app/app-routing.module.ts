@@ -6,9 +6,9 @@ import {MainMenuComponent} from './main-menu/main-menu.component';
 export const appRoutes: Routes = [
   { path: '', redirectTo: '/main', pathMatch: 'full'},
   { path: 'main', component: MainMenuComponent, data: { state: 'main-menu' }},
-  { path: 'storybook', loadChildren: './storybook/storybook.module#StorybookModule'},
-  { path: 'speaking', loadChildren: './speaking/speaking.module#SpeakingModule'},
-  { path: 'finaltest', loadChildren: './finaltest/finaltest.module#FinaltestModule'},
+  { path: 'storybook', loadChildren: () => import('./storybook/storybook.module').then(m => m.StorybookModule)},
+  { path: 'speaking', loadChildren: () => import('./speaking/speaking.module').then(m => m.SpeakingModule)},
+  { path: 'finaltest', loadChildren: () => import('./finaltest/finaltest.module').then(m => m.FinaltestModule)},
   { path: 'page-not-found', component: PageNotFoundComponent },
 
   // routes get parsed from top to bottom so  always put this double asterisk at the end

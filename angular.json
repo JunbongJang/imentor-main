@@ -4,6 +4,14 @@
   "newProjectRoot": "projects",
   "projects": {
     "imentor-main": {
+      "i18n": {
+        "locales": {
+          "zh": {
+            "translation": "src/locale/messages.cn.xlf",
+            "baseHref": ""
+          }
+        }
+      },
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -13,6 +21,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "aot": true,
             "outputPath": "dist/imentor-main",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -38,6 +47,12 @@
           },
           "configurations": {
             "production": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -55,12 +70,21 @@
               "buildOptimizer": true
             },
             "production-cn": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
                   "with": "src/environments/environment.prod.ts"
                 }
               ],
+            "localize": [
+              "zh"
+            ],
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
@@ -70,9 +94,6 @@
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
-              "i18nFile": "src/locale/messages.cn.xlf",
-              "i18nFormat": "xlf",
-              "i18nLocale": "zh",
               "i18nMissingTranslation": "error"
             }
           }

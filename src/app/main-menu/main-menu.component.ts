@@ -112,12 +112,12 @@ export class MainMenuComponent implements OnInit, OnDestroy, AfterViewInit {
     }
   }
 
-  viewStateChooseTest(a_step: string, a_kind: string, step_num: number) {
+  viewStateChooseTest(a_step: string, a_kind: string, is_finaltest: boolean) {
     // if (a_kind === 'speaking' && environment.chinese === false) {
     //   const open_url = `/IMENTOR/my-result-final.html?uid=${this.userService.user.uid}&user_id=${this.userService.user.user_id}&ho=${this.userService.ho}&step=finaltest&kind=speaking&master=${this.userService.master_status}`;
     //   window.open(open_url, '_blank');
     // }
-    if (this.checkMasterPerm() || this.step_num >= step_num) {
+    if (this.checkMasterPerm() || is_finaltest) {
       this.userService.step = a_step;
       this.userService.kind = a_kind;
       const a_view =  a_step + '_' + a_kind;

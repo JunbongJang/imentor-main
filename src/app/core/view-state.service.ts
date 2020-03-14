@@ -1,6 +1,8 @@
 import {UserService} from './user.service';
 import {ActivatedRoute, Router} from '@angular/router';
+import { Injectable } from "@angular/core";
 
+@Injectable()
 export class ViewStateService {
 
   // -------------------GLOBAL CONSTANTS----------------------
