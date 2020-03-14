@@ -368,7 +368,7 @@ export class MainMenuComponent implements OnInit, OnDestroy, AfterViewInit {
         if (environment.chinese) {
           window.open('/onacademy/', '_self');
         } else {
-          window.open('/user/?goto=/IMENTOR/main/', '_self');
+          window.open('/user/?goto=/onacademy/korea.html', '_self');
         }
       },
       (error) => {

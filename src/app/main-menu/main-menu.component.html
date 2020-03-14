@@ -438,7 +438,7 @@
               <li class="round_list16" (click)="this.viewStateChooseTest('finaltest', 'writing', 18)" style="position:absolute; z-index:5;">
                 <ng-template [ngIf]="this.step_num <= 18" [ngIfElse]="studied_step18">
                   <a class="on" href="javascript:void(0)">Writing Test</a>
-                  <span class="area_btn_start" *ngIf="this.checkMasterPerm() || this.step_num == 18">
+                  <span class="area_btn_start" *ngIf="this.checkMasterPerm() || this.step_num > 16">
                     <a class="btn_start" href="javascript:void(0)">Start</a>
                   </span>
                 </ng-template>
