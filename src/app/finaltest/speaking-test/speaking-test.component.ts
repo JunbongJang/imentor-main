@@ -92,9 +92,9 @@ export class SpeakingTestComponent implements OnInit, OnDestroy {
       navigator.mediaDevices.getUserMedia = function(constraints) {
 
         // First get ahold of the legacy getUserMedia, if present
-        navigator.getUserMedia = (navigator.webkitGetUserMedia ||
+        navigator.getUserMedia = ((<any>navigator).webkitGetUserMedia ||
           navigator.getUserMedia ||
-          navigator.mozGetUserMedia);
+          (<any>navigator).mozGetUserMedia);
 
         // Some browsers just don't implement it - return a rejected promise with an error
         // to keep a consistent interface
