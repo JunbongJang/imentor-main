@@ -5,7 +5,6 @@ import {ViewStateService} from '../core/view-state.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ServerService} from '../core/server.service';
 import {FinaltestService} from './finaltest.service';
-import {P} from '@angular/core/src/render3';
 import {environment} from '../../environments/environment.prod';
 import {Subscription} from 'rxjs';
 

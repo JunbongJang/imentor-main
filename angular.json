@@ -32,8 +32,8 @@
               "src/assets"
             ],
             "styles": [
-              "node_modules/angular-bootstrap-md/scss/bootstrap/bootstrap.scss",
-              "node_modules/angular-bootstrap-md/scss/mdb-free.scss",
+              "node_modules/angular-bootstrap-md/assets/scss/bootstrap/bootstrap.scss",
+              "node_modules/angular-bootstrap-md/assets/scss/mdb.scss",
               "node_modules/@fortawesome/fontawesome-free/css/all.css",
               "src/styles.css"
             ],
@@ -82,9 +82,9 @@
                   "with": "src/environments/environment.prod.ts"
                 }
               ],
-            "localize": [
-              "zh"
-            ],
+              "localize": [
+                "zh"
+              ],
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
@@ -169,5 +169,8 @@
       }
     }
   },
-  "defaultProject": "imentor-main"
+  "defaultProject": "imentor-main",
+  "cli": {
+    "analytics": false
+  }
 }
