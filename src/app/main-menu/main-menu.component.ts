@@ -113,22 +113,34 @@ export class MainMenuComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   viewStateChooseTest(a_step: string, a_kind: string, is_finaltest: boolean) {
-    // if (a_kind === 'speaking' && environment.chinese === false) {
-    //   const open_url = `/IMENTOR/my-result-final.html?uid=${this.userService.user.uid}&user_id=${this.userService.user.user_id}&ho=${this.userService.ho}&step=finaltest&kind=speaking&master=${this.userService.master_status}`;
-    //   window.open(open_url, '_blank');
-    // }
+
     if (this.checkMasterPerm() || is_finaltest) {
       this.userService.step = a_step;
       this.userService.kind = a_kind;
-      const a_view =  a_step + '_' + a_kind;
+      const a_view = a_step + '_' + a_kind;
+
+      if ((Bowser.parse(window.navigator.userAgent).platform.type !== 'desktop' || mobile_app_bool) && environment.chinese === false ) {
+        alert('Final Test는 정확한 테스트진단을 위하여\nPC나 노트북으로 진행해주세요');
+        return;
+      }
+
       if (this.viewStateService.view_state !== a_view) {
         this.viewStateService.view_state = a_view;
-        this.router.navigate(['finaltest' + '/' + this.userService.kind]);
+        if (environment.chinese === false) {
+          const open_url = `/IMENTOR/my-result-final.html?uid=${this.userService.user.uid}&user_id=${this.userService.user.user_id}&ho=${this.userService.ho}&step=finaltest&kind=${a_kind}&master=${this.userService.master_status}`;
+          window.open(open_url, '_blank');
+        } else {
+          this.router.navigate(['finaltest' + '/' + this.userService.kind]);
+        }
+
+      } else {
+        alert('Finish previous sections first!');
       }
     } else {
       alert('Finish previous sections first!');
     }
   }
+
 
   /**
    * @param clicked_step_category
@@ -192,41 +204,39 @@ export class MainMenuComponent implements OnInit, OnDestroy, AfterViewInit {
 
       open_url = path_url + `sub.html?uid=${this.userService.user.uid}&user_id=${this.userService.user.user_id}&ho=${this.userService.ho}&step=storybook${clicked_step}&section=${this.userService.section}&master=${this.userService.master_status}`;
 
-    } else if (clicked_step_category === 'speaking') { // ----------------------- speaking -------------------------------------
-      let temp_max_section = '1';
-      if (clicked_step === '1') {
-        this.userService.section = this.userService.jindo.current_speaking1;
-        temp_max_section = this.userService.jindo.max_speaking1;
-      } else if (clicked_step === '2') {
-        this.userService.section = this.userService.jindo.current_speaking2;
-        temp_max_section = this.userService.jindo.max_speaking2;
-      } else if (clicked_step === '3') {
-        this.userService.section = this.userService.jindo.current_speaking3;
-        temp_max_section = this.userService.jindo.max_speaking3;
-      }
-
-      if (isNaN(parseInt(this.userService.section, 10))) {
-        this.userService.section = '1';
-      } else {
-        if (parseInt(this.userService.section, 10) < parseInt(temp_max_section, 10)) {
-          this.userService.section = String(parseInt(this.userService.section, 10) + 1);
+    } else if (clicked_step_category === 'speaking') {
+        let temp_max_section = '1';
+        if (clicked_step === '1') {
+          this.userService.section = this.userService.jindo.current_speaking1;
+          temp_max_section = this.userService.jindo.max_speaking1;
+        } else if (clicked_step === '2') {
+          this.userService.section = this.userService.jindo.current_speaking2;
+          temp_max_section = this.userService.jindo.max_speaking2;
+        } else if (clicked_step === '3') {
+          this.userService.section = this.userService.jindo.current_speaking3;
+          temp_max_section = this.userService.jindo.max_speaking3;
         }
-      }
 
-      let speaking_version = 'speaking';
-      if (Bowser.parse(window.navigator.userAgent).platform.type !== 'desktop' && !mobile_app_bool && environment.chinese === false) {
-        speaking_version = 'speaking_mobile';
-        alert('구글 플레이스토어 에서\n웰이스턴 M러닝 앱을\n다운로드 받으세요.');
-        return '/IMENTOR/main/';
-      }
+        if (isNaN(parseInt(this.userService.section, 10))) {
+          this.userService.section = '1';
+        } else {
+          if (parseInt(this.userService.section, 10) < parseInt(temp_max_section, 10)) {
+            this.userService.section = String(parseInt(this.userService.section, 10) + 1);
+          }
+        }
 
-      if (clicked_step === '1' || clicked_step ===  '2') {
-        open_url = 'https://www.welleastern.co.kr' + path_url + speaking_version + `/index.php?uid=${this.userService.user.uid}&user_id=${this.userService.user.user_id}&ho=${this.userService.ho}&step=speaking${clicked_step}&section=${this.userService.section}&master=${this.userService.master_status}`;
-      } else if (clicked_step === '3') {
-        open_url = 'https://www.welleastern.co.kr' + path_url + speaking_version + `/index2.php?uid=${this.userService.user.uid}&user_id=${this.userService.user.user_id}&ho=${this.userService.ho}&step=speaking${clicked_step}&section=${this.userService.section}&master=${this.userService.master_status}`;
-      }
+        let speaking_version = 'speaking';
+        if (Bowser.parse(window.navigator.userAgent).platform.type !== 'desktop' && !mobile_app_bool && environment.chinese === false) {
+          speaking_version = 'speaking_mobile';
+          alert('구글 플레이스토어 에서\n웰이스턴 M러닝 앱을\n다운로드 받으세요.');
+          return '/IMENTOR/main/';
+        } else if (clicked_step === '1' || clicked_step ===  '2') {
+          open_url = 'https://www.welleastern.co.kr' + path_url + speaking_version + `/index.php?uid=${this.userService.user.uid}&user_id=${this.userService.user.user_id}&ho=${this.userService.ho}&step=speaking${clicked_step}&section=${this.userService.section}&master=${this.userService.master_status}`;
+        } else if (clicked_step === '3') {
+          open_url = 'https://www.welleastern.co.kr' + path_url + speaking_version + `/index2.php?uid=${this.userService.user.uid}&user_id=${this.userService.user.user_id}&ho=${this.userService.ho}&step=speaking${clicked_step}&section=${this.userService.section}&master=${this.userService.master_status}`;
+        }
 
-    } else if (clicked_step_category === 'finaltest') {   // ------------------- fianl test ----------------------------
+    } else if (clicked_step_category === 'finaltest') {
       if (clicked_step === '1') {
         this.userService.kind = 'speaking';
       } else if (clicked_step === '2') { // this.userService.jindo.current_finaltest

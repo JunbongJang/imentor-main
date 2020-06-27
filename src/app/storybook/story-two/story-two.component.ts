@@ -60,7 +60,7 @@ export class StoryTwoComponent implements OnInit, OnDestroy, AfterViewChecked {
 
     this.modalStartSubscription = this.initialModalService.modalStartClicked.subscribe(
       (modal_state) => {
-        this.storybookService.storybookSceneAudioInitialize.next('1');
+        this.storybookService.storybookSceneAudioInitialize.next('');
         this.initializeStorybookTwo(); // so that the focus remains.
       }, (error) => {
         console.log('error');

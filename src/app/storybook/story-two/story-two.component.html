@@ -36,7 +36,7 @@
                     (blur)="this.input_foucsed = false;"
                      [id]="'english_sentence_'+ idx">
             </textarea>
-            <label [for]="'english_sentence_'+ idx" [ngClass]="this.input_foucsed ? 'active' : 'inactive'">{{this.current_english_sentence}}</label>
+            <label style="white-space: normal;" [for]="'english_sentence_'+ idx" [ngClass]="this.input_foucsed ? 'active' : 'inactive'">{{this.current_english_sentence}}</label>
           </form>
         </ng-template>
 
