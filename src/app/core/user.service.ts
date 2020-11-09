@@ -209,10 +209,11 @@ export class UserService {
           this.user_initialized_bool = true;
           this.userInitialized.next(true);
         } else {
+          alert('EMS에서 마이멘토 레벨이 지정되지 않았습니다.');
           if (environment.chinese) {
             window.open('/onacademy/', '_self');
           } else {
-            window.open('/user/?goto=/IMENTOR/main/', '_self');
+            window.open('/onacademy/korea.html', '_self');
           }
         }
       },

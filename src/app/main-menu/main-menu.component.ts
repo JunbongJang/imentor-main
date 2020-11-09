@@ -130,7 +130,10 @@ export class MainMenuComponent implements OnInit, OnDestroy, AfterViewInit {
           const open_url = `/IMENTOR/my-result-final.html?uid=${this.userService.user.uid}&user_id=${this.userService.user.user_id}&ho=${this.userService.ho}&step=finaltest&kind=${a_kind}&master=${this.userService.master_status}`;
           window.open(open_url, '_blank');
         } else {
-          this.router.navigate(['finaltest' + '/' + this.userService.kind]);
+          alert('Final Test is not ready.');
+
+          // Not finished developing it
+          // this.router.navigate(['finaltest' + '/' + this.userService.kind]);
         }
 
       } else {
@@ -378,7 +381,7 @@ export class MainMenuComponent implements OnInit, OnDestroy, AfterViewInit {
         if (environment.chinese) {
           window.open('/onacademy/', '_self');
         } else {
-          window.open('/user/?goto=/onacademy/korea.html', '_self');
+          window.open('/onacademy/korea.html', '_self');
         }
       },
       (error) => {
