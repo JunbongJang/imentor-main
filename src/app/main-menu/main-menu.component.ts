@@ -263,6 +263,9 @@ export class MainMenuComponent implements OnInit, OnDestroy, AfterViewInit {
   chooseBook() {
     this.userService.ho = this.userService.viewHoToHo(String(this.book_select_num));
     this.userService.view_ho = this.userService.hoToViewHo(this.userService.ho);
+    console.log('chooseBook');
+    console.log(this.userService.ho);
+    console.log(this.userService.view_ho);
     this.setJindoFromServer(this.userService.step, this.userService.ho);
     this.setCharacterImage();
     this.setBookImage();

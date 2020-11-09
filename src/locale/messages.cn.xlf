@@ -366,7 +366,7 @@
       </trans-unit>
       <trans-unit id="005eff01dfca2fe0e975619a104b0fb7d70567ab" datatype="html">
         <source>본 학습은 30일 학습기간을 제공합니다.</source>
-        <target></target>
+        <target> </target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/main-menu/main-menu.component.html</context>
           <context context-type="linenumber">156</context>
